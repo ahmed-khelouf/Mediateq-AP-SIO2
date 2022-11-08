@@ -59,6 +59,8 @@ namespace Mediateq_AP_SIO2
             this.label6 = new System.Windows.Forms.Label();
             this.txbTitre = new System.Windows.Forms.TextBox();
             this.grpRechercheCode = new System.Windows.Forms.GroupBox();
+            this.lblCategorie = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.btnRechercher = new System.Windows.Forms.Button();
             this.lblTitre = new System.Windows.Forms.Label();
             this.lblImage = new System.Windows.Forms.Label();
@@ -75,8 +77,7 @@ namespace Mediateq_AP_SIO2
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tabDVD = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblCategorie = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabOngletsApplication.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -86,6 +87,8 @@ namespace Mediateq_AP_SIO2
             this.grpRechercheTitre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLivres)).BeginInit();
             this.grpRechercheCode.SuspendLayout();
+            this.tabDVD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabOngletsApplication
@@ -373,6 +376,25 @@ namespace Mediateq_AP_SIO2
             this.grpRechercheCode.TabStop = false;
             this.grpRechercheCode.Text = "RECHERCHE PAR CODE DOCUMENT";
             // 
+            // lblCategorie
+            // 
+            this.lblCategorie.AutoSize = true;
+            this.lblCategorie.Location = new System.Drawing.Point(490, 179);
+            this.lblCategorie.Name = "lblCategorie";
+            this.lblCategorie.Size = new System.Drawing.Size(57, 13);
+            this.lblCategorie.TabIndex = 18;
+            this.lblCategorie.Text = "(catégorie)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(359, 179);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(125, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Catégorie de public :";
+            // 
             // btnRechercher
             // 
             this.btnRechercher.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -517,6 +539,7 @@ namespace Mediateq_AP_SIO2
             // 
             // tabDVD
             // 
+            this.tabDVD.Controls.Add(this.dataGridView1);
             this.tabDVD.Location = new System.Drawing.Point(4, 22);
             this.tabDVD.Name = "tabDVD";
             this.tabDVD.Size = new System.Drawing.Size(792, 523);
@@ -524,24 +547,13 @@ namespace Mediateq_AP_SIO2
             this.tabDVD.Text = "DVD";
             this.tabDVD.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // dataGridView1
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(359, 179);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(125, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "Catégorie de public :";
-            // 
-            // lblCategorie
-            // 
-            this.lblCategorie.AutoSize = true;
-            this.lblCategorie.Location = new System.Drawing.Point(490, 179);
-            this.lblCategorie.Name = "lblCategorie";
-            this.lblCategorie.Size = new System.Drawing.Size(57, 13);
-            this.lblCategorie.TabIndex = 18;
-            this.lblCategorie.Text = "(catégorie)";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(76, 67);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(509, 275);
+            this.dataGridView1.TabIndex = 0;
             // 
             // FrmMediateq
             // 
@@ -565,6 +577,8 @@ namespace Mediateq_AP_SIO2
             ((System.ComponentModel.ISupportInitialize)(this.dgvLivres)).EndInit();
             this.grpRechercheCode.ResumeLayout(false);
             this.grpRechercheCode.PerformLayout();
+            this.tabDVD.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -619,6 +633,7 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridViewTextBoxColumn lacollection;
         private System.Windows.Forms.Label lblCategorie;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
