@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mediateq_AP_SIO2.metier;
+using Mediateq_AP_SIO2.Exeption;
 
 
 namespace Mediateq_AP_SIO2
@@ -20,6 +21,7 @@ namespace Mediateq_AP_SIO2
         static List<Descripteur> lesDescripteurs;
         static List<Revue> lesTitres;
         static List<Livre> lesLivres;
+        static List<DVD> lesDvd;
 
         #endregion
 
@@ -33,12 +35,23 @@ namespace Mediateq_AP_SIO2
 
         private void FrmMediateq_Load(object sender, EventArgs e)
         {
-            // Création de la connexion avec la base de données
-            DAOFactory.creerConnection();
+            try
+            {
 
-            // Chargement des objets en mémoire
-            lesDescripteurs = DAODocuments.getAllDescripteurs();
-            lesTitres = DAOPresse.getAllTitre();
+
+                // Création de la connexion avec la base de données
+                DAOFactory.creerConnection();
+
+                // Chargement des objets en mémoire
+                lesDescripteurs = DAODocuments.getAllDescripteurs();
+                lesTitres = DAOPresse.getAllTitre();
+                lesDvd = DAODocuments.getAllDvd();
+            }
+            catch (ExceptionSIO exc)
+            {
+                MessageBox.Show(exc.NiveauExc + " - " + exc.LibelleExc + " - " + exc.Message);
+            }
+            
 
         }
 
@@ -174,5 +187,22 @@ namespace Mediateq_AP_SIO2
         }
         #endregion
 
+        
+
+        private void tabDVD_Enter(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (DVD dvd in lesDvd)
+            {
+                dataGridView1.Rows.Add(dvd.Synopsis, dvd.Realisteur, dvd.Duree);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DVD dvd = new DVD(textBox1.Text, textBox2.Text, int.Parse(textBox3.Text), textBox4.Text, textBox5.Text, textBox6.Text ,new Categorie (textBox7.Text , textBox8.Text) );
+            lesDvd.Add(dvd);
+            DAODocuments.ajouterDvd(dvd);
+        }
     }
 }

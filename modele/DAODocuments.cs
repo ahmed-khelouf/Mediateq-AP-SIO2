@@ -1,6 +1,7 @@
 ﻿using Mediateq_AP_SIO2.metier;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,36 @@ namespace Mediateq_AP_SIO2
 {
     class DAODocuments
     {
+        public static void ajouterDvd(DVD dvd)
+        {
+            
+            string query = "INSERT INTO document ( id , titre , image , commandeEnCours , idPublic)" + "VALUES('" + dvd.IdDoc.ToString() + "' ,'" + dvd.Titre.ToString() + "' ,'" + dvd.Image.ToString() + "' , null , null )";
+            string queryss = "INSERT INTO categorie (id , libelle )" +" VALUES('" + dvd.IdDoc.ToString() + "', " + dvd.LaCategorie.Libelle + ")";
+            string querys = "INSERT INTO dvd (id , synopsis , réalisateur , duree)" + "VALUES('" + dvd.IdDoc.ToString() + "','" + dvd.Synopsis.ToString() + "', '" + dvd.Realisteur.ToString() + "' ," + int.Parse(dvd.Duree.ToString()) + " )";
+            DAOFactory.connecter();
+            DAOFactory.execSQLWrite(query);
+           
+            DAOFactory.execSQLWrite(querys);
+            DAOFactory.deconnecter();
+
+
+        }
+
+
+        public static List<DVD> getAllDvd()
+        {
+            List<DVD> lesDvd = new List<DVD>();
+            string req = "Select dvd.id, dvd.synopsis, dvd.duree , dvd.réalisateur, d.titre, d.image ,d.idPublic, c.libelle from dvd inner join document d on dvd.id=d.id inner join categorie c on d.idPublic = c.id ";
+            DAOFactory.connecter();
+            MySqlDataReader reader = DAOFactory.execSQLRead(req);
+            while (reader.Read())
+            {
+                DVD dvd = new DVD(reader[0].ToString(), reader[1].ToString(), int.Parse(reader[2].ToString()), reader[3].ToString(), reader[4].ToString(), reader[5].ToString() , new Categorie(reader[6].ToString() , reader[7].ToString()));
+                lesDvd.Add(dvd);
+            }
+            DAOFactory.deconnecter();
+            return lesDvd;
+        }
         public static List<Categorie> getAllCategories()
         {
             List<Categorie> lesCategories = new List<Categorie>();
@@ -31,22 +62,32 @@ namespace Mediateq_AP_SIO2
         public static List<Descripteur> getAllDescripteurs()
         {
             List<Descripteur> lesDescripteurs = new List<Descripteur>();
-            string req = "Select * from descripteur";
 
-            DAOFactory.connecter();
-
-            MySqlDataReader reader = DAOFactory.execSQLRead(req);
-
-            while (reader.Read())
+            try
             {
-                Descripteur genre = new Descripteur(reader[0].ToString(), reader[1].ToString());
-                lesDescripteurs.Add(genre);
+                string req = "Select * from descripteur";
+
+                DAOFactory.connecter();
+
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+
+                while (reader.Read())
+                {
+                    Descripteur genre = new Descripteur(reader[0].ToString(), reader[1].ToString());
+                    lesDescripteurs.Add(genre);
+                }
+                DAOFactory.deconnecter();
             }
-            DAOFactory.deconnecter();
+            catch (Exception exc)
+            {
+                throw exc;
+                
+            }
             return lesDescripteurs;
         }
-        
-        public static List<Livre> getAllLivres()
+         
+
+public static List<Livre> getAllLivres()
         {
             List<Livre> lesLivres = new List<Livre>();
             string req = "Select l.id, l.ISBN, l.auteur, d.titre, d.image, l.collection, d.idPublic, c.libelle from livre l ";
