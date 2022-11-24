@@ -12,6 +12,7 @@ using Mediateq_AP_SIO2.Exeption;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Text.RegularExpressions;
+using Mediateq_AP_SIO2.modele;
 
 namespace Mediateq_AP_SIO2
 {
@@ -55,10 +56,10 @@ namespace Mediateq_AP_SIO2
                 lesTitres = DAOPresse.getAllTitre();
                 lesDvd = DAODocuments.getAllDvd();
                 lesExemplaires = DAODocuments.getAllExemplaire();
-                lesParutions = DAODocuments.getAllParution();
+                lesParutions = DAORevues.getAllParution();
                 lesDocuments = DAODocuments.getAllDocument();
-                lesRevues = DAODocuments.getAllRevue();
-                lesSignalerExemplaires = DAODocuments.getAllSignalementExemplaire();
+                lesRevues = DAORevues.getAllRevue();
+                lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
 
 
 
@@ -257,7 +258,7 @@ namespace Mediateq_AP_SIO2
             dataGridView2.Refresh();
             // PARCOUR DE COLLECTION ET AJOUTE LES PARUTIONS DANS LE DATAGRIDVIEW
             dataGridView3.Rows.Clear();
-            lesParutions = DAODocuments.getAllParution();
+            lesParutions = DAORevues.getAllParution();
             foreach (Parution parution in lesParutions)
             {
                 dataGridView3.Rows.Add(parution.Revue.Id, parution.Revue.Titre , parution.Numero, parution.Etat.Libelle);
@@ -278,7 +279,7 @@ namespace Mediateq_AP_SIO2
             dataGridView2.Refresh();
 
             dataGridView3.Rows.Clear();
-            lesParutions = DAODocuments.getAllParution();
+            lesParutions = DAORevues.getAllParution();
             foreach (Parution parution in lesParutions)
             {
                 dataGridView3.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
@@ -383,7 +384,7 @@ namespace Mediateq_AP_SIO2
                 {
                     if(parution.Numero == int.Parse(textBox12.Text))
                     {
-                        DAODocuments.modifierParutionUsage(parution);
+                        DAORevues.modifierParutionUsage(parution);
                         reussi = true;
                     }
                 }
@@ -423,7 +424,7 @@ namespace Mediateq_AP_SIO2
                     {
                         if (parution.Numero == int.Parse(textBox12.Text.ToString()))
                         {
-                            DAODocuments.modifierParutionInnutilisable(parution);
+                            DAORevues.modifierParutionInnutilisable(parution);
                             reussi = true;
                         }
                     }
@@ -516,7 +517,7 @@ namespace Mediateq_AP_SIO2
                             DAODocuments.modifierExemplaireDeteriore(exemplaire);
                             // CREATION D'UN OBJET SIGNALER 
                             SignalerExemplaire signaler = new SignalerExemplaire( textBox13.Text, exemplaire, textBox15.Text, textBox14.Text, DateTime.Parse(textBox18.Text));
-                            DAODocuments.ajouterSignalement(signaler);
+                            DAOSignalerExemplaires.ajouterSignalement(signaler);
                             reussi = true;
                         }
                     }
@@ -595,26 +596,17 @@ namespace Mediateq_AP_SIO2
             }
 
             dataGridView5.Rows.Clear();
-            lesParutions = DAODocuments.getAllParution();
+            lesParutions = DAORevues.getAllParution();
             foreach (Parution parution in lesParutions)
             {
-                foreach (Revue revue in lesRevues)
-                {
-                    if (parution.Revue.Id == revue.Id)
-                    {
-                        if (parution.Etat.Libelle == "inutilisable")
-                        {
-                            dataGridView5.Rows.Add(parution.Revue.Id, parution.Numero, revue.Titre , parution.Etat.Libelle);
-                        }
-                    }
-                }
-
+                 if (parution.Etat.Libelle == "inutilisable")
+                 {
+                     dataGridView5.Rows.Add(parution.Revue.Id, parution.Numero, parution.Revue.Titre , parution.Etat.Libelle);
+                 }
             }
-        }
+       }
 
-
-
-
+    
         #endregion
 
 
@@ -626,7 +618,7 @@ namespace Mediateq_AP_SIO2
         private void tabPage4_Enter(object sender, EventArgs e)
         {
             dataGridView6.Rows.Clear();
-            lesSignalerExemplaires = DAODocuments.getAllSignalementExemplaire();
+            lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
             foreach (SignalerExemplaire signalerExemplaire in lesSignalerExemplaires)
             {
                   if (signalerExemplaire.Exemplaire.Etat.Libelle == "détérioré")
@@ -639,8 +631,9 @@ namespace Mediateq_AP_SIO2
 
 
 
+
         #endregion
 
-
+       
     }
 }

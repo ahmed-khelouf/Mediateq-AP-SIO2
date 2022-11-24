@@ -152,6 +152,7 @@ namespace Mediateq_AP_SIO2
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,7 +160,6 @@ namespace Mediateq_AP_SIO2
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button8 = new System.Windows.Forms.Button();
             this.tabOngletsApplication.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -1301,6 +1301,15 @@ namespace Mediateq_AP_SIO2
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(240, 327);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(281, 121);
+            this.button8.TabIndex = 1;
+            this.button8.Text = "REFRESH";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
             // dataGridView6
             // 
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1315,6 +1324,7 @@ namespace Mediateq_AP_SIO2
             this.dataGridView6.Name = "dataGridView6";
             this.dataGridView6.Size = new System.Drawing.Size(693, 226);
             this.dataGridView6.TabIndex = 0;
+//            this.dataGridView6.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellContentClick);
             // 
             // Column7
             // 
@@ -1346,16 +1356,6 @@ namespace Mediateq_AP_SIO2
             // 
             this.Column17.HeaderText = "Date";
             this.Column17.Name = "Column17";
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(240, 327);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(281, 121);
-            this.button8.TabIndex = 1;
-            this.button8.Text = "REFRESH";
-            this.button8.UseVisualStyleBackColor = true;
-//            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // FrmMediateq
             // 

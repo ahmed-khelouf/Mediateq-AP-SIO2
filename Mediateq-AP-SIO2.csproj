@@ -104,6 +104,8 @@
     <Compile Include="metier\SignalerExemplaire.cs" />
     <Compile Include="modele\DAODocuments.cs" />
     <Compile Include="modele\DAOPresse.cs" />
+    <Compile Include="modele\DAORevues.cs" />
+    <Compile Include="modele\DAOSignalerExemplaires.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FrmMediateq.cs">
