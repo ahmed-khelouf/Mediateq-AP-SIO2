@@ -82,6 +82,11 @@ namespace Mediateq_AP_SIO2
             this.realisateur = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.duree = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -94,11 +99,67 @@ namespace Mediateq_AP_SIO2
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numeroExemplaire = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idEtat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.signaler = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.REVUES = new System.Windows.Forms.Label();
+            this.DOCUMENTS = new System.Windows.Forms.Label();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button8 = new System.Windows.Forms.Button();
             this.tabOngletsApplication.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -111,6 +172,15 @@ namespace Mediateq_AP_SIO2
             this.tabDVD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.signaler.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.SuspendLayout();
             // 
             // tabOngletsApplication
@@ -120,6 +190,10 @@ namespace Mediateq_AP_SIO2
             this.tabOngletsApplication.Controls.Add(this.tabLivres);
             this.tabOngletsApplication.Controls.Add(this.tabDVD);
             this.tabOngletsApplication.Controls.Add(this.tabPage1);
+            this.tabOngletsApplication.Controls.Add(this.tabPage2);
+            this.tabOngletsApplication.Controls.Add(this.signaler);
+            this.tabOngletsApplication.Controls.Add(this.tabPage3);
+            this.tabOngletsApplication.Controls.Add(this.tabPage4);
             this.tabOngletsApplication.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabOngletsApplication.Location = new System.Drawing.Point(0, 0);
             this.tabOngletsApplication.Name = "tabOngletsApplication";
@@ -625,6 +699,48 @@ namespace Mediateq_AP_SIO2
             this.tabPage1.Text = "ajouter DVD";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(322, 274);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(109, 20);
+            this.textBox8.TabIndex = 16;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(89, 274);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(103, 20);
+            this.textBox7.TabIndex = 15;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(329, 229);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(41, 13);
+            this.label21.TabIndex = 14;
+            this.label21.Text = "label21";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(105, 229);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(41, 13);
+            this.label20.TabIndex = 13;
+            this.label20.Text = "label20";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(299, 338);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 33);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(528, 165);
@@ -721,47 +837,525 @@ namespace Mediateq_AP_SIO2
             this.label14.TabIndex = 0;
             this.label14.Text = "label14";
             // 
-            // button1
+            // tabPage2
             // 
-            this.button1.Location = new System.Drawing.Point(299, 338);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 33);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tabPage2.Controls.Add(this.button7);
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.dataGridView3);
+            this.tabPage2.Controls.Add(this.textBox12);
+            this.tabPage2.Controls.Add(this.label28);
+            this.tabPage2.Controls.Add(this.label27);
+            this.tabPage2.Controls.Add(this.label26);
+            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.label25);
+            this.tabPage2.Controls.Add(this.label24);
+            this.tabPage2.Controls.Add(this.textBox11);
+            this.tabPage2.Controls.Add(this.textBox10);
+            this.tabPage2.Controls.Add(this.label23);
+            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.textBox9);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(792, 523);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "changer l\'etat";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
             // 
-            // label20
+            // button7
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(105, 229);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 13);
-            this.label20.TabIndex = 13;
-            this.label20.Text = "label20";
+            this.button7.Location = new System.Drawing.Point(156, 264);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 19;
+            this.button7.Text = "REFRESH";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // label21
+            // button5
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(329, 229);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(41, 13);
-            this.label21.TabIndex = 14;
-            this.label21.Text = "label21";
+            this.button5.Location = new System.Drawing.Point(641, 434);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(109, 28);
+            this.button5.TabIndex = 18;
+            this.button5.Text = "INUTILISABLE";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // textBox7
+            // button4
             // 
-            this.textBox7.Location = new System.Drawing.Point(89, 274);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(103, 20);
-            this.textBox7.TabIndex = 15;
+            this.button4.Location = new System.Drawing.Point(485, 439);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 23);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "USAGE";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox8
+            // dataGridView3
             // 
-            this.textBox8.Location = new System.Drawing.Point(322, 274);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(109, 20);
-            this.textBox8.TabIndex = 16;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column18,
+            this.Column3,
+            this.Column19});
+            this.dataGridView3.Location = new System.Drawing.Point(9, 318);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(439, 167);
+            this.dataGridView3.TabIndex = 16;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "ID";
+            this.Column1.Name = "Column1";
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "Titre";
+            this.Column18.Name = "Column18";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Numero";
+            this.Column3.Name = "Column3";
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "Etat";
+            this.Column19.Name = "Column19";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(650, 386);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(100, 20);
+            this.textBox12.TabIndex = 14;
+            this.textBox12.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox12_KeyPress);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(493, 360);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(67, 13);
+            this.label28.TabIndex = 13;
+            this.label28.Text = "Code Revue";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(536, 304);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(154, 13);
+            this.label27.TabIndex = 12;
+            this.label27.Text = "CHANGEMENT ETAT REVUE";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(511, 17);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(179, 13);
+            this.label26.TabIndex = 10;
+            this.label26.Text = "CHANGEMENT ETAT DOCUMENT";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.Column2,
+            this.numeroExemplaire,
+            this.idEtat});
+            this.dataGridView2.Location = new System.Drawing.Point(8, 39);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(440, 150);
+            this.dataGridView2.TabIndex = 9;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Titre";
+            this.Column2.Name = "Column2";
+            // 
+            // numeroExemplaire
+            // 
+            this.numeroExemplaire.HeaderText = "Numero";
+            this.numeroExemplaire.Name = "numeroExemplaire";
+            // 
+            // idEtat
+            // 
+            this.idEtat.HeaderText = "Etat";
+            this.idEtat.Name = "idEtat";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(650, 173);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "INUTILISABLE";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(485, 173);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "USAGE";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(647, 360);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(83, 13);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "numero parution";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(482, 39);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(0, 13);
+            this.label24.TabIndex = 5;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(485, 386);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(100, 20);
+            this.textBox11.TabIndex = 4;
+            this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox11_KeyPress);
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(658, 98);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 20);
+            this.textBox10.TabIndex = 3;
+            this.textBox10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox10_KeyPress);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(655, 62);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(95, 13);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "numero exemplaire";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(477, 62);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(84, 13);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "Code Document";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(480, 98);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 20);
+            this.textBox9.TabIndex = 0;
+            this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
+            // 
+            // signaler
+            // 
+            this.signaler.Controls.Add(this.button6);
+            this.signaler.Controls.Add(this.textBox18);
+            this.signaler.Controls.Add(this.label34);
+            this.signaler.Controls.Add(this.textBox16);
+            this.signaler.Controls.Add(this.label32);
+            this.signaler.Controls.Add(this.label31);
+            this.signaler.Controls.Add(this.label30);
+            this.signaler.Controls.Add(this.label29);
+            this.signaler.Controls.Add(this.textBox15);
+            this.signaler.Controls.Add(this.textBox14);
+            this.signaler.Controls.Add(this.textBox13);
+            this.signaler.Location = new System.Drawing.Point(4, 22);
+            this.signaler.Name = "signaler";
+            this.signaler.Size = new System.Drawing.Size(792, 523);
+            this.signaler.TabIndex = 6;
+            this.signaler.Text = "Signaler";
+            this.signaler.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(273, 259);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(181, 69);
+            this.button6.TabIndex = 12;
+            this.button6.Text = "SGNALER UN EXEMPLAIRE";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // textBox18
+            // 
+            this.textBox18.Location = new System.Drawing.Point(318, 127);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(111, 20);
+            this.textBox18.TabIndex = 11;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(315, 99);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(28, 13);
+            this.label34.TabIndex = 9;
+            this.label34.Text = "date";
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(116, 127);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(107, 20);
+            this.textBox16.TabIndex = 7;
+            this.textBox16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox16_KeyPress);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(113, 99);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(92, 13);
+            this.label32.TabIndex = 6;
+            this.label32.Text = "numero document";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(535, 23);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(42, 13);
+            this.label31.TabIndex = 5;
+            this.label31.Text = "prenom";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(315, 23);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(30, 13);
+            this.label30.TabIndex = 4;
+            this.label30.Text = "nom ";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(113, 23);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(81, 13);
+            this.label29.TabIndex = 3;
+            this.label29.Text = "code document";
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(538, 50);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(115, 20);
+            this.textBox15.TabIndex = 2;
+            this.textBox15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox15_KeyPress);
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(318, 50);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(120, 20);
+            this.textBox14.TabIndex = 1;
+            this.textBox14.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox14_KeyPress);
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(116, 50);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(100, 20);
+            this.textBox13.TabIndex = 0;
+            this.textBox13.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox13_KeyPress);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.REVUES);
+            this.tabPage3.Controls.Add(this.DOCUMENTS);
+            this.tabPage3.Controls.Add(this.dataGridView5);
+            this.tabPage3.Controls.Add(this.dataGridView4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(792, 523);
+            this.tabPage3.TabIndex = 7;
+            this.tabPage3.Text = "doc inutilisable";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Enter);
+            // 
+            // REVUES
+            // 
+            this.REVUES.AutoSize = true;
+            this.REVUES.Location = new System.Drawing.Point(585, 310);
+            this.REVUES.Name = "REVUES";
+            this.REVUES.Size = new System.Drawing.Size(51, 13);
+            this.REVUES.TabIndex = 3;
+            this.REVUES.Text = "REVUES";
+            // 
+            // DOCUMENTS
+            // 
+            this.DOCUMENTS.AutoSize = true;
+            this.DOCUMENTS.Location = new System.Drawing.Point(572, 88);
+            this.DOCUMENTS.Name = "DOCUMENTS";
+            this.DOCUMENTS.Size = new System.Drawing.Size(76, 13);
+            this.DOCUMENTS.TabIndex = 2;
+            this.DOCUMENTS.Text = "DOCUMENTS";
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column9,
+            this.Column10,
+            this.Column11,
+            this.Column13});
+            this.dataGridView5.Location = new System.Drawing.Point(53, 257);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(493, 181);
+            this.dataGridView5.TabIndex = 1;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "idRevue";
+            this.Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "numero";
+            this.Column10.Name = "Column10";
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "titre";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 150;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "etat";
+            this.Column13.Name = "Column13";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column8});
+            this.dataGridView4.Location = new System.Drawing.Point(53, 32);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(493, 194);
+            this.dataGridView4.TabIndex = 0;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "idExemplaire";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "numero";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Titre";
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 150;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "etat";
+            this.Column8.Name = "Column8";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.button8);
+            this.tabPage4.Controls.Add(this.dataGridView6);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(792, 523);
+            this.tabPage4.TabIndex = 8;
+            this.tabPage4.Text = "doc deteriore";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
+            // 
+            // dataGridView6
+            // 
+            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column7,
+            this.Column12,
+            this.Column14,
+            this.Column15,
+            this.Column16,
+            this.Column17});
+            this.dataGridView6.Location = new System.Drawing.Point(24, 48);
+            this.dataGridView6.Name = "dataGridView6";
+            this.dataGridView6.Size = new System.Drawing.Size(693, 226);
+            this.dataGridView6.TabIndex = 0;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "ID";
+            this.Column7.Name = "Column7";
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "Titre";
+            this.Column12.Name = "Column12";
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "Numero";
+            this.Column14.Name = "Column14";
+            this.Column14.Width = 150;
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "Nom";
+            this.Column15.Name = "Column15";
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "Prenom";
+            this.Column16.Name = "Column16";
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "Date";
+            this.Column17.Name = "Column17";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(240, 327);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(281, 121);
+            this.button8.TabIndex = 1;
+            this.button8.Text = "REFRESH";
+            this.button8.UseVisualStyleBackColor = true;
+//            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // FrmMediateq
             // 
@@ -789,6 +1383,18 @@ namespace Mediateq_AP_SIO2
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.signaler.ResumeLayout(false);
+            this.signaler.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -865,6 +1471,67 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TabPage signaler;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox textBox18;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dataGridView6;
+        private System.Windows.Forms.Label REVUES;
+        private System.Windows.Forms.Label DOCUMENTS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numeroExemplaire;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idEtat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.Button button8;
     }
 }
 

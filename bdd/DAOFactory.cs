@@ -12,10 +12,11 @@ namespace Mediateq_AP_SIO2
         {
             string serverIp = "127.0.0.1";
             string username = "root";
-            string password = "";
-            string databaseName = "mediateq1";
+            string password = "root";
+            string databaseName = "mediateq2";
+             
 
-            string dbConnectionString = string.Format("server={0};uid={1};pwd={2};database={3};", serverIp, username, password, databaseName);
+            string dbConnectionString = string.Format("server={0};uid={1};pwd={2};database={3}; ", serverIp, username, password, databaseName);
 
             try
             {

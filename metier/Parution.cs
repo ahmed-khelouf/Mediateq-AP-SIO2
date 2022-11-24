@@ -11,19 +11,23 @@ namespace Mediateq_AP_SIO2.metier
         private int numero;
         private DateTime dateParution;
         private string photo;
-        private string idRevue;
+        private Revue uneRevue;
+        private Etat unEtat;
 
-        public Parution(int numero, DateTime dateParution, string photo, string idRevue)
+        public Parution(int numero, DateTime dateParution, string photo, Revue uneRevue, Etat unEtat)
         {
             this.numero = numero;
             this.dateParution = dateParution;
             this.photo = photo;
-            this.idRevue = idRevue;
+            this.uneRevue = uneRevue;
+            this.unEtat = unEtat;
+           
         }
 
         public int Numero { get => numero; set => numero = value; }
         public DateTime DateParution { get => dateParution; set => dateParution = value; }
         public string Photo { get => photo; set => photo = value; }
-        public string IdRevue { get => idRevue; set => idRevue = value; }
+        public Revue Revue { get => uneRevue; set => uneRevue = value; }
+        public Etat Etat { get => unEtat; set => unEtat = value; }
     }
 }

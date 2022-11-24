@@ -96,9 +96,12 @@
     <Compile Include="metier\Document.cs" />
     <Compile Include="metier\Descripteur.cs" />
     <Compile Include="metier\DVD.cs" />
+    <Compile Include="metier\Etat.cs" />
+    <Compile Include="metier\Exemplaire.cs" />
     <Compile Include="metier\Livre.cs" />
     <Compile Include="metier\Parution.cs" />
     <Compile Include="metier\Revue.cs" />
+    <Compile Include="metier\SignalerExemplaire.cs" />
     <Compile Include="modele\DAODocuments.cs" />
     <Compile Include="modele\DAOPresse.cs" />
     <Compile Include="Program.cs" />

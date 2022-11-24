@@ -94,7 +94,7 @@ namespace Mediateq_AP_SIO2
         public static List<Parution> getParutionByTitre(Revue pTitre)
         {
             List<Parution> lesParutions = new List<Parution>();
-            string req = "Select * from parution where idRevue = " + pTitre.Id;
+            string req = "Select parution.numero , parution.dateParution , parution.photo , revue.id , revue.titre , revue.empruntable , revue.periodicite , revue.dateFinAbonnement , revue.delai_miseadispo , revue.idDesc , etat.id , etat.libelle from revue inner join parution on revue.id=parution.idRevue inner join etat on etat.id=parution.idEtat   where idRevue = " + pTitre.Id;
 
             DAOFactory.connecter();
 
@@ -102,12 +102,14 @@ namespace Mediateq_AP_SIO2
 
             while (reader.Read())
             {
-                Parution parution = new Parution(int.Parse(reader[1].ToString()), DateTime.Parse(reader[2].ToString()), reader[3].ToString(), pTitre.Id);
+                Parution parution = new Parution(int.Parse(reader[0].ToString()), DateTime.Parse(reader[1].ToString()), reader[2].ToString(), new Revue(reader[3].ToString(), pTitre.Id, Char.Parse(reader[5].ToString()), reader[6].ToString(), DateTime.Parse(reader[7].ToString()), int.Parse(reader[8].ToString()), reader[9].ToString()), new Etat(int.Parse(reader[10].ToString()), reader[11].ToString())); 
                 lesParutions.Add(parution);
             }
             DAOFactory.deconnecter();
             return lesParutions;
         }
+
+      
 
     }
 }
