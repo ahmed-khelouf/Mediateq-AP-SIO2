@@ -552,7 +552,7 @@ namespace Mediateq_AP_SIO2
 
         #region DETERIORES
         //-----------------------------------------------------------
-        // ONGLET "DOCUMENT OU REVUE DETERIORE"
+        // ONGLET "DOCUMENT OU REVUE DETERIORE "
         //-----------------------------------------------------------
 
         private void tabPage4_Enter(object sender, EventArgs e)
