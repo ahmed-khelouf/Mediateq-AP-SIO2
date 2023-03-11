@@ -16,14 +16,13 @@ namespace Mediateq_AP_SIO2.metier
         private DateTime date;
         
 
-        public SignalerExemplaire(  string codeD, Exemplaire unExemplaire, string nom, string prenom, DateTime date)
+        public SignalerExemplaire(  string codeD, Exemplaire unExemplaire, string nom, string prenom)
         {
             
             this.codeD = codeD;
             this.unExemplaire = unExemplaire;
             this.nom = nom;
             this.prenom = prenom;
-            this.date = date;
         }
 
         

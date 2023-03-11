@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Text.RegularExpressions;
 using Mediateq_AP_SIO2.modele;
+using System.Security.Cryptography;
 
 namespace Mediateq_AP_SIO2
 {
@@ -30,7 +31,7 @@ namespace Mediateq_AP_SIO2
         static List<Document> lesDocuments;
         static List<Revue> lesRevues;
         static List<SignalerExemplaire> lesSignalerExemplaires;
-
+        static List<Historique> lesHistoriques; 
 
         #endregion
 
@@ -60,6 +61,7 @@ namespace Mediateq_AP_SIO2
                 lesDocuments = DAODocuments.getAllDocument();
                 lesRevues = DAORevues.getAllRevue();
                 lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
+                //lesHistoriques = DAODocuments.getAllHistorique();
 
 
 
@@ -253,7 +255,8 @@ namespace Mediateq_AP_SIO2
             foreach (Exemplaire exemplaire in lesExemplaires)
             {            
                     dataGridView2.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre ,   exemplaire.Numero, exemplaire.Etat.Libelle);
-
+                    // AJOUTE ID ET LE NUMERO D'UN DOCUMENT A LA COMBOBOX
+                    comboBoxDocuments.Items.Add("ID : " + exemplaire.Document.IdDoc + "    numero : " + exemplaire.Numero);
             }
             dataGridView2.Refresh();
             // PARCOUR DE COLLECTION ET AJOUTE LES PARUTIONS DANS LE DATAGRIDVIEW
@@ -262,6 +265,8 @@ namespace Mediateq_AP_SIO2
             foreach (Parution parution in lesParutions)
             {
                 dataGridView3.Rows.Add(parution.Revue.Id, parution.Revue.Titre , parution.Numero, parution.Etat.Libelle);
+                // AJOUTE ID ET LE NUMERO D'UNE PARUTION A LA COMBOBOX
+                comboBoxRevues.Items.Add("ID : " + parution.Revue.Id + "    numero : " + parution.Numero);
             }
             
             dataGridView3.Refresh();
@@ -288,7 +293,6 @@ namespace Mediateq_AP_SIO2
             dataGridView3.Refresh();
         }
 
-
         // BOUTON POUR EXEMPLAIRE ETAT = USAGE
         private void button2_Click(object sender, EventArgs e)
         {
@@ -296,209 +300,143 @@ namespace Mediateq_AP_SIO2
             //PARCOUR LA COLLECTION EXEMPLAIRE POUR SELECTIONNER UNE REVUE ET MODIFIER L'ETAT EN USAGE GRACE A LA METHODE modifierExemplaireUsage
             foreach (Exemplaire exemplaire in lesExemplaires)
             {
-                if (exemplaire.Document.IdDoc == textBox9.Text && exemplaire.Etat.Libelle!="usagé")
-                { 
-                    if (exemplaire.Numero == textBox10.Text)
-                    {
+                if ("ID : " + exemplaire.Document.IdDoc + "    numero : " + exemplaire.Numero == comboBoxDocuments.Text && exemplaire.Etat.Libelle != "usagé")
+                {
+                        //Historique historique = new Historique(exemplaire, exemplaire.Etat);
+                        //lesHistoriques.Add(historique);
+                        //DAODocuments.ajouterUnHistorique(historique);
                         DAODocuments.modifierExemplaireUsage(exemplaire);
                         reussi = true;
-                        
-                    }
                 }
             }
 
-            // AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
-            if (reussi) 
-            { 
+            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
+            if (reussi)
+            {
                 MessageBox.Show("changement d'etat: Usagé effectué");
             }
 
-            // AFFICHE UN MESSAGE SI IL Y A UNE ERREUR DE SAISIE
-            if (!reussi && textBox9.Text != "" && textBox10.Text != "")
+            // AFFICHE UN MESSAGE SI LE DOCUMENT EST DEJA EN USAGE
+            if (!reussi && comboBoxDocuments.Text != "")
             {
-                MessageBox.Show("verifier vos champs saisie merci !");
+                MessageBox.Show("Le document est déja en usagé !");
             }
 
-
-            // AFFICHE UN MESSAGE SI LES CHAMPS SONT VIDES OU l'UN DES DEUX 
-            if (textBox9.Text == "" && textBox10.Text == ""  || textBox9.Text != "" && textBox10.Text == "" || textBox9.Text == "" && textBox10.Text != "")
+            // AFFICHE UN MESSAGE SI AUCUN DOCUMENT EST CHOISI
+            if (!reussi && comboBoxDocuments.Text=="")
             {
-                MessageBox.Show(" veuillez remplir les champs ");
+                MessageBox.Show("Veuillez choisir un document !");
             }
-           
 
-            // VIDER LES TEXTES BOX
-            textBox9.Text = "";
-            textBox10.Text = "";
+            
         }
 
-        // BOUTON POUR EXEMPLAIRE ETAT = INNUTILISBALE 
+        // BOUTON POUR EXEMPLAIRE ETAT = INUTILISBALE 
         private void button3_Click(object sender, EventArgs e)
         {
             bool reussi = false;
             //PARCOUR LA COLLECTION EXEMPLAIRE POUR SELECTIONNER UN EXEMPLAIRE ET MODIFIER L'ETAT EN INNUTILISABLE GRACE A LA METHODE modifierExemplaireInnutilisable
             foreach (Exemplaire exemplaire in lesExemplaires)
             {
-                if(exemplaire.Document.IdDoc == textBox9.Text && exemplaire.Etat.Libelle != "inutilisable")
+                if ("ID : " + exemplaire.Document.IdDoc + "    numero : " + exemplaire.Numero == comboBoxDocuments.Text && exemplaire.Etat.Libelle != "inutilisable")
                 {
-                    if(exemplaire.Numero == textBox10.Text)
-                    {
-                        DAODocuments.modifierExemplaireInnutilisable(exemplaire);
+                        DAODocuments.modifierExemplaireInutilisable(exemplaire);
                         reussi = true;
-                    }
-                }  
+                }
             }
-            // AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
+
+            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
             if (reussi)
             {
-                MessageBox.Show("changement d'etat: inutilisable effectué");
+                MessageBox.Show("changement d'etat: Inutilisable effectué");
             }
 
-            // AFFICHE UN MESSAGE SI IL Y A UNE ERREUR DE SAISIE
-            if (!reussi && textBox9.Text != "" && textBox10.Text != "")
+            // AFFICHE UN MESSAGE SI LE DOCUMENT EST DEJA EN USAGE
+            if (!reussi && comboBoxDocuments.Text != "")
             {
-                MessageBox.Show("verifier vos champs saisie merci !");
+                MessageBox.Show("Le document est déja en inutilisable !");
             }
 
-
-            // AFFICHE UN MESSAGE SI LES CHAMPS SONT VIDES OU l'UN DES DEUX 
-            if (textBox9.Text == "" && textBox10.Text == "" || textBox9.Text != "" && textBox10.Text == "" || textBox9.Text == "" && textBox10.Text != "")
+            // AFFICHE UN MESSAGE SI AUCUN DOCUMENT EST CHOISI
+            if (!reussi && comboBoxDocuments.Text == "")
             {
-                MessageBox.Show(" veuillez remplir les champs ");
+                MessageBox.Show("Veuillez choisir un document !");
             }
-
-
-            // VIDER LES TEXTES BOX
-            textBox9.Text = "";
-            textBox10.Text = "";
         }
-  
+
         // BOUTON POURE PARUTION ETAT = USAGE
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
             bool reussi = false;
             //PARCOUR LA COLLECTION PARUTION POUR SELECTIONNER UNE PARUTION ET MODIFIER L'ETAT EN USAGE GRACE A LA METHODE modifierParutionUsage
             foreach (Parution parution in lesParutions)
             {
-                if(parution.Revue.Id == textBox11.Text && parution.Etat.Libelle!="usagé")
+                if("ID : " + parution.Revue.Id + "    numero : " + parution.Numero == comboBoxRevues.Text && parution.Etat.Libelle!="usagé")
                 {
-                    if(parution.Numero == int.Parse(textBox12.Text))
-                    {
-                        DAORevues.modifierParutionUsage(parution);
-                        reussi = true;
-                    }
+                      DAORevues.modifierParutionUsage(parution);
+                      reussi = true;
                 }
             }
-            // AFFICHE UN MESSAGE 
+
+            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
             if (reussi)
             {
                 MessageBox.Show("changement d'etat: Usagé effectué");
             }
 
-            // AFFICHE UN MESSAGE SI IL Y A UNE ERREUR DE SAISIE
-            if (!reussi && textBox11.Text != "" && textBox12.Text != "")
+            // AFFICHE UN MESSAGE SI LA REVUE EST DEJA EN USAGE
+            if (!reussi && comboBoxRevues.Text != "")
             {
-                MessageBox.Show("verifier vos champs saisie merci !");
+                MessageBox.Show("La Revue est déja en usagé !");
             }
 
-            // AFFICHE UN MESSAGE SI LES CHAMPS SONT VIDES OU l'UN DES DEUX 
-            if (textBox11.Text == "" && textBox12.Text == "" || textBox11.Text != "" && textBox12.Text == "" || textBox11.Text == "" && textBox12.Text != "")
+            // AFFICHE UN MESSAGE SI AUCUNE REVUE EST CHOISI
+            if (!reussi && comboBoxRevues.Text == "")
             {
-                MessageBox.Show(" veuillez remplir les champs ");
+                MessageBox.Show("Veuillez choisir une revue !");
             }
-            // VIDER LES TEXTES BOX
-            textBox11.Text = "";
-            textBox12.Text = "";
         }
 
         // BOUTON POUR UNE PARUTION ETAT = INUTILISBALE 
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click_1(object sender, EventArgs e)
         {
             bool reussi = false;
-            //PARCOUR LA COLLECTION PARUTION POUR SELECTIONNER UNE PARUTION ET MODIFIER L'ETAT EN INNUTILISABLE GRACE A LA METHODE modifierParutionInnutilisable
-
-
+            //PARCOUR LA COLLECTION PARUTION POUR SELECTIONNER UNE PARUTION ET MODIFIER L'ETAT EN INUTILISABLE GRACE A LA METHODE modifierParutionInnutilisable
                 foreach (Parution parution in lesParutions)
                 {
-                    if (parution.Revue.Id == textBox11.Text && parution.Etat.Libelle!="inutilisable")
+                    if ("ID : " + parution.Revue.Id + "    numero : " + parution.Numero == comboBoxRevues.Text && parution.Etat.Libelle!="inutilisable")
                     {
-                        if (parution.Numero == int.Parse(textBox12.Text.ToString()))
-                        {
-                            DAORevues.modifierParutionInnutilisable(parution);
-                            reussi = true;
-                        }
+                          DAORevues.modifierParutionInutilisable(parution);
+                          reussi = true;
                     }
                 }
-        
 
-
-            // AFFICHE UN MESSAGE 
+            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
             if (reussi)
             {
-                MessageBox.Show("changement d'etat: Usagé effectué");
+                MessageBox.Show("changement d'etat: Inutilisable effectué");
             }
 
-            // AFFICHE UN MESSAGE SI IL Y A UNE ERREUR DE SAISIE
-            if (!reussi && textBox11.Text != "" && textBox12.Text != "")
+            // AFFICHE UN MESSAGE SI LA REVUE EST DEJA EN USAGE
+            if (!reussi && comboBoxRevues.Text != "")
             {
-                MessageBox.Show("verifier vos champs saisie merci !");
+                MessageBox.Show("La Revue est déja en inutilisable !");
             }
 
-            // AFFICHE UN MESSAGE SI LES CHAMPS SONT VIDES OU l'UN DES DEUX 
-            if (textBox11.Text == "" && textBox12.Text == "" || textBox11.Text != "" && textBox12.Text == "" || textBox11.Text == "" && textBox12.Text != "")
+            // AFFICHE UN MESSAGE SI AUCUNE REVUE EST CHOISI
+            if (!reussi && comboBoxRevues.Text == "")
             {
-                  MessageBox.Show(" veuillez remplir les champs ");
+                MessageBox.Show("Veuillez choisir une revue !");
             }
-            // VIDER LES TEXTES BOX
-                textBox11.Text = "";
-                textBox12.Text = "";
         }
 
-        // INTERDIRE LA SAISIE DE CARACTERE SUR LES 4 TEXTES BOX
-        private void textBox10_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsNumber(e.KeyChar))
-                 e.Handled = false;
-            else if (char.IsControl(e.KeyChar))
-                 e.Handled = false;
-            else
-                 e.Handled = true;
-}
-        private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = false;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-        private void textBox11_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = false;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-        private void textBox12_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = false;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
 
-     
         #endregion
 
 
         #region Signaler
         // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES EXEMPLAIRES
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click_1(object sender, EventArgs e)
         {
             
             bool reussi = false;
@@ -516,7 +454,7 @@ namespace Mediateq_AP_SIO2
                             // CHANGE L'ETAT en DETERIORE ET AJOUTE DANS LA TABLE SIGNALER LA PERSONNE A L'ORIGNE DE CETTE ETAT
                             DAODocuments.modifierExemplaireDeteriore(exemplaire);
                             // CREATION D'UN OBJET SIGNALER 
-                            SignalerExemplaire signaler = new SignalerExemplaire( textBox13.Text, exemplaire, textBox15.Text, textBox14.Text, DateTime.Parse(textBox18.Text));
+                            SignalerExemplaire signaler = new SignalerExemplaire( textBox13.Text, exemplaire, textBox15.Text, textBox14.Text);
                             DAOSignalerExemplaires.ajouterSignalement(signaler);
                             reussi = true;
                         }
@@ -585,28 +523,30 @@ namespace Mediateq_AP_SIO2
         //-----------------------------------------------------------
         private void tabPage3_Enter(object sender, EventArgs e)
         {
-            dataGridView4.Rows.Clear();
-             lesExemplaires = DAODocuments.getAllExemplaire();
+            dataGridViewDocumentsInutilisable.Rows.Clear();
+            lesExemplaires = DAODocuments.getAllExemplaire();
             foreach (Exemplaire exemplaire in lesExemplaires)
             {
-                 if (exemplaire.Etat.Libelle == "inutilisable")
-                 {
-                      dataGridView4.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Numero   , exemplaire.Document.IdDoc , exemplaire.Etat.Libelle);
-                 }
+                if (exemplaire.Etat.Libelle == "inutilisable")
+                {
+                    dataGridViewDocumentsInutilisable.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Numero, exemplaire.Document.Titre, exemplaire.Etat.Libelle);
+                }
             }
 
-            dataGridView5.Rows.Clear();
+            dataGridViewRevuesInutilisable.Rows.Clear();
             lesParutions = DAORevues.getAllParution();
             foreach (Parution parution in lesParutions)
             {
-                 if (parution.Etat.Libelle == "inutilisable")
-                 {
-                     dataGridView5.Rows.Add(parution.Revue.Id, parution.Numero, parution.Revue.Titre , parution.Etat.Libelle);
-                 }
+                if (parution.Etat.Libelle == "inutilisable")
+                {
+                    dataGridViewRevuesInutilisable.Rows.Add(parution.Revue.Id, parution.Numero, parution.Revue.Titre, parution.Etat.Libelle);
+                }
             }
-       }
+        }
 
-    
+
+
+
         #endregion
 
 
@@ -621,19 +561,16 @@ namespace Mediateq_AP_SIO2
             lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
             foreach (SignalerExemplaire signalerExemplaire in lesSignalerExemplaires)
             {
-                  if (signalerExemplaire.Exemplaire.Etat.Libelle == "détérioré")
-                  {
-                     dataGridView6.Rows.Add(signalerExemplaire.Exemplaire.Document.IdDoc, signalerExemplaire.Exemplaire.Document.Titre, signalerExemplaire.Exemplaire.Numero, signalerExemplaire.Nom, signalerExemplaire.Prenom, signalerExemplaire.Date);
-                  } 
+                if (signalerExemplaire.Exemplaire.Etat.Libelle == "détérioré")
+                {
+                    dataGridView6.Rows.Add(signalerExemplaire.Exemplaire.Document.IdDoc, signalerExemplaire.Exemplaire.Document.Titre, signalerExemplaire.Exemplaire.Numero, signalerExemplaire.Nom, signalerExemplaire.Prenom, signalerExemplaire.Date.ToString());
+                }
             }
         }
 
 
-
-
-
         #endregion
 
-       
+
     }
 }

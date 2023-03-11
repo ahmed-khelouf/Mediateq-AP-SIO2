@@ -41,7 +41,7 @@ namespace Mediateq_AP_SIO2.modele
             }
         }
 
-        public static void modifierParutionInnutilisable(Parution parution)
+        public static void modifierParutionInutilisable(Parution parution)
         {
             try
             {

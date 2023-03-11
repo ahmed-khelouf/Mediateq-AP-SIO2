@@ -40,11 +40,50 @@ namespace Mediateq_AP_SIO2
             return lesExemplaires;
         }
 
-       
+        //public static void ajouterUnHistorique(Historique historique)
+        //{
+            //try
+            //{
+                //string query = "INSERT INTO historique (  idDoc , etat , date , numeroExemplaire)" + "VALUES('"+ historique.IdExemplaire.Document.IdDoc.ToString() + "' ,'" + historique.IdEtat.Libelle.ToString() + "' , '" + "', Current_Date  " + "' , '" + historique.IdExemplaire.Numero.ToString() +" )";
+                //DAOFactory.connecter();
+                //DAOFactory.execSQLWrite(query);
+                //DAOFactory.deconnecter();
+            //}
+           // catch (Exception exc)
+           //{
+              //  throw exc;
+           // }
+
+       // }
+
+        //public static List<Historique> getAllHistorique()
+        //{
+           // List<Historique> lesHistorique = new List<Historique>();
+           // try
+            //{
+                //string req = "select historique.id , historique.idExemplaire , historique.etat , historique.date , exemplaire.idDoc , exemplaire.numero , exemplaire.dateAchat , exemplaire.dateAchat , exemplaire.idRayon , exemplaire.idEtat , etat.id , etat.libelle from historique inner join exemplaire on historique.idExemplaire=exemplaire.idDoc inner join etat on etat.id=exemplaire.idEtat ";
+                //DAOFactory.connecter();
+                //MySqlDataReader reader = DAOFactory.execSQLRead(req);
+               // while (reader.Read())
+               // {
+                  //  Historique historique = new Historique(int.Parse(reader[0].ToString()), new Exemplaire(new Document(reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), new Categorie(reader[4].ToString(), reader[5].ToString())), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), new Etat(int.Parse(reader[9].ToString()), reader[10].ToString())), reader[11].ToString(), DateTime.Parse(reader[12].ToString()));
+                    //lesHistorique.Add(historique);
+               // }
+               // DAOFactory.deconnecter();
+            //}
+            //catch (Exception exc)
+            //{
+              //  throw exc;
+
+            //}
+            //return lesHistorique;
+        //}
+
         public static void modifierExemplaireDeteriore(Exemplaire exemplaire)
         {
             try
             {
+         
                 string query = "UPDATE exemplaire set exemplaire.idEtat='00003' where exemplaire.idDoc='" + exemplaire.Document.IdDoc + "'AND exemplaire.numero= '" + exemplaire.Numero + "'";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
@@ -70,7 +109,7 @@ namespace Mediateq_AP_SIO2
             }
         }
 
-        public static void modifierExemplaireInnutilisable(Exemplaire exemplaire)
+        public static void modifierExemplaireInutilisable(Exemplaire exemplaire)
         {
             try
             {
@@ -85,9 +124,6 @@ namespace Mediateq_AP_SIO2
             }
         }
 
-
-       
-       
         public static void ajouterDvd(DVD dvd)
         {
             try
@@ -130,9 +166,6 @@ namespace Mediateq_AP_SIO2
             return lesDocuments;
         }
 
-      
-
-
         public static List<DVD> getAllDvd()
         {
             List<DVD> lesDvd = new List<DVD>();
@@ -155,6 +188,7 @@ namespace Mediateq_AP_SIO2
             }
             return lesDvd;
         }
+
         public static List<Categorie> getAllCategories()
         {
             List<Categorie> lesCategories = new List<Categorie>();
@@ -207,7 +241,6 @@ namespace Mediateq_AP_SIO2
             return lesDescripteurs;
         }
          
-
         public static List<Livre> getAllLivres()
         {
             List<Livre> lesLivres = new List<Livre>();
