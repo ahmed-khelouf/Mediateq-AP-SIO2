@@ -13,7 +13,6 @@ namespace Mediateq_AP_SIO2.metier
         private string dateAchat;
         private string idRayon;
         private Etat etat;
-        private List<Historique> lesHistoriques;
 
         public Exemplaire(Document unDocument, string numero, string dateAchat, string idRayon, Etat unetat )
         {
@@ -38,7 +37,6 @@ namespace Mediateq_AP_SIO2.metier
 
         public Etat Etat { get => etat; set => etat = value; }
 
-        public List<Historique> LesHistoriques { get => lesHistoriques; set => lesHistoriques = value; }
 
     }
 }
