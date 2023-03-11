@@ -100,6 +100,8 @@ namespace Mediateq_AP_SIO2
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.comboBoxRevues = new System.Windows.Forms.ComboBox();
+            this.comboBoxDocuments = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -152,8 +154,6 @@ namespace Mediateq_AP_SIO2
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBoxDocuments = new System.Windows.Forms.ComboBox();
-            this.comboBoxRevues = new System.Windows.Forms.ComboBox();
             this.tabOngletsApplication.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -851,7 +851,24 @@ namespace Mediateq_AP_SIO2
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "changer l\'etat";
             this.tabPage2.UseVisualStyleBackColor = true;
+//            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
+            // 
+            // comboBoxRevues
+            // 
+            this.comboBoxRevues.FormattingEnabled = true;
+            this.comboBoxRevues.Location = new System.Drawing.Point(514, 347);
+            this.comboBoxRevues.Name = "comboBoxRevues";
+            this.comboBoxRevues.Size = new System.Drawing.Size(190, 21);
+            this.comboBoxRevues.TabIndex = 21;
+            // 
+            // comboBoxDocuments
+            // 
+            this.comboBoxDocuments.FormattingEnabled = true;
+            this.comboBoxDocuments.Location = new System.Drawing.Point(514, 68);
+            this.comboBoxDocuments.Name = "comboBoxDocuments";
+            this.comboBoxDocuments.Size = new System.Drawing.Size(190, 21);
+            this.comboBoxDocuments.TabIndex = 20;
             // 
             // button7
             // 
@@ -1271,22 +1288,6 @@ namespace Mediateq_AP_SIO2
             // 
             this.Column17.HeaderText = "Date";
             this.Column17.Name = "Column17";
-            // 
-            // comboBoxDocuments
-            // 
-            this.comboBoxDocuments.FormattingEnabled = true;
-            this.comboBoxDocuments.Location = new System.Drawing.Point(514, 68);
-            this.comboBoxDocuments.Name = "comboBoxDocuments";
-            this.comboBoxDocuments.Size = new System.Drawing.Size(190, 21);
-            this.comboBoxDocuments.TabIndex = 20;
-            // 
-            // comboBoxRevues
-            // 
-            this.comboBoxRevues.FormattingEnabled = true;
-            this.comboBoxRevues.Location = new System.Drawing.Point(514, 347);
-            this.comboBoxRevues.Name = "comboBoxRevues";
-            this.comboBoxRevues.Size = new System.Drawing.Size(190, 21);
-            this.comboBoxRevues.TabIndex = 21;
             // 
             // FrmMediateq
             // 

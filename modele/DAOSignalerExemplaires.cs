@@ -14,7 +14,7 @@ namespace Mediateq_AP_SIO2.modele
 
         public static List<SignalerExemplaire> getAllSignalementExemplaire()
         {
-            List<SignalerExemplaire> lesSignalementExemplaires = new List<SignalerExemplaire>();
+            List<SignalerExemplaire>  lesSignalementExemplaires = new List<SignalerExemplaire>();
             try
             {
                 string req = "Select signalerExemplaire.codeD , document.id , document.titre , document.image  , categorie.id , categorie.libelle , exemplaire.numero, exemplaire.dateAchat , exemplaire.idRayon , etat.id , etat.libelle ,signalerexemplaire.nom , signalerexemplaire.prenom , signalerexemplaire.date    from categorie inner join document on document.idCategorie=categorie.id inner join signalerexemplaire on signalerexemplaire.codeD=document.id inner join exemplaire on exemplaire.idDoc=document.id inner join etat on etat.id=exemplaire.idEtat ";

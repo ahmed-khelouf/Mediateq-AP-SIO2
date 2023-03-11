@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31402.337
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mediateq-AP-SIO2", "Mediateq-AP-SIO2.csproj", "{9E10C63B-D8D6-4A7F-B118-9B7B7D0D650F}"
 EndProject
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FE6B882B-6F02-4A45-A722-F725B79433D7}
+		SolutionGuid = {50604356-7ECF-45AC-8D55-2241D569E8EE}
 	EndGlobalSection
 EndGlobal
