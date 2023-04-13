@@ -21,10 +21,6 @@ namespace Mediateq_AP_SIO2.metier
             this.dateAchat = dateAchat;
             this.idRayon = idRayon;
             this.etat = unetat;
-
-            
-
-
         }
 
         public Document Document { get => unDocument; set => unDocument = value; }

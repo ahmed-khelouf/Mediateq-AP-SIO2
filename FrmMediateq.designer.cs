@@ -81,7 +81,7 @@ namespace Mediateq_AP_SIO2
             this.synopsis = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.realisateur = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.duree = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageAjoutDVD = new System.Windows.Forms.TabPage();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -99,28 +99,29 @@ namespace Mediateq_AP_SIO2
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageChangerEtat = new System.Windows.Forms.TabPage();
+            this.tittre_document = new System.Windows.Forms.Label();
+            this.Titre_Revue = new System.Windows.Forms.Label();
             this.comboBoxRevues = new System.Windows.Forms.ComboBox();
             this.comboBoxDocuments = new System.Windows.Forms.ComboBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.button_revue_inutilisable = new System.Windows.Forms.Button();
+            this.button_revue_usagé = new System.Windows.Forms.Button();
+            this.dataGridViewRevue = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label27 = new System.Windows.Forms.Label();
+            this.changement_etat_revue = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDocument = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numeroExemplaire = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idEtat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_document_inutilisable = new System.Windows.Forms.Button();
+            this.button_document_usagé = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
-            this.signaler = new System.Windows.Forms.TabPage();
+            this.tabSignaler = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -132,20 +133,13 @@ namespace Mediateq_AP_SIO2
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageInutilisable = new System.Windows.Forms.TabPage();
+            this.comboBox_Doc = new System.Windows.Forms.ComboBox();
             this.REVUES = new System.Windows.Forms.Label();
             this.DOCUMENTS = new System.Windows.Forms.Label();
             this.dataGridViewRevuesInutilisable = new System.Windows.Forms.DataGridView();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewDocumentsInutilisable = new System.Windows.Forms.DataGridView();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPageDeteriore = new System.Windows.Forms.TabPage();
             this.button8 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -154,6 +148,15 @@ namespace Mediateq_AP_SIO2
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox_Rev = new System.Windows.Forms.ComboBox();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabOngletsApplication.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -165,15 +168,15 @@ namespace Mediateq_AP_SIO2
             this.grpRechercheCode.SuspendLayout();
             this.tabDVD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.signaler.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabPageAjoutDVD.SuspendLayout();
+            this.tabPageChangerEtat.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocument)).BeginInit();
+            this.tabSignaler.SuspendLayout();
+            this.tabPageInutilisable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevuesInutilisable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentsInutilisable)).BeginInit();
-            this.tabPage4.SuspendLayout();
+            this.tabPageDeteriore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,11 +186,11 @@ namespace Mediateq_AP_SIO2
             this.tabOngletsApplication.Controls.Add(this.tabTitres);
             this.tabOngletsApplication.Controls.Add(this.tabLivres);
             this.tabOngletsApplication.Controls.Add(this.tabDVD);
-            this.tabOngletsApplication.Controls.Add(this.tabPage1);
-            this.tabOngletsApplication.Controls.Add(this.tabPage2);
-            this.tabOngletsApplication.Controls.Add(this.signaler);
-            this.tabOngletsApplication.Controls.Add(this.tabPage3);
-            this.tabOngletsApplication.Controls.Add(this.tabPage4);
+            this.tabOngletsApplication.Controls.Add(this.tabPageAjoutDVD);
+            this.tabOngletsApplication.Controls.Add(this.tabPageChangerEtat);
+            this.tabOngletsApplication.Controls.Add(this.tabSignaler);
+            this.tabOngletsApplication.Controls.Add(this.tabPageInutilisable);
+            this.tabOngletsApplication.Controls.Add(this.tabPageDeteriore);
             this.tabOngletsApplication.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabOngletsApplication.Location = new System.Drawing.Point(0, 0);
             this.tabOngletsApplication.Name = "tabOngletsApplication";
@@ -666,32 +669,32 @@ namespace Mediateq_AP_SIO2
             this.duree.HeaderText = "duree";
             this.duree.Name = "duree";
             // 
-            // tabPage1
+            // tabPageAjoutDVD
             // 
-            this.tabPage1.Controls.Add(this.textBox8);
-            this.tabPage1.Controls.Add(this.textBox7);
-            this.tabPage1.Controls.Add(this.label21);
-            this.tabPage1.Controls.Add(this.label20);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.textBox6);
-            this.tabPage1.Controls.Add(this.textBox5);
-            this.tabPage1.Controls.Add(this.textBox4);
-            this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.label19);
-            this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.label16);
-            this.tabPage1.Controls.Add(this.label15);
-            this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 523);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "ajouter DVD";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageAjoutDVD.Controls.Add(this.textBox8);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox7);
+            this.tabPageAjoutDVD.Controls.Add(this.label21);
+            this.tabPageAjoutDVD.Controls.Add(this.label20);
+            this.tabPageAjoutDVD.Controls.Add(this.button1);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox6);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox5);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox4);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox3);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox2);
+            this.tabPageAjoutDVD.Controls.Add(this.textBox1);
+            this.tabPageAjoutDVD.Controls.Add(this.label19);
+            this.tabPageAjoutDVD.Controls.Add(this.label18);
+            this.tabPageAjoutDVD.Controls.Add(this.label17);
+            this.tabPageAjoutDVD.Controls.Add(this.label16);
+            this.tabPageAjoutDVD.Controls.Add(this.label15);
+            this.tabPageAjoutDVD.Controls.Add(this.label14);
+            this.tabPageAjoutDVD.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAjoutDVD.Name = "tabPageAjoutDVD";
+            this.tabPageAjoutDVD.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAjoutDVD.Size = new System.Drawing.Size(792, 523);
+            this.tabPageAjoutDVD.TabIndex = 4;
+            this.tabPageAjoutDVD.Text = "ajouter DVD";
+            this.tabPageAjoutDVD.UseVisualStyleBackColor = true;
             // 
             // textBox8
             // 
@@ -831,87 +834,108 @@ namespace Mediateq_AP_SIO2
             this.label14.TabIndex = 0;
             this.label14.Text = "label14";
             // 
-            // tabPage2
+            // tabPageChangerEtat
             // 
-            this.tabPage2.Controls.Add(this.comboBoxRevues);
-            this.tabPage2.Controls.Add(this.comboBoxDocuments);
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Controls.Add(this.dataGridView3);
-            this.tabPage2.Controls.Add(this.label27);
-            this.tabPage2.Controls.Add(this.label26);
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.label24);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(792, 523);
-            this.tabPage2.TabIndex = 5;
-            this.tabPage2.Text = "changer l\'etat";
-            this.tabPage2.UseVisualStyleBackColor = true;
-//            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
-            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
+            this.tabPageChangerEtat.BackColor = System.Drawing.Color.Transparent;
+            this.tabPageChangerEtat.Controls.Add(this.tittre_document);
+            this.tabPageChangerEtat.Controls.Add(this.Titre_Revue);
+            this.tabPageChangerEtat.Controls.Add(this.comboBoxRevues);
+            this.tabPageChangerEtat.Controls.Add(this.comboBoxDocuments);
+            this.tabPageChangerEtat.Controls.Add(this.button_revue_inutilisable);
+            this.tabPageChangerEtat.Controls.Add(this.button_revue_usagé);
+            this.tabPageChangerEtat.Controls.Add(this.dataGridViewRevue);
+            this.tabPageChangerEtat.Controls.Add(this.changement_etat_revue);
+            this.tabPageChangerEtat.Controls.Add(this.label26);
+            this.tabPageChangerEtat.Controls.Add(this.dataGridViewDocument);
+            this.tabPageChangerEtat.Controls.Add(this.button_document_inutilisable);
+            this.tabPageChangerEtat.Controls.Add(this.button_document_usagé);
+            this.tabPageChangerEtat.Controls.Add(this.label24);
+            this.tabPageChangerEtat.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tabPageChangerEtat.Location = new System.Drawing.Point(4, 22);
+            this.tabPageChangerEtat.Name = "tabPageChangerEtat";
+            this.tabPageChangerEtat.Size = new System.Drawing.Size(792, 523);
+            this.tabPageChangerEtat.TabIndex = 5;
+            this.tabPageChangerEtat.Text = "changer l\'etat";
+            this.tabPageChangerEtat.Enter += new System.EventHandler(this.tabPage2_Enter);
+            // 
+            // tittre_document
+            // 
+            this.tittre_document.AutoSize = true;
+            this.tittre_document.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tittre_document.Location = new System.Drawing.Point(482, 79);
+            this.tittre_document.Name = "tittre_document";
+            this.tittre_document.Size = new System.Drawing.Size(90, 15);
+            this.tittre_document.TabIndex = 23;
+            this.tittre_document.Text = "Titre document :";
+            // 
+            // Titre_Revue
+            // 
+            this.Titre_Revue.AutoSize = true;
+            this.Titre_Revue.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Titre_Revue.Location = new System.Drawing.Point(482, 340);
+            this.Titre_Revue.Name = "Titre_Revue";
+            this.Titre_Revue.Size = new System.Drawing.Size(71, 15);
+            this.Titre_Revue.TabIndex = 22;
+            this.Titre_Revue.Text = "Titre revue :";
             // 
             // comboBoxRevues
             // 
             this.comboBoxRevues.FormattingEnabled = true;
-            this.comboBoxRevues.Location = new System.Drawing.Point(514, 347);
+            this.comboBoxRevues.Location = new System.Drawing.Point(579, 338);
             this.comboBoxRevues.Name = "comboBoxRevues";
             this.comboBoxRevues.Size = new System.Drawing.Size(190, 21);
             this.comboBoxRevues.TabIndex = 21;
+            this.comboBoxRevues.SelectedIndexChanged += new System.EventHandler(this.comboBoxRevues_SelectedIndexChanged);
             // 
             // comboBoxDocuments
             // 
             this.comboBoxDocuments.FormattingEnabled = true;
-            this.comboBoxDocuments.Location = new System.Drawing.Point(514, 68);
+            this.comboBoxDocuments.Location = new System.Drawing.Point(581, 77);
             this.comboBoxDocuments.Name = "comboBoxDocuments";
             this.comboBoxDocuments.Size = new System.Drawing.Size(190, 21);
             this.comboBoxDocuments.TabIndex = 20;
+            this.comboBoxDocuments.SelectedIndexChanged += new System.EventHandler(this.comboBoxDocuments_SelectedIndexChanged);
             // 
-            // button7
+            // button_revue_inutilisable
             // 
-            this.button7.Location = new System.Drawing.Point(164, 227);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 19;
-            this.button7.Text = "REFRESH";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button_revue_inutilisable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button_revue_inutilisable.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_revue_inutilisable.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button_revue_inutilisable.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_revue_inutilisable.Location = new System.Drawing.Point(628, 397);
+            this.button_revue_inutilisable.Name = "button_revue_inutilisable";
+            this.button_revue_inutilisable.Size = new System.Drawing.Size(141, 50);
+            this.button_revue_inutilisable.TabIndex = 18;
+            this.button_revue_inutilisable.Text = "INUTILISABLE";
+            this.button_revue_inutilisable.UseVisualStyleBackColor = false;
+            this.button_revue_inutilisable.Click += new System.EventHandler(this.button_revue_inutilisable_Click);
             // 
-            // button5
+            // button_revue_usagé
             // 
-            this.button5.Location = new System.Drawing.Point(646, 408);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 28);
-            this.button5.TabIndex = 18;
-            this.button5.Text = "INUTILISABLE";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            this.button_revue_usagé.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button_revue_usagé.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_revue_usagé.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_revue_usagé.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_revue_usagé.Location = new System.Drawing.Point(496, 397);
+            this.button_revue_usagé.Name = "button_revue_usagé";
+            this.button_revue_usagé.Size = new System.Drawing.Size(105, 50);
+            this.button_revue_usagé.TabIndex = 17;
+            this.button_revue_usagé.Text = "USAGE";
+            this.button_revue_usagé.UseVisualStyleBackColor = false;
+            this.button_revue_usagé.Click += new System.EventHandler(this.button_revue_usagé_Click);
             // 
-            // button4
+            // dataGridViewRevue
             // 
-            this.button4.Location = new System.Drawing.Point(485, 413);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 23);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "USAGE";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewRevue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRevue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column18,
             this.Column3,
             this.Column19});
-            this.dataGridView3.Location = new System.Drawing.Point(8, 286);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(439, 167);
-            this.dataGridView3.TabIndex = 16;
+            this.dataGridViewRevue.Location = new System.Drawing.Point(24, 256);
+            this.dataGridViewRevue.Name = "dataGridViewRevue";
+            this.dataGridViewRevue.Size = new System.Drawing.Size(439, 191);
+            this.dataGridViewRevue.TabIndex = 16;
             // 
             // Column1
             // 
@@ -933,36 +957,38 @@ namespace Mediateq_AP_SIO2
             this.Column19.HeaderText = "Etat";
             this.Column19.Name = "Column19";
             // 
-            // label27
+            // changement_etat_revue
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(536, 286);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(154, 13);
-            this.label27.TabIndex = 12;
-            this.label27.Text = "CHANGEMENT ETAT REVUE";
+            this.changement_etat_revue.AutoSize = true;
+            this.changement_etat_revue.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changement_etat_revue.Location = new System.Drawing.Point(511, 286);
+            this.changement_etat_revue.Name = "changement_etat_revue";
+            this.changement_etat_revue.Size = new System.Drawing.Size(220, 21);
+            this.changement_etat_revue.TabIndex = 12;
+            this.changement_etat_revue.Text = "CHANGEMENT ETAT REVUE";
             // 
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label26.Location = new System.Drawing.Point(511, 17);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(179, 13);
+            this.label26.Size = new System.Drawing.Size(258, 21);
             this.label26.TabIndex = 10;
             this.label26.Text = "CHANGEMENT ETAT DOCUMENT";
             // 
-            // dataGridView2
+            // dataGridViewDocument
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewDocument.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDocument.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.Column2,
             this.numeroExemplaire,
             this.idEtat});
-            this.dataGridView2.Location = new System.Drawing.Point(8, 39);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(440, 150);
-            this.dataGridView2.TabIndex = 9;
+            this.dataGridViewDocument.Location = new System.Drawing.Point(24, 17);
+            this.dataGridViewDocument.Name = "dataGridViewDocument";
+            this.dataGridViewDocument.Size = new System.Drawing.Size(439, 188);
+            this.dataGridViewDocument.TabIndex = 9;
             // 
             // id
             // 
@@ -984,25 +1010,33 @@ namespace Mediateq_AP_SIO2
             this.idEtat.HeaderText = "Etat";
             this.idEtat.Name = "idEtat";
             // 
-            // button3
+            // button_document_inutilisable
             // 
-            this.button3.Location = new System.Drawing.Point(650, 144);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "INUTILISABLE";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button_document_inutilisable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button_document_inutilisable.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_document_inutilisable.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_document_inutilisable.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_document_inutilisable.Location = new System.Drawing.Point(632, 134);
+            this.button_document_inutilisable.Name = "button_document_inutilisable";
+            this.button_document_inutilisable.Size = new System.Drawing.Size(139, 49);
+            this.button_document_inutilisable.TabIndex = 8;
+            this.button_document_inutilisable.Text = "INUTILISABLE";
+            this.button_document_inutilisable.UseVisualStyleBackColor = false;
+            this.button_document_inutilisable.Click += new System.EventHandler(this.button_document_inutilisable_Click);
             // 
-            // button2
+            // button_document_usagé
             // 
-            this.button2.Location = new System.Drawing.Point(485, 144);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "USAGE";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_document_usagé.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button_document_usagé.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_document_usagé.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_document_usagé.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_document_usagé.Location = new System.Drawing.Point(496, 133);
+            this.button_document_usagé.Name = "button_document_usagé";
+            this.button_document_usagé.Size = new System.Drawing.Size(105, 50);
+            this.button_document_usagé.TabIndex = 7;
+            this.button_document_usagé.Text = "USAGE";
+            this.button_document_usagé.UseVisualStyleBackColor = false;
+            this.button_document_usagé.Click += new System.EventHandler(this.button_document_usagé_Click);
             // 
             // label24
             // 
@@ -1012,25 +1046,25 @@ namespace Mediateq_AP_SIO2
             this.label24.Size = new System.Drawing.Size(0, 13);
             this.label24.TabIndex = 5;
             // 
-            // signaler
+            // tabSignaler
             // 
-            this.signaler.Controls.Add(this.button6);
-            this.signaler.Controls.Add(this.textBox18);
-            this.signaler.Controls.Add(this.label34);
-            this.signaler.Controls.Add(this.textBox16);
-            this.signaler.Controls.Add(this.label32);
-            this.signaler.Controls.Add(this.label31);
-            this.signaler.Controls.Add(this.label30);
-            this.signaler.Controls.Add(this.label29);
-            this.signaler.Controls.Add(this.textBox15);
-            this.signaler.Controls.Add(this.textBox14);
-            this.signaler.Controls.Add(this.textBox13);
-            this.signaler.Location = new System.Drawing.Point(4, 22);
-            this.signaler.Name = "signaler";
-            this.signaler.Size = new System.Drawing.Size(792, 523);
-            this.signaler.TabIndex = 6;
-            this.signaler.Text = "Signaler";
-            this.signaler.UseVisualStyleBackColor = true;
+            this.tabSignaler.Controls.Add(this.button6);
+            this.tabSignaler.Controls.Add(this.textBox18);
+            this.tabSignaler.Controls.Add(this.label34);
+            this.tabSignaler.Controls.Add(this.textBox16);
+            this.tabSignaler.Controls.Add(this.label32);
+            this.tabSignaler.Controls.Add(this.label31);
+            this.tabSignaler.Controls.Add(this.label30);
+            this.tabSignaler.Controls.Add(this.label29);
+            this.tabSignaler.Controls.Add(this.textBox15);
+            this.tabSignaler.Controls.Add(this.textBox14);
+            this.tabSignaler.Controls.Add(this.textBox13);
+            this.tabSignaler.Location = new System.Drawing.Point(4, 22);
+            this.tabSignaler.Name = "tabSignaler";
+            this.tabSignaler.Size = new System.Drawing.Size(792, 523);
+            this.tabSignaler.TabIndex = 6;
+            this.tabSignaler.Text = "Signaler";
+            this.tabSignaler.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -1122,35 +1156,48 @@ namespace Mediateq_AP_SIO2
             this.textBox13.Size = new System.Drawing.Size(100, 20);
             this.textBox13.TabIndex = 0;
             // 
-            // tabPage3
+            // tabPageInutilisable
             // 
-            this.tabPage3.Controls.Add(this.REVUES);
-            this.tabPage3.Controls.Add(this.DOCUMENTS);
-            this.tabPage3.Controls.Add(this.dataGridViewRevuesInutilisable);
-            this.tabPage3.Controls.Add(this.dataGridViewDocumentsInutilisable);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(792, 523);
-            this.tabPage3.TabIndex = 7;
-            this.tabPage3.Text = "doc inutilisable";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Enter);
+            this.tabPageInutilisable.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPageInutilisable.Controls.Add(this.comboBox_Rev);
+            this.tabPageInutilisable.Controls.Add(this.comboBox_Doc);
+            this.tabPageInutilisable.Controls.Add(this.REVUES);
+            this.tabPageInutilisable.Controls.Add(this.DOCUMENTS);
+            this.tabPageInutilisable.Controls.Add(this.dataGridViewRevuesInutilisable);
+            this.tabPageInutilisable.Controls.Add(this.dataGridViewDocumentsInutilisable);
+            this.tabPageInutilisable.Location = new System.Drawing.Point(4, 22);
+            this.tabPageInutilisable.Name = "tabPageInutilisable";
+            this.tabPageInutilisable.Size = new System.Drawing.Size(792, 523);
+            this.tabPageInutilisable.TabIndex = 7;
+            this.tabPageInutilisable.Text = "doc inutilisable";
+            this.tabPageInutilisable.Enter += new System.EventHandler(this.tabPage3_Enter);
+            // 
+            // comboBox_Doc
+            // 
+            this.comboBox_Doc.FormattingEnabled = true;
+            this.comboBox_Doc.Location = new System.Drawing.Point(575, 94);
+            this.comboBox_Doc.Name = "comboBox_Doc";
+            this.comboBox_Doc.Size = new System.Drawing.Size(190, 21);
+            this.comboBox_Doc.TabIndex = 21;
+            this.comboBox_Doc.SelectedIndexChanged += new System.EventHandler(this.comboBox_document_SelectedIndexChanged);
             // 
             // REVUES
             // 
             this.REVUES.AutoSize = true;
-            this.REVUES.Location = new System.Drawing.Point(585, 310);
+            this.REVUES.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.REVUES.Location = new System.Drawing.Point(636, 266);
             this.REVUES.Name = "REVUES";
-            this.REVUES.Size = new System.Drawing.Size(51, 13);
+            this.REVUES.Size = new System.Drawing.Size(69, 21);
             this.REVUES.TabIndex = 3;
             this.REVUES.Text = "REVUES";
             // 
             // DOCUMENTS
             // 
             this.DOCUMENTS.AutoSize = true;
-            this.DOCUMENTS.Location = new System.Drawing.Point(572, 88);
+            this.DOCUMENTS.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DOCUMENTS.Location = new System.Drawing.Point(612, 43);
             this.DOCUMENTS.Name = "DOCUMENTS";
-            this.DOCUMENTS.Size = new System.Drawing.Size(76, 13);
+            this.DOCUMENTS.Size = new System.Drawing.Size(107, 21);
             this.DOCUMENTS.TabIndex = 2;
             this.DOCUMENTS.Text = "DOCUMENTS";
             // 
@@ -1164,29 +1211,8 @@ namespace Mediateq_AP_SIO2
             this.Column13});
             this.dataGridViewRevuesInutilisable.Location = new System.Drawing.Point(53, 257);
             this.dataGridViewRevuesInutilisable.Name = "dataGridViewRevuesInutilisable";
-            this.dataGridViewRevuesInutilisable.Size = new System.Drawing.Size(493, 181);
+            this.dataGridViewRevuesInutilisable.Size = new System.Drawing.Size(493, 226);
             this.dataGridViewRevuesInutilisable.TabIndex = 1;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "idRevue";
-            this.Column9.Name = "Column9";
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "numero";
-            this.Column10.Name = "Column10";
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "titre";
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 150;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "etat";
-            this.Column13.Name = "Column13";
             // 
             // dataGridViewDocumentsInutilisable
             // 
@@ -1201,38 +1227,17 @@ namespace Mediateq_AP_SIO2
             this.dataGridViewDocumentsInutilisable.Size = new System.Drawing.Size(493, 194);
             this.dataGridViewDocumentsInutilisable.TabIndex = 0;
             // 
-            // Column4
+            // tabPageDeteriore
             // 
-            this.Column4.HeaderText = "idExemplaire";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "numero";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Titre";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 150;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "etat";
-            this.Column8.Name = "Column8";
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.button8);
-            this.tabPage4.Controls.Add(this.dataGridView6);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(792, 523);
-            this.tabPage4.TabIndex = 8;
-            this.tabPage4.Text = "doc deteriore";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
+            this.tabPageDeteriore.Controls.Add(this.button8);
+            this.tabPageDeteriore.Controls.Add(this.dataGridView6);
+            this.tabPageDeteriore.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDeteriore.Name = "tabPageDeteriore";
+            this.tabPageDeteriore.Size = new System.Drawing.Size(792, 523);
+            this.tabPageDeteriore.TabIndex = 8;
+            this.tabPageDeteriore.Text = "doc deteriore";
+            this.tabPageDeteriore.UseVisualStyleBackColor = true;
+            this.tabPageDeteriore.Enter += new System.EventHandler(this.tabPage4_Enter);
             // 
             // button8
             // 
@@ -1289,12 +1294,64 @@ namespace Mediateq_AP_SIO2
             this.Column17.HeaderText = "Date";
             this.Column17.Name = "Column17";
             // 
+            // comboBox_Rev
+            // 
+            this.comboBox_Rev.FormattingEnabled = true;
+            this.comboBox_Rev.Location = new System.Drawing.Point(575, 301);
+            this.comboBox_Rev.Name = "comboBox_Rev";
+            this.comboBox_Rev.Size = new System.Drawing.Size(190, 21);
+            this.comboBox_Rev.TabIndex = 22;
+            this.comboBox_Rev.SelectedIndexChanged += new System.EventHandler(this.comboBox_Rev_SelectedIndexChanged);
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "ID";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Titre";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Numero";
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 150;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Etat";
+            this.Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "ID";
+            this.Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Titre";
+            this.Column10.Name = "Column10";
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Numero";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 150;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "Etat";
+            this.Column13.Name = "Column13";
+            // 
             // FrmMediateq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 549);
             this.Controls.Add(this.tabOngletsApplication);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmMediateq";
             this.Text = "Gestion Médiathèque";
             this.Load += new System.EventHandler(this.FrmMediateq_Load);
@@ -1313,19 +1370,19 @@ namespace Mediateq_AP_SIO2
             this.grpRechercheCode.PerformLayout();
             this.tabDVD.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.signaler.ResumeLayout(false);
-            this.signaler.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tabPageAjoutDVD.ResumeLayout(false);
+            this.tabPageAjoutDVD.PerformLayout();
+            this.tabPageChangerEtat.ResumeLayout(false);
+            this.tabPageChangerEtat.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocument)).EndInit();
+            this.tabSignaler.ResumeLayout(false);
+            this.tabSignaler.PerformLayout();
+            this.tabPageInutilisable.ResumeLayout(false);
+            this.tabPageInutilisable.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevuesInutilisable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentsInutilisable)).EndInit();
-            this.tabPage4.ResumeLayout(false);
+            this.tabPageDeteriore.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             this.ResumeLayout(false);
 
@@ -1385,7 +1442,7 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridViewTextBoxColumn synopsis;
         private System.Windows.Forms.DataGridViewTextBoxColumn realisateur;
         private System.Windows.Forms.DataGridViewTextBoxColumn duree;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPageAjoutDVD;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
@@ -1403,17 +1460,17 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageChangerEtat;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button button_document_inutilisable;
+        private System.Windows.Forms.Button button_document_usagé;
+        private System.Windows.Forms.DataGridView dataGridViewDocument;
+        private System.Windows.Forms.Label changement_etat_revue;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TabPage signaler;
+        private System.Windows.Forms.DataGridView dataGridViewRevue;
+        private System.Windows.Forms.Button button_revue_inutilisable;
+        private System.Windows.Forms.Button button_revue_usagé;
+        private System.Windows.Forms.TabPage tabSignaler;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
@@ -1425,22 +1482,13 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageInutilisable;
         private System.Windows.Forms.DataGridView dataGridViewDocumentsInutilisable;
         private System.Windows.Forms.DataGridView dataGridViewRevuesInutilisable;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPageDeteriore;
         private System.Windows.Forms.DataGridView dataGridView6;
         private System.Windows.Forms.Label REVUES;
         private System.Windows.Forms.Label DOCUMENTS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -1458,6 +1506,18 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.ComboBox comboBoxDocuments;
         private System.Windows.Forms.ComboBox comboBoxRevues;
+        private System.Windows.Forms.Label tittre_document;
+        private System.Windows.Forms.Label Titre_Revue;
+        private System.Windows.Forms.ComboBox comboBox_Doc;
+        private System.Windows.Forms.ComboBox comboBox_Rev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
     }
 }
 

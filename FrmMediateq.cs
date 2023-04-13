@@ -14,6 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Text.RegularExpressions;
 using Mediateq_AP_SIO2.modele;
 using System.Security.Cryptography;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mediateq_AP_SIO2
 {
@@ -31,7 +32,8 @@ namespace Mediateq_AP_SIO2
         static List<Document> lesDocuments;
         static List<Revue> lesRevues;
         static List<SignalerExemplaire> lesSignalerExemplaires;
-        static List<Historique> lesHistoriques; 
+        static List<Historique> lesHistoriques;
+
 
         #endregion
 
@@ -47,31 +49,25 @@ namespace Mediateq_AP_SIO2
         {
             try
             {
-
-
                 // Création de la connexion avec la base de données
                 DAOFactory.creerConnection();
 
                 // Chargement des objets en mémoire
                 lesDescripteurs = DAODocuments.getAllDescripteurs();
-                lesTitres = DAOPresse.getAllTitre();
+                lesTitres = DAORevues.getAllTitre();
                 lesDvd = DAODocuments.getAllDvd();
                 lesExemplaires = DAODocuments.getAllExemplaire();
                 lesParutions = DAORevues.getAllParution();
                 lesDocuments = DAODocuments.getAllDocument();
                 lesRevues = DAORevues.getAllRevue();
                 lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
-                //lesHistoriques = DAODocuments.getAllHistorique();
-
-
-
 
             }
             catch (ExceptionSIO exc)
             {
                 MessageBox.Show(exc.NiveauExc + " - " + exc.LibelleExc + " - " + exc.Message);
             }
-            
+
 
         }
 
@@ -90,20 +86,21 @@ namespace Mediateq_AP_SIO2
 
         private void cbxTitres_SelectedIndexChanged(object sender, EventArgs e)
         {
-                List<Parution> lesParutions;
+            List<Parution> lesParutions;
 
-                Revue titreSelectionne = (Revue)cbxTitres.SelectedItem;
-                lesParutions = DAOPresse.getParutionByTitre(titreSelectionne);
+            Revue titreSelectionne = (Revue)cbxTitres.SelectedItem;
+            lesParutions = DAORevues.getParutionByTitre(titreSelectionne);
 
-                // ré-initialisation du dataGridView
-                dgvParutions.Rows.Clear();
+            // ré-initialisation du dataGridView
+            dgvParutions.Rows.Clear();
 
-                // Parcours de la collection des titres et alimentation du datagridview
-                foreach (Parution parution in lesParutions)
-                {
-                    dgvParutions.Rows.Add(parution.Numero, parution.DateParution, parution.Photo);
-                }
-            
+            // Parcours de la collection des titres et alimentation du datagridview
+            foreach (Parution parution in lesParutions)
+            {
+                dgvParutions.Rows.Add(parution.Numero, parution.DateParution, parution.Photo);
+            }
+
+
         }
         #endregion
 
@@ -129,7 +126,7 @@ namespace Mediateq_AP_SIO2
             // Parcours de la collection des titres et alimentation du datagridview
             foreach (Revue revue in lesTitres)
             {
-                if (revue.IdDescripteur==domaineSelectionne.Id)
+                if (revue.IdDescripteur == domaineSelectionne.Id)
                 {
                     dgvTitres.Rows.Add(revue.Id, revue.Titre, revue.Empruntable, revue.DateFinAbonnement, revue.DelaiMiseADispo);
                 }
@@ -151,7 +148,7 @@ namespace Mediateq_AP_SIO2
             lesLivres = DAODocuments.getAllLivres();
             //DAODocuments.setDescripteurs(lesLivres);
         }
-   
+
         private void btnRechercher_Click(object sender, EventArgs e)
         {
             // On réinitialise les labels
@@ -168,7 +165,7 @@ namespace Mediateq_AP_SIO2
             bool trouve = false;
             foreach (Livre livre in lesLivres)
             {
-                if (livre.IdDoc==txbNumDoc.Text)
+                if (livre.IdDoc == txbNumDoc.Text)
                 {
                     lblNumero.Text = livre.IdDoc;
                     lblTitre.Text = livre.Titre;
@@ -201,7 +198,7 @@ namespace Mediateq_AP_SIO2
                 //on teste si le titre du livre contient ce qui a été saisi
                 if (titreMinuscules.Contains(saisieMinuscules))
                 {
-                    dgvLivres.Rows.Add(livre.IdDoc,livre.Titre,livre.Auteur,livre.ISBN1,livre.LaCollection);
+                    dgvLivres.Rows.Add(livre.IdDoc, livre.Titre, livre.Auteur, livre.ISBN1, livre.LaCollection);
                 }
             }
         }
@@ -234,7 +231,7 @@ namespace Mediateq_AP_SIO2
         private void button1_Click(object sender, EventArgs e)
         {
             // CREATION DE DVD ET L'AJOUTE DANS LA COLLECTION
-            DVD dvd = new DVD(textBox1.Text, textBox2.Text, int.Parse(textBox3.Text), textBox4.Text, textBox5.Text, textBox6.Text ,new Categorie (textBox7.Text , textBox8.Text) );
+            DVD dvd = new DVD(textBox1.Text, textBox2.Text, int.Parse(textBox3.Text), textBox4.Text, textBox5.Text, textBox6.Text, new Categorie(textBox7.Text, textBox8.Text));
             lesDvd.Add(dvd);
             DAODocuments.ajouterDvd(dvd);
         }
@@ -246,190 +243,255 @@ namespace Mediateq_AP_SIO2
         // ONGLET "CHANGER ETAT D'UN DOCUMENT OU REVUE"
         //-----------------------------------------------------------
 
-        // AFFICHAGE DATAGRIDVIEW DES EXEMPLAIRES ET PARUTIONS
+        // ALLIMENTATION COMBOBOX DES DOCUMENTS ET REVUES
         private void tabPage2_Enter(object sender, EventArgs e)
         {
-            // PARCOUR DE COLLECTION ET AJOUTE LES EXEMPLAIRES DANS LE DATAGRIDVIEW
-            dataGridView2.Rows.Clear();
-            lesExemplaires = DAODocuments.getAllExemplaire();
-            foreach (Exemplaire exemplaire in lesExemplaires)
-            {            
-                    dataGridView2.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre ,   exemplaire.Numero, exemplaire.Etat.Libelle);
-                    // AJOUTE ID ET LE NUMERO D'UN DOCUMENT A LA COMBOBOX
-                    comboBoxDocuments.Items.Add("ID : " + exemplaire.Document.IdDoc + "    numero : " + exemplaire.Numero);
-            }
-            dataGridView2.Refresh();
-            // PARCOUR DE COLLECTION ET AJOUTE LES PARUTIONS DANS LE DATAGRIDVIEW
-            dataGridView3.Rows.Clear();
-            lesParutions = DAORevues.getAllParution();
-            foreach (Parution parution in lesParutions)
-            {
-                dataGridView3.Rows.Add(parution.Revue.Id, parution.Revue.Titre , parution.Numero, parution.Etat.Libelle);
-                // AJOUTE ID ET LE NUMERO D'UNE PARUTION A LA COMBOBOX
-                comboBoxRevues.Items.Add("ID : " + parution.Revue.Id + "    numero : " + parution.Numero);
-            }
-            
-            dataGridView3.Refresh();
+            // attribue la source de données de la combobox 
+            comboBoxDocuments.DataSource = lesDocuments;
+
+            //définition du champ qui doit être affiché dans la combobox
+            comboBoxDocuments.DisplayMember = "titre";
+
+            comboBoxRevues.DataSource = lesRevues;
+
+            comboBoxRevues.DisplayMember = "titre";
         }
 
-        // BOUTON POUR REFRESH LE DATAGRIDVIEW
-        private void button7_Click(object sender, EventArgs e)
+
+        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        private void comboBoxDocuments_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dataGridView2.Rows.Clear();
-            lesExemplaires = DAODocuments.getAllExemplaire();
-            foreach (Exemplaire exemplaire in lesExemplaires)
-            {
-                dataGridView2.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
-            }
-            dataGridView2.Refresh();
+            // Récupération du document sélectionné dans la combobox
+            Document titreSelectionne = (Document)comboBoxDocuments.SelectedItem;
 
-            dataGridView3.Rows.Clear();
-            lesParutions = DAORevues.getAllParution();
-            foreach (Parution parution in lesParutions)
+            // Vérification qu'un document a été sélectionné
+            if (titreSelectionne != null)
             {
-                dataGridView3.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
-            }
+                // Récupération des exemplaires pour le document sélectionné à partir de la base de données
+                lesExemplaires = DAODocuments.getDocumentByTitre(titreSelectionne);
 
-            dataGridView3.Refresh();
-        }
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewDocument.Rows.Clear();
 
-        // BOUTON POUR EXEMPLAIRE ETAT = USAGE
-        private void button2_Click(object sender, EventArgs e)
-        {
-            bool reussi = false;
-            //PARCOUR LA COLLECTION EXEMPLAIRE POUR SELECTIONNER UNE REVUE ET MODIFIER L'ETAT EN USAGE GRACE A LA METHODE modifierExemplaireUsage
-            foreach (Exemplaire exemplaire in lesExemplaires)
-            {
-                if ("ID : " + exemplaire.Document.IdDoc + "    numero : " + exemplaire.Numero == comboBoxDocuments.Text && exemplaire.Etat.Libelle != "usagé")
+                // Parcours de la collection des exemplaires
+                foreach (Exemplaire exemplaire in lesExemplaires)
                 {
-                        //Historique historique = new Historique(exemplaire, exemplaire.Etat);
-                        //lesHistoriques.Add(historique);
-                        //DAODocuments.ajouterUnHistorique(historique);
-                        DAODocuments.modifierExemplaireUsage(exemplaire);
-                        reussi = true;
+                    dataGridViewDocument.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
                 }
             }
-
-            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
-            if (reussi)
-            {
-                MessageBox.Show("changement d'etat: Usagé effectué");
-            }
-
-            // AFFICHE UN MESSAGE SI LE DOCUMENT EST DEJA EN USAGE
-            if (!reussi && comboBoxDocuments.Text != "")
-            {
-                MessageBox.Show("Le document est déja en usagé !");
-            }
-
-            // AFFICHE UN MESSAGE SI AUCUN DOCUMENT EST CHOISI
-            if (!reussi && comboBoxDocuments.Text=="")
-            {
-                MessageBox.Show("Veuillez choisir un document !");
-            }
-
-            
         }
 
-        // BOUTON POUR EXEMPLAIRE ETAT = INUTILISBALE 
-        private void button3_Click(object sender, EventArgs e)
+
+        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        private void comboBoxRevues_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool reussi = false;
-            //PARCOUR LA COLLECTION EXEMPLAIRE POUR SELECTIONNER UN EXEMPLAIRE ET MODIFIER L'ETAT EN INNUTILISABLE GRACE A LA METHODE modifierExemplaireInnutilisable
-            foreach (Exemplaire exemplaire in lesExemplaires)
-            {
-                if ("ID : " + exemplaire.Document.IdDoc + "    numero : " + exemplaire.Numero == comboBoxDocuments.Text && exemplaire.Etat.Libelle != "inutilisable")
-                {
-                        DAODocuments.modifierExemplaireInutilisable(exemplaire);
-                        reussi = true;
-                }
-            }
+            // Récupération de la revue sélectionné dans la combobox
+            Revue titreSelectionne = (Revue)comboBoxRevues.SelectedItem;
 
-            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
-            if (reussi)
+            // Vérification qu'une revue a été sélectionné
+            if (titreSelectionne != null)
             {
-                MessageBox.Show("changement d'etat: Inutilisable effectué");
-            }
+                // Récupération des parutions pour le document sélectionné à partir de la base de données
+                lesParutions = DAORevues.getParutionByTitre(titreSelectionne);
 
-            // AFFICHE UN MESSAGE SI LE DOCUMENT EST DEJA EN USAGE
-            if (!reussi && comboBoxDocuments.Text != "")
-            {
-                MessageBox.Show("Le document est déja en inutilisable !");
-            }
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewRevue.Rows.Clear();
 
-            // AFFICHE UN MESSAGE SI AUCUN DOCUMENT EST CHOISI
-            if (!reussi && comboBoxDocuments.Text == "")
-            {
-                MessageBox.Show("Veuillez choisir un document !");
-            }
-        }
-
-        // BOUTON POURE PARUTION ETAT = USAGE
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-            bool reussi = false;
-            //PARCOUR LA COLLECTION PARUTION POUR SELECTIONNER UNE PARUTION ET MODIFIER L'ETAT EN USAGE GRACE A LA METHODE modifierParutionUsage
-            foreach (Parution parution in lesParutions)
-            {
-                if("ID : " + parution.Revue.Id + "    numero : " + parution.Numero == comboBoxRevues.Text && parution.Etat.Libelle!="usagé")
-                {
-                      DAORevues.modifierParutionUsage(parution);
-                      reussi = true;
-                }
-            }
-
-            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
-            if (reussi)
-            {
-                MessageBox.Show("changement d'etat: Usagé effectué");
-            }
-
-            // AFFICHE UN MESSAGE SI LA REVUE EST DEJA EN USAGE
-            if (!reussi && comboBoxRevues.Text != "")
-            {
-                MessageBox.Show("La Revue est déja en usagé !");
-            }
-
-            // AFFICHE UN MESSAGE SI AUCUNE REVUE EST CHOISI
-            if (!reussi && comboBoxRevues.Text == "")
-            {
-                MessageBox.Show("Veuillez choisir une revue !");
-            }
-        }
-
-        // BOUTON POUR UNE PARUTION ETAT = INUTILISBALE 
-        private void button5_Click_1(object sender, EventArgs e)
-        {
-            bool reussi = false;
-            //PARCOUR LA COLLECTION PARUTION POUR SELECTIONNER UNE PARUTION ET MODIFIER L'ETAT EN INUTILISABLE GRACE A LA METHODE modifierParutionInnutilisable
+                // Parcours de la collection des parutions
                 foreach (Parution parution in lesParutions)
                 {
-                    if ("ID : " + parution.Revue.Id + "    numero : " + parution.Numero == comboBoxRevues.Text && parution.Etat.Libelle!="inutilisable")
-                    {
-                          DAORevues.modifierParutionInutilisable(parution);
-                          reussi = true;
-                    }
+                    dataGridViewRevue.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
                 }
-
-            //AFFICHE UN MESSAGE SI LE CHANGEMENT EST REUSSI
-            if (reussi)
-            {
-                MessageBox.Show("changement d'etat: Inutilisable effectué");
-            }
-
-            // AFFICHE UN MESSAGE SI LA REVUE EST DEJA EN USAGE
-            if (!reussi && comboBoxRevues.Text != "")
-            {
-                MessageBox.Show("La Revue est déja en inutilisable !");
-            }
-
-            // AFFICHE UN MESSAGE SI AUCUNE REVUE EST CHOISI
-            if (!reussi && comboBoxRevues.Text == "")
-            {
-                MessageBox.Show("Veuillez choisir une revue !");
             }
         }
 
+
+        // BOUTON POUR EXEMPLAIRE ETAT = USAGE
+        private void button_document_usagé_Click(object sender, EventArgs e)
+        {
+            // Variable pour vérifier si le changement d'état a réussi
+            bool reussi = false;
+
+            // Vérifier si la liste d'exemplaires est non nulle
+            if (lesExemplaires != null) 
+            {
+                // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
+                int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
+
+                // Récupérer l'exemplaire correspondant à l'index sélectionné
+                Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
+
+                // Vérifier si l'état de l'exemplaire est déjà "usagé"
+                if (exemplaire.Etat.Libelle == "usagé") 
+                {
+                    // Afficher un message si l'exemplaire est déjà en usage
+                    MessageBox.Show("Ce document est déjà en usage !"); 
+                }
+                else // Si l'exemplaire n'est pas déjà en usage
+                {
+                    // Modifier l'état de l'exemplaire à "usagé" dans la base de données 
+                    DAODocuments.modifierExemplaireUsage(exemplaire);
+
+                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                    reussi = true; 
+                }
+            }
+            else // Si la liste d'exemplaires est nulle
+            {
+                // Afficher un message d'erreur pour demander à l'utilisateur de sélectionner un document
+                MessageBox.Show("Veuillez choisir un document !"); 
+            }
+
+            if (reussi) // Si le changement d'état a réussi
+            {
+                // Afficher un message de confirmation
+                MessageBox.Show("Changement d'état : usagé effectué !");
+
+                // Rafraîchir les données de la DataGridView en appelant la méthode "comboBoxDocuments_SelectedIndexChanged"
+                comboBoxDocuments_SelectedIndexChanged(sender, e);
+            }
+        }
+
+
+        // BOUTON POUR EXEMPLAIRE ETAT = INUTILISBALE 
+        private void button_document_inutilisable_Click(object sender, EventArgs e)
+        {
+            // Variable pour vérifier si le changement d'état a réussi
+            bool reussi = false;
+
+            // Vérifier si la liste d'exemplaires est non nulle
+            if (lesExemplaires != null)
+            {
+                // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
+                int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
+
+                // Récupérer l'exemplaire correspondant à l'index sélectionné
+                Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
+
+                // Vérifier si l'état de l'exemplaire est déjà "inutilisable"
+                if (exemplaire.Etat.Libelle == "inutilisable")
+                {
+                    // Afficher un message si l'exemplaire est déjà en inutilisable
+                    MessageBox.Show("Ce document est déjà en inutilisable !");
+                }
+                else // Si l'exemplaire n'est pas déjà en inutilisable
+                {
+                    // Modifier l'état de l'exemplaire à "inutilisable" dans la base de données 
+                    DAODocuments.modifierExemplaireInutilisable(exemplaire);
+
+                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                    reussi = true;
+                }
+            }
+            else // Si la liste d'exemplaires est nulle
+            {
+                // Afficher un message d'erreur pour demander à l'utilisateur de sélectionner un document
+                MessageBox.Show("Veuillez choisir un document !");
+            }
+
+            if (reussi) // Si le changement d'état a réussi
+            {
+                // Afficher un message de confirmation
+                MessageBox.Show("Changement d'état : inutilisable effectué !");
+
+                // Rafraîchir les données de la DataGridView en appelant la méthode "comboBoxDocuments_SelectedIndexChanged"
+                comboBoxDocuments_SelectedIndexChanged(sender, e);
+            }
+        }
+
+
+        // BOUTON POUR PARUTION ETAT = USAGE
+        private void button_revue_usagé_Click(object sender, EventArgs e)
+        {
+            // Variable pour vérifier si le changement d'état a réussi
+            bool reussi = false;
+
+            // Vérifier si la liste de parutions est non nulle
+            if (lesParutions != null)
+            {
+                // Récupérer l'index de la parution sélectionné dans la DataGridView
+                int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
+
+                // Récupérer la parution correspondant à l'index sélectionné
+                Parution parution = lesParutions.ElementAt(selectedParution);
+
+                // Vérifier si l'état de la parution est déjà "usagé"
+                if (parution.Etat.Libelle == "usagé")
+                {
+                    // Afficher un message si la parution est déjà en usagé
+                    MessageBox.Show("Cette parution est déjà en usagé !");
+                }
+                else // Si la parution n'est pas déjà en usagé
+                {
+                    // Modifier l'état de la parution à "usagé" dans la base de données 
+                    DAORevues.modifierParutionUsage(parution);
+
+                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                    reussi = true;
+                }
+            }
+            else // Si la liste de parution est nulle
+            {
+                // Afficher un message d'erreur pour demander à l'utilisateur de sélectionner une parution
+                MessageBox.Show("Veuillez choisir un document !");
+            }
+
+            if (reussi) // Si le changement d'état a réussi
+            {
+                // Afficher un message de confirmation
+                MessageBox.Show("Changement d'état : usagé effectué !");
+
+                // Rafraîchir les données de la DataGridView en appelant la méthode "comboBoxRevues_SelectedIndexChanged"
+                comboBoxRevues_SelectedIndexChanged(sender, e);
+            }
+        }
+
+
+        // BOUTON POUR UNE PARUTION ETAT = INUTILISBALE 
+        private void button_revue_inutilisable_Click(object sender, EventArgs e)
+        {
+            // Variable pour vérifier si le changement d'état a réussi
+            bool reussi = false;
+
+            // Vérifier si la liste de parutions est non nulle
+            if (lesParutions != null)
+            {
+                // Récupérer l'index de la parution sélectionné dans la DataGridView
+                int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
+
+                // Récupérer la parution correspondant à l'index sélectionné
+                Parution parution = lesParutions.ElementAt(selectedParution);
+
+                // Vérifier si l'état de la parution est déjà "inutilisable"
+                if (parution.Etat.Libelle == "inutilisable")
+                {
+                    // Afficher un message si la parution est déjà en inutilisable
+                    MessageBox.Show("Cette parution est déjà en inutilisable !");
+                }
+                else // Si la parution n'est pas déjà en inutilisable
+                {
+                    // Modifier l'état de la parution à "inutilisable" dans la base de données 
+                    DAORevues.modifierParutionInutilisable(parution);
+
+                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                    reussi = true;
+                }
+            }
+            else // Si la liste de parution est nulle
+            {
+                // Afficher un message d'erreur pour demander à l'utilisateur de sélectionner une parution
+                MessageBox.Show("Veuillez choisir un document !");
+            }
+
+            if (reussi) // Si le changement d'état a réussi
+            {
+                // Afficher un message de confirmation
+                MessageBox.Show("Changement d'état : inutilisable effectué !");
+
+                // Rafraîchir les données de la DataGridView en appelant la méthode "comboBoxRevues_SelectedIndexChanged"
+                comboBoxRevues_SelectedIndexChanged(sender, e);
+            }
+        }
 
         #endregion
 
@@ -438,7 +500,7 @@ namespace Mediateq_AP_SIO2
         // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES EXEMPLAIRES
         private void button6_Click_1(object sender, EventArgs e)
         {
-            
+
             bool reussi = false;
             foreach (Exemplaire exemplaire in lesExemplaires)
             {
@@ -454,14 +516,14 @@ namespace Mediateq_AP_SIO2
                             // CHANGE L'ETAT en DETERIORE ET AJOUTE DANS LA TABLE SIGNALER LA PERSONNE A L'ORIGNE DE CETTE ETAT
                             DAODocuments.modifierExemplaireDeteriore(exemplaire);
                             // CREATION D'UN OBJET SIGNALER 
-                            SignalerExemplaire signaler = new SignalerExemplaire( textBox13.Text, exemplaire, textBox15.Text, textBox14.Text);
+                            SignalerExemplaire signaler = new SignalerExemplaire(textBox13.Text, exemplaire, textBox15.Text, textBox14.Text);
                             DAOSignalerExemplaires.ajouterSignalement(signaler);
                             reussi = true;
                         }
                     }
                 }
             }
-            
+
             // AFFICHE UN MESSAGE 
             if (reussi)
             {
@@ -523,30 +585,78 @@ namespace Mediateq_AP_SIO2
         //-----------------------------------------------------------
         private void tabPage3_Enter(object sender, EventArgs e)
         {
-            dataGridViewDocumentsInutilisable.Rows.Clear();
-            lesExemplaires = DAODocuments.getAllExemplaire();
-            foreach (Exemplaire exemplaire in lesExemplaires)
-            {
-                if (exemplaire.Etat.Libelle == "inutilisable")
-                {
-                    dataGridViewDocumentsInutilisable.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Numero, exemplaire.Document.Titre, exemplaire.Etat.Libelle);
-                }
-            }
+            // attribue la source de données de la combobox 
+            comboBox_Doc.DataSource = lesDocuments;
 
-            dataGridViewRevuesInutilisable.Rows.Clear();
-            lesParutions = DAORevues.getAllParution();
-            foreach (Parution parution in lesParutions)
+            //définition du champ qui doit être affiché dans la combobox
+            comboBox_Doc.DisplayMember = "titre";
+
+            comboBox_Rev.DataSource = lesRevues;
+
+            comboBox_Rev.DisplayMember = "titre";
+
+            // Rafraîchir les données de la DataGridView en appelant la méthode "comboBox_document_SelectedIndexChanged"
+            comboBox_document_SelectedIndexChanged(sender, e);
+
+            // Rafraîchir les données de la DataGridView en appelant la méthode "comboBox_Rev_SelectedIndexChanged"
+            comboBox_Rev_SelectedIndexChanged(sender, e);
+        }
+
+
+        // appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires inutilisable correspondants dans le dataGridView
+        private void comboBox_document_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Récupération du document sélectionné dans la combobox
+            Document titreSelectionne = (Document)comboBox_Doc.SelectedItem;
+
+            // Vérification qu'un document a été sélectionné
+            if (titreSelectionne != null)
             {
-                if (parution.Etat.Libelle == "inutilisable")
+                // Récupération des exemplaires pour le document sélectionné à partir de la base de données
+                lesExemplaires = DAODocuments.getDocumentByTitre(titreSelectionne);
+
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewDocumentsInutilisable.Rows.Clear();
+
+                // Parcours de la collection des exemplaires
+                foreach (Exemplaire exemplaire in lesExemplaires)
                 {
-                    dataGridViewRevuesInutilisable.Rows.Add(parution.Revue.Id, parution.Numero, parution.Revue.Titre, parution.Etat.Libelle);
+                    // Si l'etat est égale à inutilisable
+                    if (exemplaire.Etat.Libelle == "inutilisable")
+                    {
+                        dataGridViewDocumentsInutilisable.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre,  exemplaire.Numero,  exemplaire.Etat.Libelle);
+                    }
                 }
             }
         }
 
 
+        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les parutions inutilisable correspondants dans le dataGridView
+        private void comboBox_Rev_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Récupération de la revue sélectionné dans la combobox
+            Revue titreSelectionne = (Revue)comboBox_Rev.SelectedItem;
 
+            // Vérification qu'une revue a été sélectionné
+            if (titreSelectionne != null)
+            {
+                // Récupération des parutions pour le document sélectionné à partir de la base de données
+                lesParutions = DAORevues.getParutionByTitre(titreSelectionne);
 
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewRevuesInutilisable.Rows.Clear();
+
+                // Parcours de la collection des parutions
+                foreach (Parution parution in lesParutions)
+                {
+                    // Si l'etat est égale à inutilisable
+                    if (parution.Etat.Libelle == "inutilisable")
+                    {
+                        dataGridViewRevuesInutilisable.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
+                    }
+                }
+            }
+        }
         #endregion
 
 
@@ -570,8 +680,18 @@ namespace Mediateq_AP_SIO2
 
 
 
+
+
+
+
+
+
+
+
+
+
         #endregion
 
-   
+       
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace Mediateq_AP_SIO2
 {
     class DAODocuments
     {
+        //Récupération de tous les exemplaires dans la base de données
         public static List<Exemplaire> getAllExemplaire()
         {
             List<Exemplaire> lesExemplaires = new List<Exemplaire>();
@@ -40,45 +42,8 @@ namespace Mediateq_AP_SIO2
             return lesExemplaires;
         }
 
-        //public static void ajouterUnHistorique(Historique historique)
-        //{
-            //try
-            //{
-                //string query = "INSERT INTO historique (  idDoc , etat , date , numeroExemplaire)" + "VALUES('"+ historique.IdExemplaire.Document.IdDoc.ToString() + "' ,'" + historique.IdEtat.Libelle.ToString() + "' , '" + "', Current_Date  " + "' , '" + historique.IdExemplaire.Numero.ToString() +" )";
-                //DAOFactory.connecter();
-                //DAOFactory.execSQLWrite(query);
-                //DAOFactory.deconnecter();
-            //}
-           // catch (Exception exc)
-           //{
-              //  throw exc;
-           // }
 
-       // }
-
-        //public static List<Historique> getAllHistorique()
-        //{
-           // List<Historique> lesHistorique = new List<Historique>();
-           // try
-            //{
-                //string req = "select historique.id , historique.idExemplaire , historique.etat , historique.date , exemplaire.idDoc , exemplaire.numero , exemplaire.dateAchat , exemplaire.dateAchat , exemplaire.idRayon , exemplaire.idEtat , etat.id , etat.libelle from historique inner join exemplaire on historique.idExemplaire=exemplaire.idDoc inner join etat on etat.id=exemplaire.idEtat ";
-                //DAOFactory.connecter();
-                //MySqlDataReader reader = DAOFactory.execSQLRead(req);
-               // while (reader.Read())
-               // {
-                  //  Historique historique = new Historique(int.Parse(reader[0].ToString()), new Exemplaire(new Document(reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), new Categorie(reader[4].ToString(), reader[5].ToString())), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), new Etat(int.Parse(reader[9].ToString()), reader[10].ToString())), reader[11].ToString(), DateTime.Parse(reader[12].ToString()));
-                    //lesHistorique.Add(historique);
-               // }
-               // DAOFactory.deconnecter();
-            //}
-            //catch (Exception exc)
-            //{
-              //  throw exc;
-
-            //}
-            //return lesHistorique;
-        //}
-
+        //Modifier l'état d'un exemplaire en deterioré dans la base de données
         public static void modifierExemplaireDeteriore(Exemplaire exemplaire)
         {
             try
@@ -94,6 +59,9 @@ namespace Mediateq_AP_SIO2
                 throw exc;
             }
         }
+
+
+        //Modifier l'état d'un exemplaire en usagé dans la base de données
         public static void modifierExemplaireUsage(Exemplaire exemplaire)
         {
             try
@@ -109,6 +77,8 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Modifier l'état d'un exemplaire en inutilisable dans la base de données
         public static void modifierExemplaireInutilisable(Exemplaire exemplaire)
         {
             try
@@ -124,6 +94,8 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Ajout d'un DVD dans la base de données
         public static void ajouterDvd(DVD dvd)
         {
             try
@@ -142,7 +114,8 @@ namespace Mediateq_AP_SIO2
             }
 
         }
-       
+
+        //Récupération de tous les documents dans la base de données
         public static List<Document> getAllDocument()
         {
             List<Document> lesDocuments = new List<Document>();
@@ -166,6 +139,8 @@ namespace Mediateq_AP_SIO2
             return lesDocuments;
         }
 
+
+        //Récupération de tous les dvd dans la base de données
         public static List<DVD> getAllDvd()
         {
             List<DVD> lesDvd = new List<DVD>();
@@ -189,6 +164,8 @@ namespace Mediateq_AP_SIO2
             return lesDvd;
         }
 
+
+        //Récupération de tous les categories dans la base de données
         public static List<Categorie> getAllCategories()
         {
             List<Categorie> lesCategories = new List<Categorie>();
@@ -215,6 +192,8 @@ namespace Mediateq_AP_SIO2
             return lesCategories;
         }
 
+
+        //Récupération de tous les descripteurs dans la base de données
         public static List<Descripteur> getAllDescripteurs()
         {
             List<Descripteur> lesDescripteurs = new List<Descripteur>();
@@ -240,7 +219,9 @@ namespace Mediateq_AP_SIO2
             }
             return lesDescripteurs;
         }
-         
+
+
+        //Récupération de tous les livres dans la base de données
         public static List<Livre> getAllLivres()
         {
             List<Livre> lesLivres = new List<Livre>();
@@ -269,6 +250,8 @@ namespace Mediateq_AP_SIO2
             return lesLivres;
         }
 
+
+        //Récupère tous les descripteurs associés aux livres dans la liste donnée et les associe aux livres correspondants
         public static void setDescripteurs(List<Livre> lesLivres)
         {
             try
@@ -297,6 +280,8 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Obtenir la catégorie d'un livre dans la base de données
         public static Categorie getCategorieByLivre(Livre pLivre)
         {
             Categorie categorie;
@@ -326,6 +311,24 @@ namespace Mediateq_AP_SIO2
             return categorie;
         }
 
-    }
 
+        //Récupérer les exemplaires d'un document à partir de son titre
+        public static List<Exemplaire> getDocumentByTitre(Document dTitre)
+        {
+            List<Exemplaire> lesExemplaires = new List<Exemplaire>();
+            string req = "Select document.id , document.titre , document.image , categorie.id , categorie.libelle , exemplaire.numero ,exemplaire.dateAchat, exemplaire.idRayon , Etat.id , Etat.libelle from document inner join exemplaire on exemplaire.idDoc = document.id inner join categorie on categorie.id = document.idCategorie inner join etat on etat.id = exemplaire.idEtat  where document.id  = " + dTitre.IdDoc;
+            
+            DAOFactory.connecter();
+
+            MySqlDataReader reader = DAOFactory.execSQLRead(req);
+
+            while (reader.Read())
+            {
+                Exemplaire exemplaire = new Exemplaire(new Document(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), new Categorie(reader[3].ToString(), reader[4].ToString())), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), new Etat(int.Parse(reader[8].ToString()), reader[9].ToString()));
+                lesExemplaires.Add(exemplaire);
+            }
+            DAOFactory.deconnecter();
+            return lesExemplaires;
+        }
+    }
 }
