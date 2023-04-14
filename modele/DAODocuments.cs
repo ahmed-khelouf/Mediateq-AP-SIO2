@@ -29,7 +29,7 @@ namespace Mediateq_AP_SIO2
 
                 while (reader.Read())
                 {
-                     Exemplaire exemplaire = new Exemplaire(new Document(reader[0].ToString(), reader[1].ToString(), reader[2].ToString() , new Categorie(reader[3].ToString(), reader[4].ToString())) ,reader[5].ToString(), reader[6].ToString(), reader[7].ToString(),  new Etat(int.Parse(reader[8].ToString()) , reader[9].ToString()) );
+                     Exemplaire exemplaire = new Exemplaire(new Document(reader[0].ToString(), reader[1].ToString(), reader[2].ToString() , new Categorie(reader[3].ToString(), reader[4].ToString())) ,reader[5].ToString(), DateTime.Parse(reader[6].ToString()), reader[7].ToString(),  new Etat(int.Parse(reader[8].ToString()) , reader[9].ToString()) );
                      lesExemplaires.Add(exemplaire);
                 }
                  DAOFactory.deconnecter();
@@ -324,7 +324,7 @@ namespace Mediateq_AP_SIO2
 
             while (reader.Read())
             {
-                Exemplaire exemplaire = new Exemplaire(new Document(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), new Categorie(reader[3].ToString(), reader[4].ToString())), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), new Etat(int.Parse(reader[8].ToString()), reader[9].ToString()));
+                Exemplaire exemplaire = new Exemplaire(new Document(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), new Categorie(reader[3].ToString(), reader[4].ToString())), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), reader[7].ToString(), new Etat(int.Parse(reader[8].ToString()), reader[9].ToString()));
                 lesExemplaires.Add(exemplaire);
             }
             DAOFactory.deconnecter();

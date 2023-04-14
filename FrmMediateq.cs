@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using Mediateq_AP_SIO2.modele;
 using System.Security.Cryptography;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace Mediateq_AP_SIO2
 {
@@ -33,7 +34,8 @@ namespace Mediateq_AP_SIO2
         static List<Revue> lesRevues;
         static List<SignalerExemplaire> lesSignalerExemplaires;
         static List<Historique> lesHistoriques;
-
+        static List<Abonne> lesAbonnes;
+        
 
         #endregion
 
@@ -61,7 +63,7 @@ namespace Mediateq_AP_SIO2
                 lesDocuments = DAODocuments.getAllDocument();
                 lesRevues = DAORevues.getAllRevue();
                 lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
-
+                lesAbonnes = DAOAbonne.getAllAbonne();
             }
             catch (ExceptionSIO exc)
             {
@@ -307,13 +309,13 @@ namespace Mediateq_AP_SIO2
 
 
         // BOUTON POUR EXEMPLAIRE ETAT = USAGE
-        private void button_document_usagé_Click(object sender, EventArgs e)
+        private void buttonDocumentUsage_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
             bool reussi = false;
 
             // Vérifier si la liste d'exemplaires est non nulle
-            if (lesExemplaires != null) 
+            if (lesExemplaires != null)
             {
                 // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
                 int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
@@ -322,10 +324,10 @@ namespace Mediateq_AP_SIO2
                 Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
 
                 // Vérifier si l'état de l'exemplaire est déjà "usagé"
-                if (exemplaire.Etat.Libelle == "usagé") 
+                if (exemplaire.Etat.Libelle == "usagé")
                 {
                     // Afficher un message si l'exemplaire est déjà en usage
-                    MessageBox.Show("Ce document est déjà en usage !"); 
+                    MessageBox.Show("Ce document est déjà en usage !");
                 }
                 else // Si l'exemplaire n'est pas déjà en usage
                 {
@@ -333,13 +335,13 @@ namespace Mediateq_AP_SIO2
                     DAODocuments.modifierExemplaireUsage(exemplaire);
 
                     // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                    reussi = true; 
+                    reussi = true;
                 }
             }
             else // Si la liste d'exemplaires est nulle
             {
                 // Afficher un message d'erreur pour demander à l'utilisateur de sélectionner un document
-                MessageBox.Show("Veuillez choisir un document !"); 
+                MessageBox.Show("Veuillez choisir un document !");
             }
 
             if (reussi) // Si le changement d'état a réussi
@@ -354,7 +356,7 @@ namespace Mediateq_AP_SIO2
 
 
         // BOUTON POUR EXEMPLAIRE ETAT = INUTILISBALE 
-        private void button_document_inutilisable_Click(object sender, EventArgs e)
+        private void buttonDocumentInutilisable_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
             bool reussi = false;
@@ -401,7 +403,7 @@ namespace Mediateq_AP_SIO2
 
 
         // BOUTON POUR PARUTION ETAT = USAGE
-        private void button_revue_usagé_Click(object sender, EventArgs e)
+        private void buttonRevueUsage_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
             bool reussi = false;
@@ -448,7 +450,7 @@ namespace Mediateq_AP_SIO2
 
 
         // BOUTON POUR UNE PARUTION ETAT = INUTILISBALE 
-        private void button_revue_inutilisable_Click(object sender, EventArgs e)
+        private void buttonRevueInutilisable_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
             bool reussi = false;
@@ -586,14 +588,14 @@ namespace Mediateq_AP_SIO2
         private void tabPage3_Enter(object sender, EventArgs e)
         {
             // attribue la source de données de la combobox 
-            comboBox_Doc.DataSource = lesDocuments;
+            comboBoxDoc.DataSource = lesDocuments;
 
             //définition du champ qui doit être affiché dans la combobox
-            comboBox_Doc.DisplayMember = "titre";
+            comboBoxDoc.DisplayMember = "titre";
 
-            comboBox_Rev.DataSource = lesRevues;
+            comboBoxRev.DataSource = lesRevues;
 
-            comboBox_Rev.DisplayMember = "titre";
+            comboBoxRev.DisplayMember = "titre";
 
             // Rafraîchir les données de la DataGridView en appelant la méthode "comboBox_document_SelectedIndexChanged"
             comboBox_document_SelectedIndexChanged(sender, e);
@@ -607,7 +609,7 @@ namespace Mediateq_AP_SIO2
         private void comboBox_document_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
-            Document titreSelectionne = (Document)comboBox_Doc.SelectedItem;
+            Document titreSelectionne = (Document)comboBoxDoc.SelectedItem;
 
             // Vérification qu'un document a été sélectionné
             if (titreSelectionne != null)
@@ -635,7 +637,7 @@ namespace Mediateq_AP_SIO2
         private void comboBox_Rev_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération de la revue sélectionné dans la combobox
-            Revue titreSelectionne = (Revue)comboBox_Rev.SelectedItem;
+            Revue titreSelectionne = (Revue)comboBoxRev.SelectedItem;
 
             // Vérification qu'une revue a été sélectionné
             if (titreSelectionne != null)
@@ -679,15 +681,263 @@ namespace Mediateq_AP_SIO2
         }
 
 
+        #endregion
 
 
+        #region ABONNE
+        // ONGLET ABONNE
+
+        // Empeche l'utilisation du bouton 
+        private void tabAbonne_Enter(object sender, EventArgs e)
+        {
+            buttonAjouterAbonne.Enabled = false;
+            textBoxID.Visible = false;
+        }
+
+        // AJOUTER UN ABONNE DANS LA BDD
+        private void buttonAjouterAbonne_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Vérifier si tous les champs obligatoires sont remplis
+                if (textBoxNom.Text != "" && textBoxNom.Text != "")
+                {
+                    // Activer le bouton si tous les champs obligatoires sont remplis
+                    buttonAjouterAbonne.Enabled = true;
+                }
+                else
+                {
+                    // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
+                    buttonAjouterAbonne.Enabled = false;
+                }
+
+                // CREATION DE l'abonne ET L'AJOUTE DANS LA COLLECTION
+                DateTime dateNaissance = dateTimePickerDateNaissance.Value;
+
+                // GÉNÉRER UN ID D'ABONNÉ UNIQUE
+                string id = Guid.NewGuid().ToString();
+
+                // SPÉCIFIER LES DATES DE DÉBUT ET DE FIN D'ABONNEMENT
+                DateTime debutAbonnement = DateTime.Now;
+                DateTime finAbonnement = debutAbonnement.AddDays(60);
+
+                Abonne abo = new Abonne(id.ToString(), textBoxNom.Text, textBoxPrenom.Text, textBoxTelephone.Text, textBoxAdresse.Text, textBoxEmail.Text, dateNaissance, debutAbonnement, finAbonnement );
+
+                // AJOUTER L'ABONNE DANS LA BDD
+                DAOAbonne.ajouterAbonne(abo);
+
+                MessageBox.Show("Abonné ajouté avec succès.");
+
+                // Mettre à jour les données et rafraîchir le DataGridView
+                lesAbonnes = DAOAbonne.getAllAbonne();
+
+                // Parcour les abonnes pour les afficher dans le dataGridViewAbonnes
+                foreach (Abonne abonne in lesAbonnes)
+                {
+                    dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString());
+                }
+
+                dataGridViewAbonnes.Rows.Clear();
+                // VIDER LES CHAMPS DE TEXTE
+                textBoxNom.Text = "";
+                textBoxPrenom.Text = "";
+                textBoxTelephone.Text = "";
+                textBoxAdresse.Text = "";
+                textBoxEmail.Text = "";
+                dateTimePickerDateNaissance.Value = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de l'ajout de l'abonné : " + ex.Message);
+            }
+        }
 
 
+        //Vérification de la saisie de champs obligatoires pour activer le bouton Ajouter Abonné
+        private void verifTextBox(object sender, EventArgs e)
+        {
+            // Vérifier si tous les champs obligatoires sont remplis
+            if (textBoxNom.Text != "" && textBoxPrenom.Text != "" && textBoxTelephone.Text != "" && textBoxAdresse.Text != "" && textBoxEmail.Text != "" && dateTimePickerDateNaissance.Value.Date != DateTime.Today)
+            {
+                // Vérifier si le nom et le prénom ne contiennent pas de caractères spéciaux ou de chiffres
+                string regex = @"^[A-Za-zÀ-ÿ\s]+$";
+                Regex regexNomEtPrenom = new Regex(regex);
+
+                // Vérifier si l'adresse email est valide
+                regex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+                Regex regexEmail = new Regex(regex);
+
+                // Vérifier si le numero de  telephone est valide
+                regex = @"^[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}$";
+                Regex regexTelephone = new Regex(regex);
+
+                // Vérifier si l'adresse est valide
+                regex = @"^[A-Za-z0-9éà\s]+$";
+                Regex regexAdresse = new Regex(regex);
+
+                // Vérifier si la chaîne saisie correspond au modèle de format  valide
+                if (regexEmail.IsMatch(textBoxEmail.Text) && regexNomEtPrenom.IsMatch(textBoxNom.Text) && regexNomEtPrenom.IsMatch(textBoxPrenom.Text) && regexTelephone.IsMatch(textBoxTelephone.Text) && regexAdresse.IsMatch(textBoxAdresse.Text))
+                {
+                    // Activer le bouton si tous les champs obligatoires sont remplis et qui respect le modèle de format valide
+                    buttonAjouterAbonne.Enabled = true;
+                }
+                else
+                {
+                    // Désactiver si pas valide 
+                    buttonAjouterAbonne.Enabled = false;
+                }
+            }
+            else
+            {
+                // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
+                buttonAjouterAbonne.Enabled = false;
+            }
+        }
 
 
+        //Vérification de la saisie de champs
+        private void textBoxNom_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBox(sender, e);
+        }
 
 
+        //Vérification de la saisie de champs
+        private void textBoxPrenom_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBox(sender, e);
+        }
 
+
+        //Vérification de la saisie de champs
+        private void textBoxTelephone_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBox(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxAdresse_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBox(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxEmail_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBox(sender, e);
+            string pattern = @" ^ ([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"; // Expression régulière pour valider l'adresse email
+            Regex regex = new Regex(pattern);
+
+            if (regex.IsMatch(textBoxEmail.Text)) // Vérifier si la chaîne saisie correspond au modèle de format d'adresse email valide
+            {
+                // La chaîne saisie est une adresse email valide
+                // Vous pouvez activer le bouton ou effectuer d'autres actions nécessaires
+            }
+            else
+            {
+                // La chaîne saisie n'est pas une adresse email valide
+                // Vous pouvez désactiver le bouton ou effectuer d'autres actions nécessaires
+            }
+        }
+
+
+        //Vérification de la saisie de champs
+        private void dateTimePickerDateNaissance_ValueChanged(object sender, EventArgs e)
+        {
+            verifTextBox(sender, e);
+        }
+
+
+        // Bouton pour modifier les informations d'un abonne dans la bdd
+        private void buttonModifierAbonne_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                  // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte et les contrôles de date et d'heure
+                  Abonne abonneModifie = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
+
+                  // Modification de l'abonné dans la base de données avec les nouvelles valeurs
+                  DAOAbonne.modifierAbonne(abonneModifie);
+
+                  MessageBox.Show("Abonné modifié avec succès.");
+
+                  // Mettre à jour les données et rafraîchir le DataGridView
+                  lesAbonnes = DAOAbonne.getAllAbonne();
+
+                // Parcours les abonnées pour afficher dans le dataGridViewAbonnes
+                foreach (Abonne abonne in lesAbonnes)
+                  {
+                      dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString());
+                  }
+                  dataGridViewAbonnes.Rows.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Une erreur s'est produite lors de la modification de l'abonné : " + ex.Message);
+            }
+        }
+
+
+        // Recherche nom d'un abonne 
+        private void textBoxRechercheNom_TextChanged(object sender, EventArgs e)
+        {
+            dataGridViewAbonnes.Rows.Clear();
+
+            // On parcourt tous les abonnes. Si le nom matche avec la saisie, on l'affiche dans le dataGridViewAbonnes.
+            foreach (Abonne abonne in lesAbonnes)
+            {
+                // on passe le champ de saisie et le nom en minuscules car la méthode Contains
+                // tient compte de la casse.
+                string saisieMinuscules;
+                saisieMinuscules = textBoxRechercheNom.Text.ToLower();
+                string titreMinuscules;
+                titreMinuscules = abonne.Nom.ToLower();
+
+                //on teste si le nom de l'abonne contient ce qui a été saisi
+                if (titreMinuscules.Contains(saisieMinuscules))
+                {
+                    dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd") , abonne.Id.ToString()); ;
+                }
+            }
+
+        }
+
+
+        // Affichage des abonnes dans le dataGridViewAbonnes
+        private void dataGridViewAbonnes_SelectionChanged(object sender, EventArgs e)
+        {
+            // Vérification qu'une seule ligne est sélectionnée
+            if (dataGridViewAbonnes.SelectedRows.Count == 1)
+            {
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewAbonnes.SelectedRows[0];
+
+                // Récupération des valeurs de chaque cellule de la ligne
+                string nom = row.Cells["ColumnNomAbo"].Value.ToString();
+                string prenom = row.Cells["ColumnPrenomAbo"].Value.ToString();
+                string telephone = row.Cells["ColumnTelAbo"].Value.ToString();
+                string adresse = row.Cells["ColumnAdresseAbo"].Value.ToString();
+                string email = row.Cells["ColumnEmailAbo"].Value.ToString();
+                DateTime dateNaissance = DateTime.Parse(row.Cells["ColumnNaissanceAbo"].Value.ToString());
+                DateTime debutAbonnement = DateTime.Parse(row.Cells["ColumnDebutAbo"].Value.ToString());
+                DateTime finAbonnement = DateTime.Parse(row.Cells["ColumnFinAbo"].Value.ToString());
+                string id = row.Cells["ColumnIdAbo"].Value.ToString();
+
+                // Affichage des valeurs dans les TextBox correspondantes
+                textBoxModifNom.Text = nom;
+                textBoxModifPrenom.Text = prenom;
+                textBoxModifTelephone.Text = telephone;
+                textBoxModifAdresse.Text = adresse;
+                textBoxModifEmail.Text = email;
+                dateTimePickerModifDateNaissance.Value = dateNaissance;
+                dateTimePickerDebutAbonnement.Value = debutAbonnement;
+                dateTimePickerFinAbonnement.Value = finAbonnement;
+                textBoxID.Text = id;
+
+            }
+        }
 
 
         #endregion

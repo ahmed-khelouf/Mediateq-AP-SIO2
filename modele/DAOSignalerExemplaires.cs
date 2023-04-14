@@ -22,7 +22,7 @@ namespace Mediateq_AP_SIO2.modele
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
                 while (reader.Read())
                 {
-                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(reader[0].ToString(), new Exemplaire(new Document(reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), new Categorie(reader[4].ToString(), reader[5].ToString())), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), new Etat(int.Parse(reader[9].ToString()), reader[10].ToString())), reader[11].ToString(), reader[12].ToString());
+                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(reader[0].ToString(), new Exemplaire(new Document(reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), new Categorie(reader[4].ToString(), reader[5].ToString())), reader[6].ToString(), DateTime.Parse(reader[7].ToString()), reader[8].ToString(), new Etat(int.Parse(reader[9].ToString()), reader[10].ToString())), reader[11].ToString(), reader[12].ToString());
                     lesSignalementExemplaires.Add(signalerExemplaire);
                 }
                 DAOFactory.deconnecter();

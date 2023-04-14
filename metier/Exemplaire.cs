@@ -10,11 +10,11 @@ namespace Mediateq_AP_SIO2.metier
     {
         private Document unDocument;
         private string numero;
-        private string dateAchat;
+        private DateTime dateAchat;
         private string idRayon;
         private Etat etat;
 
-        public Exemplaire(Document unDocument, string numero, string dateAchat, string idRayon, Etat unetat )
+        public Exemplaire(Document unDocument, string numero, DateTime dateAchat, string idRayon, Etat unetat )
         {
             this.unDocument = unDocument;
             this.numero = numero;
@@ -27,7 +27,7 @@ namespace Mediateq_AP_SIO2.metier
 
         public string Numero { get => numero; set => numero = value; }
 
-        public string DateAchat { get => dateAchat; set => dateAchat = value; }
+        public DateTime DateAchat { get => dateAchat; set => dateAchat = value; }
 
         public string IdRayon { get => idRayon; set => idRayon = value; }
 
