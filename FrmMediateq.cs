@@ -687,30 +687,21 @@ namespace Mediateq_AP_SIO2
         #region ABONNE
         // ONGLET ABONNE
 
-        // Empeche l'utilisation du bouton 
+        // Empeche l'utilisation de bouton 
         private void tabAbonne_Enter(object sender, EventArgs e)
         {
             buttonAjouterAbonne.Enabled = false;
-            textBoxID.Visible = false;
+            textBoxID.ReadOnly = true;
+            buttonModifierAbonne.Enabled=false;
+            buttonSupprimer.Enabled = false;
         }
+
 
         // AJOUTER UN ABONNE DANS LA BDD
         private void buttonAjouterAbonne_Click(object sender, EventArgs e)
         {
             try
             {
-                // Vérifier si tous les champs obligatoires sont remplis
-                if (textBoxNom.Text != "" && textBoxNom.Text != "")
-                {
-                    // Activer le bouton si tous les champs obligatoires sont remplis
-                    buttonAjouterAbonne.Enabled = true;
-                }
-                else
-                {
-                    // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
-                    buttonAjouterAbonne.Enabled = false;
-                }
-
                 // CREATION DE l'abonne ET L'AJOUTE DANS LA COLLECTION
                 DateTime dateNaissance = dateTimePickerDateNaissance.Value;
 
@@ -754,7 +745,7 @@ namespace Mediateq_AP_SIO2
 
 
         //Vérification de la saisie de champs obligatoires pour activer le bouton Ajouter Abonné
-        private void verifTextBox(object sender, EventArgs e)
+        private void verifTextBoxAjouter(object sender, EventArgs e)
         {
             // Vérifier si tous les champs obligatoires sont remplis
             if (textBoxNom.Text != "" && textBoxPrenom.Text != "" && textBoxTelephone.Text != "" && textBoxAdresse.Text != "" && textBoxEmail.Text != "" && dateTimePickerDateNaissance.Value.Date != DateTime.Today)
@@ -798,55 +789,42 @@ namespace Mediateq_AP_SIO2
         //Vérification de la saisie de champs
         private void textBoxNom_TextChanged(object sender, EventArgs e)
         {
-            verifTextBox(sender, e);
+            verifTextBoxAjouter(sender, e);
         }
 
 
         //Vérification de la saisie de champs
         private void textBoxPrenom_TextChanged(object sender, EventArgs e)
         {
-            verifTextBox(sender, e);
+            verifTextBoxAjouter(sender, e);
         }
 
 
         //Vérification de la saisie de champs
         private void textBoxTelephone_TextChanged(object sender, EventArgs e)
         {
-            verifTextBox(sender, e);
+            verifTextBoxAjouter(sender, e);
         }
 
 
         //Vérification de la saisie de champs
         private void textBoxAdresse_TextChanged(object sender, EventArgs e)
         {
-            verifTextBox(sender, e);
+            verifTextBoxAjouter(sender, e);
         }
 
 
         //Vérification de la saisie de champs
         private void textBoxEmail_TextChanged(object sender, EventArgs e)
         {
-            verifTextBox(sender, e);
-            string pattern = @" ^ ([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"; // Expression régulière pour valider l'adresse email
-            Regex regex = new Regex(pattern);
-
-            if (regex.IsMatch(textBoxEmail.Text)) // Vérifier si la chaîne saisie correspond au modèle de format d'adresse email valide
-            {
-                // La chaîne saisie est une adresse email valide
-                // Vous pouvez activer le bouton ou effectuer d'autres actions nécessaires
-            }
-            else
-            {
-                // La chaîne saisie n'est pas une adresse email valide
-                // Vous pouvez désactiver le bouton ou effectuer d'autres actions nécessaires
-            }
+            verifTextBoxAjouter(sender, e);
         }
 
 
         //Vérification de la saisie de champs
         private void dateTimePickerDateNaissance_ValueChanged(object sender, EventArgs e)
         {
-            verifTextBox(sender, e);
+            verifTextBoxAjouter(sender, e);
         }
 
 
@@ -855,23 +833,39 @@ namespace Mediateq_AP_SIO2
         {
             try
             {
-                  // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte et les contrôles de date et d'heure
-                  Abonne abonneModifie = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
+                // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte 
+                Abonne abonneModifie = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
 
                   // Modification de l'abonné dans la base de données avec les nouvelles valeurs
                   DAOAbonne.modifierAbonne(abonneModifie);
 
                   MessageBox.Show("Abonné modifié avec succès.");
 
-                  // Mettre à jour les données et rafraîchir le DataGridView
-                  lesAbonnes = DAOAbonne.getAllAbonne();
+               
+                // Mettre à jour les données et rafraîchir le DataGridView
+                lesAbonnes = DAOAbonne.getAllAbonne();
 
                 // Parcours les abonnées pour afficher dans le dataGridViewAbonnes
                 foreach (Abonne abonne in lesAbonnes)
                   {
                       dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString());
-                  }
-                  dataGridViewAbonnes.Rows.Clear();
+                }
+
+                // CLEAR dataGridViewAbonnes
+                dataGridViewAbonnes.Rows.Clear();
+
+                // VIDER LES CHAMPS DE TEXTE
+                textBoxID.Text = "";
+                textBoxRechercheNom.Text = "";
+                textBoxModifNom.Text = "";
+                textBoxModifPrenom.Text = "";
+                textBoxModifTelephone.Text = "";
+                textBoxModifAdresse.Text = "";
+                textBoxModifEmail.Text = "";
+                dateTimePickerModifDateNaissance.Value = DateTime.Now; 
+                dateTimePickerDebutAbonnement.Value = DateTime.Now;
+                dateTimePickerFinAbonnement.Value = DateTime.Now;
+
             }
             catch (Exception ex)
             {
@@ -895,10 +889,11 @@ namespace Mediateq_AP_SIO2
                 string titreMinuscules;
                 titreMinuscules = abonne.Nom.ToLower();
 
+
                 //on teste si le nom de l'abonne contient ce qui a été saisi
                 if (titreMinuscules.Contains(saisieMinuscules))
                 {
-                    dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd") , abonne.Id.ToString()); ;
+                    dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString()); ;
                 }
             }
 
@@ -913,35 +908,205 @@ namespace Mediateq_AP_SIO2
             {
                 // Récupération de la ligne sélectionnée
                 DataGridViewRow row = dataGridViewAbonnes.SelectedRows[0];
+                if (row.Cells != null)
+                {
+                    // Récupération des valeurs de chaque cellule de la ligne
+                    string nom = row.Cells["ColumnNomAbo"].Value.ToString();
+                    string prenom = row.Cells["ColumnPrenomAbo"].Value.ToString();
+                    string telephone = row.Cells["ColumnTelAbo"].Value.ToString();
+                    string adresse = row.Cells["ColumnAdresseAbo"].Value.ToString();
+                    string email = row.Cells["ColumnEmailAbo"].Value.ToString();
+                    DateTime dateNaissance = DateTime.Parse(row.Cells["ColumnNaissanceAbo"].Value.ToString());
+                    DateTime debutAbonnement = DateTime.Parse(row.Cells["ColumnDebutAbo"].Value.ToString());
+                    DateTime finAbonnement = DateTime.Parse(row.Cells["ColumnFinAbo"].Value.ToString());
+                    string id = row.Cells["ColumnIdAbo"].Value.ToString();
 
-                // Récupération des valeurs de chaque cellule de la ligne
-                string nom = row.Cells["ColumnNomAbo"].Value.ToString();
-                string prenom = row.Cells["ColumnPrenomAbo"].Value.ToString();
-                string telephone = row.Cells["ColumnTelAbo"].Value.ToString();
-                string adresse = row.Cells["ColumnAdresseAbo"].Value.ToString();
-                string email = row.Cells["ColumnEmailAbo"].Value.ToString();
-                DateTime dateNaissance = DateTime.Parse(row.Cells["ColumnNaissanceAbo"].Value.ToString());
-                DateTime debutAbonnement = DateTime.Parse(row.Cells["ColumnDebutAbo"].Value.ToString());
-                DateTime finAbonnement = DateTime.Parse(row.Cells["ColumnFinAbo"].Value.ToString());
-                string id = row.Cells["ColumnIdAbo"].Value.ToString();
+                    // Affichage des valeurs dans les TextBox correspondantes
+                    textBoxModifNom.Text = nom;
+                    textBoxModifPrenom.Text = prenom;
+                    textBoxModifTelephone.Text = telephone;
+                    textBoxModifAdresse.Text = adresse;
+                    textBoxModifEmail.Text = email;
+                    dateTimePickerModifDateNaissance.Value = dateNaissance;
+                    dateTimePickerDebutAbonnement.Value = debutAbonnement;
+                    dateTimePickerFinAbonnement.Value = finAbonnement;
+                    textBoxID.Text = id;
 
-                // Affichage des valeurs dans les TextBox correspondantes
-                textBoxModifNom.Text = nom;
-                textBoxModifPrenom.Text = prenom;
-                textBoxModifTelephone.Text = telephone;
-                textBoxModifAdresse.Text = adresse;
-                textBoxModifEmail.Text = email;
-                dateTimePickerModifDateNaissance.Value = dateNaissance;
-                dateTimePickerDebutAbonnement.Value = debutAbonnement;
-                dateTimePickerFinAbonnement.Value = finAbonnement;
-                textBoxID.Text = id;
+                    // Vérifier si la date actuelle est supérieure ou égale à la fin de l'abonnement
+                    if (DateTime.Now >= finAbonnement) 
+                    {
+                        MessageBox.Show("L'abonnement a expiré"); 
+                    }
+                    else
+                    {
+                        // Calculer la différence entre la date actuelle et la fin de l'abonnement
+                        TimeSpan difference = finAbonnement - DateTime.Now;
 
+                        // Convertir la différence en jours
+                        int differenceEnJours = (int)difference.TotalDays;
+
+                        // Vérifier si la différence est inférieure ou égale à 30 jours
+                        if (differenceEnJours <= 30) 
+                        {
+                            MessageBox.Show("L'abonnement va bientot expirer dans : " + differenceEnJours.ToString() + " " + "jours"); 
+                        }
+                    }
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("ligne null ");
+                }
             }
         }
 
 
+        //Vérification de la saisie de champs obligatoires pour activer le bouton Modifier Abonné
+        private void verifTextBoxModifier(object sender, EventArgs e)
+        {
+            foreach (Abonne abonne in lesAbonnes)
+            {
+                 
+                // Vérifier si tous les champs obligatoires sont remplis
+                if (textBoxModifNom.Text != abonne.Nom || textBoxModifPrenom.Text != abonne.Prenom || textBoxModifTelephone.Text != abonne.Telephone || textBoxModifAdresse.Text != abonne.Adresse || textBoxModifEmail.Text != abonne.Email || dateTimePickerModifDateNaissance.Value.Date != abonne.DateNaissance || dateTimePickerDebutAbonnement.Value.Date != abonne.DebutAbonnement || dateTimePickerFinAbonnement.Value.Date != abonne.FinAbonnement)
+                {
+                    // Vérifier si le nom et le prénom ne contiennent pas de caractères spéciaux ou de chiffres
+                    string regex = @"^[A-Za-zÀ-ÿ\s]+$";
+                    Regex regexNomEtPrenom = new Regex(regex);
+
+                    // Vérifier si l'adresse email est valide
+                    regex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+                    Regex regexEmail = new Regex(regex);
+
+                    // Vérifier si le numero de  telephone est valide
+                    regex = @"^[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}$";
+                    Regex regexTelephone = new Regex(regex);
+
+                    // Vérifier si l'adresse est valide
+                    regex = @"^[A-Za-z0-9éà\s]+$";
+                    Regex regexAdresse = new Regex(regex);
+
+                    // Vérifier si la chaîne saisie correspond au modèle de format  valide
+                    if (regexEmail.IsMatch(textBoxModifEmail.Text) && regexNomEtPrenom.IsMatch(textBoxModifNom.Text) && regexNomEtPrenom.IsMatch(textBoxModifPrenom.Text) && regexTelephone.IsMatch(textBoxModifTelephone.Text) && regexAdresse.IsMatch(textBoxModifAdresse.Text))
+                    {
+                        // Activer le bouton si tous les champs obligatoires sont remplis et qui respect le modèle de format valide
+                        buttonModifierAbonne.Enabled = true;
+                        buttonSupprimer.Enabled = true;
+                    }
+                    else
+                    {
+                        // Désactiver si pas valide 
+                        buttonModifierAbonne.Enabled = false;
+                        buttonSupprimer.Enabled = false;
+                    }
+                }
+                else
+                {
+                    // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
+                    buttonModifierAbonne.Enabled = false;
+                }
+            }
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxModifNom_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxModifPrenom_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxModifTelephone_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxModifAdresse_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void textBoxModifEmail_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void dateTimePickerModifDateNaissance_ValueChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void dateTimePickerDebutAbonnement_ValueChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Vérification de la saisie de champs
+        private void dateTimePickerFinAbonnement_ValueChanged(object sender, EventArgs e)
+        {
+            verifTextBoxModifier(sender, e);
+        }
+
+
+        //Supprimer un abonne
+        private void buttonSupprimer_Click(object sender, EventArgs e)
+        {
+            if(textBoxID.Text!= "")
+            {
+                // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte 
+                Abonne abonneSup = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
+                DAOAbonne.supprimerAbonne(abonneSup);
+                MessageBox.Show("Abonne supprimé");
+
+                buttonSupprimer.Enabled = true;
+                // Mettre à jour les données et rafraîchir le DataGridView
+                lesAbonnes = DAOAbonne.getAllAbonne();
+
+                // Parcours les abonnées pour afficher dans le dataGridViewAbonnes
+                foreach (Abonne abonne in lesAbonnes)
+                {
+                    dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString());
+                }
+
+                // CLEAR dataGridViewAbonnes
+                dataGridViewAbonnes.Rows.Clear();
+
+                // VIDER LES CHAMPS DE TEXTE
+                textBoxID.Text = "";
+                textBoxRechercheNom.Text = "";
+                textBoxModifNom.Text = "";
+                textBoxModifPrenom.Text = "";
+                textBoxModifTelephone.Text = "";
+                textBoxModifAdresse.Text = "";
+                textBoxModifEmail.Text = "";
+                dateTimePickerModifDateNaissance.Value = DateTime.Now;
+                dateTimePickerDebutAbonnement.Value = DateTime.Now;
+                dateTimePickerFinAbonnement.Value = DateTime.Now;
+            }
+
+        }
+
         #endregion
 
-       
+
     }
 }

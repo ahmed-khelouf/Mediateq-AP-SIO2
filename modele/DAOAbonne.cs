@@ -103,5 +103,21 @@ namespace Mediateq_AP_SIO2.modele
             }
         }
 
+
+        // Supprimer un abonne 
+        public static void supprimerAbonne(Abonne abonne)
+        {
+            try
+            {
+                string query = "DELETE from abonne  WHERE id='" + abonne.Id.ToString() + "'";
+                DAOFactory.connecter();
+                DAOFactory.execSQLWrite(query);
+                DAOFactory.deconnecter();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
     }
 }

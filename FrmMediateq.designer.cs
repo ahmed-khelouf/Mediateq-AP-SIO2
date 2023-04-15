@@ -158,7 +158,6 @@ namespace Mediateq_AP_SIO2
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAbonne = new System.Windows.Forms.TabPage();
-            this.textBoxID = new System.Windows.Forms.TextBox();
             this.groupBoxAbonnes = new System.Windows.Forms.GroupBox();
             this.dataGridViewAbonnes = new System.Windows.Forms.DataGridView();
             this.ColumnNomAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -172,7 +171,7 @@ namespace Mediateq_AP_SIO2
             this.ColumnIdAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label22 = new System.Windows.Forms.Label();
             this.textBoxRechercheNom = new System.Windows.Forms.TextBox();
-            this.groupBoxModifierAbo = new System.Windows.Forms.GroupBox();
+            this.groupBoxModifierOuSupAbo = new System.Windows.Forms.GroupBox();
             this.labelFinAbonnementModif = new System.Windows.Forms.Label();
             this.labelDebutAboModif = new System.Windows.Forms.Label();
             this.labelDateNaissanceModif = new System.Windows.Forms.Label();
@@ -204,6 +203,9 @@ namespace Mediateq_AP_SIO2
             this.textBoxTelephone = new System.Windows.Forms.TextBox();
             this.textBoxPrenom = new System.Windows.Forms.TextBox();
             this.textBoxNom = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBoxID = new System.Windows.Forms.TextBox();
+            this.buttonSupprimer = new System.Windows.Forms.Button();
             this.tabOngletsAbonne.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -228,7 +230,7 @@ namespace Mediateq_AP_SIO2
             this.tabAbonne.SuspendLayout();
             this.groupBoxAbonnes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbonnes)).BeginInit();
-            this.groupBoxModifierAbo.SuspendLayout();
+            this.groupBoxModifierOuSupAbo.SuspendLayout();
             this.groupBoxAjoutAbonne.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -248,7 +250,7 @@ namespace Mediateq_AP_SIO2
             this.tabOngletsAbonne.Location = new System.Drawing.Point(0, 0);
             this.tabOngletsAbonne.Name = "tabOngletsAbonne";
             this.tabOngletsAbonne.SelectedIndex = 0;
-            this.tabOngletsAbonne.Size = new System.Drawing.Size(1143, 520);
+            this.tabOngletsAbonne.Size = new System.Drawing.Size(1143, 535);
             this.tabOngletsAbonne.TabIndex = 0;
             // 
             // tabParutions
@@ -257,10 +259,10 @@ namespace Mediateq_AP_SIO2
             this.tabParutions.Controls.Add(this.dgvParutions);
             this.tabParutions.Controls.Add(this.label1);
             this.tabParutions.Controls.Add(this.cbxTitres);
-            this.tabParutions.Location = new System.Drawing.Point(4, 22);
+            this.tabParutions.Location = new System.Drawing.Point(4, 30);
             this.tabParutions.Name = "tabParutions";
             this.tabParutions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParutions.Size = new System.Drawing.Size(1135, 494);
+            this.tabParutions.Size = new System.Drawing.Size(1135, 501);
             this.tabParutions.TabIndex = 0;
             this.tabParutions.Text = "Parutions";
             this.tabParutions.UseVisualStyleBackColor = true;
@@ -331,10 +333,10 @@ namespace Mediateq_AP_SIO2
             this.tabTitres.Controls.Add(this.dgvTitres);
             this.tabTitres.Controls.Add(this.label2);
             this.tabTitres.Controls.Add(this.cbxDomaines);
-            this.tabTitres.Location = new System.Drawing.Point(4, 22);
+            this.tabTitres.Location = new System.Drawing.Point(4, 30);
             this.tabTitres.Name = "tabTitres";
             this.tabTitres.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTitres.Size = new System.Drawing.Size(1135, 494);
+            this.tabTitres.Size = new System.Drawing.Size(1135, 501);
             this.tabTitres.TabIndex = 1;
             this.tabTitres.Text = "Titres";
             this.tabTitres.UseVisualStyleBackColor = true;
@@ -416,9 +418,9 @@ namespace Mediateq_AP_SIO2
             // 
             this.tabLivres.Controls.Add(this.grpRechercheTitre);
             this.tabLivres.Controls.Add(this.grpRechercheCode);
-            this.tabLivres.Location = new System.Drawing.Point(4, 22);
+            this.tabLivres.Location = new System.Drawing.Point(4, 30);
             this.tabLivres.Name = "tabLivres";
-            this.tabLivres.Size = new System.Drawing.Size(1135, 494);
+            this.tabLivres.Size = new System.Drawing.Size(1135, 501);
             this.tabLivres.TabIndex = 2;
             this.tabLivres.Text = "Livres";
             this.tabLivres.UseVisualStyleBackColor = true;
@@ -906,7 +908,7 @@ namespace Mediateq_AP_SIO2
             this.tabPageChangerEtat.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tabPageChangerEtat.Location = new System.Drawing.Point(4, 22);
             this.tabPageChangerEtat.Name = "tabPageChangerEtat";
-            this.tabPageChangerEtat.Size = new System.Drawing.Size(1135, 494);
+            this.tabPageChangerEtat.Size = new System.Drawing.Size(1135, 509);
             this.tabPageChangerEtat.TabIndex = 5;
             this.tabPageChangerEtat.Text = "changer l\'etat";
             this.tabPageChangerEtat.Enter += new System.EventHandler(this.tabPage2_Enter);
@@ -1114,7 +1116,7 @@ namespace Mediateq_AP_SIO2
             this.tabSignaler.Controls.Add(this.textBox13);
             this.tabSignaler.Location = new System.Drawing.Point(4, 22);
             this.tabSignaler.Name = "tabSignaler";
-            this.tabSignaler.Size = new System.Drawing.Size(1135, 494);
+            this.tabSignaler.Size = new System.Drawing.Size(1135, 509);
             this.tabSignaler.TabIndex = 6;
             this.tabSignaler.Text = "Signaler";
             this.tabSignaler.UseVisualStyleBackColor = true;
@@ -1220,7 +1222,7 @@ namespace Mediateq_AP_SIO2
             this.tabPageInutilisable.Controls.Add(this.dataGridViewDocumentsInutilisable);
             this.tabPageInutilisable.Location = new System.Drawing.Point(4, 22);
             this.tabPageInutilisable.Name = "tabPageInutilisable";
-            this.tabPageInutilisable.Size = new System.Drawing.Size(1135, 494);
+            this.tabPageInutilisable.Size = new System.Drawing.Size(1135, 509);
             this.tabPageInutilisable.TabIndex = 7;
             this.tabPageInutilisable.Text = "doc inutilisable";
             this.tabPageInutilisable.Enter += new System.EventHandler(this.tabPage3_Enter);
@@ -1337,7 +1339,7 @@ namespace Mediateq_AP_SIO2
             this.tabPageDeteriore.Controls.Add(this.dataGridView6);
             this.tabPageDeteriore.Location = new System.Drawing.Point(4, 22);
             this.tabPageDeteriore.Name = "tabPageDeteriore";
-            this.tabPageDeteriore.Size = new System.Drawing.Size(1135, 494);
+            this.tabPageDeteriore.Size = new System.Drawing.Size(1135, 509);
             this.tabPageDeteriore.TabIndex = 8;
             this.tabPageDeteriore.Text = "doc deteriore";
             this.tabPageDeteriore.UseVisualStyleBackColor = true;
@@ -1401,28 +1403,22 @@ namespace Mediateq_AP_SIO2
             // tabAbonne
             // 
             this.tabAbonne.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tabAbonne.Controls.Add(this.textBoxID);
+            this.tabAbonne.Controls.Add(this.buttonSupprimer);
             this.tabAbonne.Controls.Add(this.groupBoxAbonnes);
-            this.tabAbonne.Controls.Add(this.groupBoxModifierAbo);
+            this.tabAbonne.Controls.Add(this.groupBoxModifierOuSupAbo);
             this.tabAbonne.Controls.Add(this.groupBoxAjoutAbonne);
+            this.tabAbonne.Controls.Add(this.buttonModifierAbonne);
             this.tabAbonne.Location = new System.Drawing.Point(4, 22);
             this.tabAbonne.Name = "tabAbonne";
             this.tabAbonne.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbonne.Size = new System.Drawing.Size(1135, 494);
+            this.tabAbonne.Size = new System.Drawing.Size(1135, 509);
             this.tabAbonne.TabIndex = 9;
             this.tabAbonne.Text = "Abonné";
             this.tabAbonne.Enter += new System.EventHandler(this.tabAbonne_Enter);
             // 
-            // textBoxID
-            // 
-            this.textBoxID.Location = new System.Drawing.Point(650, 344);
-            this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(100, 20);
-            this.textBoxID.TabIndex = 20;
-//            this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
-            // 
             // groupBoxAbonnes
             // 
+            this.groupBoxAbonnes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.groupBoxAbonnes.Controls.Add(this.dataGridViewAbonnes);
             this.groupBoxAbonnes.Controls.Add(this.label22);
             this.groupBoxAbonnes.Controls.Add(this.textBoxRechercheNom);
@@ -1515,40 +1511,41 @@ namespace Mediateq_AP_SIO2
             this.textBoxRechercheNom.TabIndex = 3;
             this.textBoxRechercheNom.TextChanged += new System.EventHandler(this.textBoxRechercheNom_TextChanged);
             // 
-            // groupBoxModifierAbo
+            // groupBoxModifierOuSupAbo
             // 
-            this.groupBoxModifierAbo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.groupBoxModifierAbo.Controls.Add(this.labelFinAbonnementModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelDebutAboModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelDateNaissanceModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelEmailModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelAdresseModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelTelephoneModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelPrenomModif);
-            this.groupBoxModifierAbo.Controls.Add(this.labelNomModif);
-            this.groupBoxModifierAbo.Controls.Add(this.buttonModifierAbonne);
-            this.groupBoxModifierAbo.Controls.Add(this.dateTimePickerFinAbonnement);
-            this.groupBoxModifierAbo.Controls.Add(this.dateTimePickerDebutAbonnement);
-            this.groupBoxModifierAbo.Controls.Add(this.dateTimePickerModifDateNaissance);
-            this.groupBoxModifierAbo.Controls.Add(this.textBoxModifEmail);
-            this.groupBoxModifierAbo.Controls.Add(this.textBoxModifAdresse);
-            this.groupBoxModifierAbo.Controls.Add(this.textBoxModifTelephone);
-            this.groupBoxModifierAbo.Controls.Add(this.textBoxModifPrenom);
-            this.groupBoxModifierAbo.Controls.Add(this.textBoxModifNom);
-            this.groupBoxModifierAbo.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxModifierAbo.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.groupBoxModifierAbo.Location = new System.Drawing.Point(318, 23);
-            this.groupBoxModifierAbo.Name = "groupBoxModifierAbo";
-            this.groupBoxModifierAbo.Size = new System.Drawing.Size(282, 451);
-            this.groupBoxModifierAbo.TabIndex = 1;
-            this.groupBoxModifierAbo.TabStop = false;
-            this.groupBoxModifierAbo.Text = "Modifier un abonne";
+            this.groupBoxModifierOuSupAbo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.textBoxID);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.label23);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelFinAbonnementModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelDebutAboModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelDateNaissanceModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelEmailModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelAdresseModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelTelephoneModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelPrenomModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.labelNomModif);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.dateTimePickerFinAbonnement);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.dateTimePickerDebutAbonnement);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.dateTimePickerModifDateNaissance);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.textBoxModifEmail);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.textBoxModifAdresse);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.textBoxModifTelephone);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.textBoxModifPrenom);
+            this.groupBoxModifierOuSupAbo.Controls.Add(this.textBoxModifNom);
+            this.groupBoxModifierOuSupAbo.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxModifierOuSupAbo.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.groupBoxModifierOuSupAbo.Location = new System.Drawing.Point(318, 23);
+            this.groupBoxModifierOuSupAbo.Name = "groupBoxModifierOuSupAbo";
+            this.groupBoxModifierOuSupAbo.Size = new System.Drawing.Size(282, 428);
+            this.groupBoxModifierOuSupAbo.TabIndex = 1;
+            this.groupBoxModifierOuSupAbo.TabStop = false;
+            this.groupBoxModifierOuSupAbo.Text = "Modifier ou supprimer un abonne";
             // 
             // labelFinAbonnementModif
             // 
             this.labelFinAbonnementModif.AutoSize = true;
             this.labelFinAbonnementModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFinAbonnementModif.Location = new System.Drawing.Point(6, 350);
+            this.labelFinAbonnementModif.Location = new System.Drawing.Point(6, 370);
             this.labelFinAbonnementModif.Name = "labelFinAbonnementModif";
             this.labelFinAbonnementModif.Size = new System.Drawing.Size(97, 16);
             this.labelFinAbonnementModif.TabIndex = 17;
@@ -1558,7 +1555,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelDebutAboModif.AutoSize = true;
             this.labelDebutAboModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDebutAboModif.Location = new System.Drawing.Point(-2, 319);
+            this.labelDebutAboModif.Location = new System.Drawing.Point(-2, 334);
             this.labelDebutAboModif.Name = "labelDebutAboModif";
             this.labelDebutAboModif.Size = new System.Drawing.Size(114, 16);
             this.labelDebutAboModif.TabIndex = 16;
@@ -1568,7 +1565,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelDateNaissanceModif.AutoSize = true;
             this.labelDateNaissanceModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDateNaissanceModif.Location = new System.Drawing.Point(8, 283);
+            this.labelDateNaissanceModif.Location = new System.Drawing.Point(6, 295);
             this.labelDateNaissanceModif.Name = "labelDateNaissanceModif";
             this.labelDateNaissanceModif.Size = new System.Drawing.Size(99, 16);
             this.labelDateNaissanceModif.TabIndex = 15;
@@ -1578,7 +1575,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelEmailModif.AutoSize = true;
             this.labelEmailModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEmailModif.Location = new System.Drawing.Point(20, 238);
+            this.labelEmailModif.Location = new System.Drawing.Point(30, 248);
             this.labelEmailModif.Name = "labelEmailModif";
             this.labelEmailModif.Size = new System.Drawing.Size(37, 16);
             this.labelEmailModif.TabIndex = 14;
@@ -1588,7 +1585,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelAdresseModif.AutoSize = true;
             this.labelAdresseModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAdresseModif.Location = new System.Drawing.Point(20, 188);
+            this.labelAdresseModif.Location = new System.Drawing.Point(20, 206);
             this.labelAdresseModif.Name = "labelAdresseModif";
             this.labelAdresseModif.Size = new System.Drawing.Size(55, 16);
             this.labelAdresseModif.TabIndex = 13;
@@ -1598,7 +1595,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelTelephoneModif.AutoSize = true;
             this.labelTelephoneModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTelephoneModif.Location = new System.Drawing.Point(20, 148);
+            this.labelTelephoneModif.Location = new System.Drawing.Point(20, 168);
             this.labelTelephoneModif.Name = "labelTelephoneModif";
             this.labelTelephoneModif.Size = new System.Drawing.Size(64, 16);
             this.labelTelephoneModif.TabIndex = 12;
@@ -1608,7 +1605,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelPrenomModif.AutoSize = true;
             this.labelPrenomModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPrenomModif.Location = new System.Drawing.Point(19, 97);
+            this.labelPrenomModif.Location = new System.Drawing.Point(28, 121);
             this.labelPrenomModif.Name = "labelPrenomModif";
             this.labelPrenomModif.Size = new System.Drawing.Size(47, 16);
             this.labelPrenomModif.TabIndex = 11;
@@ -1618,7 +1615,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.labelNomModif.AutoSize = true;
             this.labelNomModif.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNomModif.Location = new System.Drawing.Point(20, 48);
+            this.labelNomModif.Location = new System.Drawing.Point(31, 78);
             this.labelNomModif.Name = "labelNomModif";
             this.labelNomModif.Size = new System.Drawing.Size(32, 16);
             this.labelNomModif.TabIndex = 10;
@@ -1626,83 +1623,93 @@ namespace Mediateq_AP_SIO2
             // 
             // buttonModifierAbonne
             // 
+            this.buttonModifierAbonne.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.buttonModifierAbonne.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonModifierAbonne.Location = new System.Drawing.Point(32, 393);
+            this.buttonModifierAbonne.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.buttonModifierAbonne.Location = new System.Drawing.Point(650, 360);
             this.buttonModifierAbonne.Name = "buttonModifierAbonne";
-            this.buttonModifierAbonne.Size = new System.Drawing.Size(217, 35);
+            this.buttonModifierAbonne.Size = new System.Drawing.Size(220, 56);
             this.buttonModifierAbonne.TabIndex = 9;
             this.buttonModifierAbonne.Text = "MODIFIER";
-            this.buttonModifierAbonne.UseVisualStyleBackColor = true;
+            this.buttonModifierAbonne.UseVisualStyleBackColor = false;
             this.buttonModifierAbonne.Click += new System.EventHandler(this.buttonModifierAbonne_Click);
             // 
             // dateTimePickerFinAbonnement
             // 
             this.dateTimePickerFinAbonnement.Font = new System.Drawing.Font("Comic Sans MS", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerFinAbonnement.Location = new System.Drawing.Point(118, 350);
+            this.dateTimePickerFinAbonnement.Location = new System.Drawing.Point(118, 370);
             this.dateTimePickerFinAbonnement.Name = "dateTimePickerFinAbonnement";
             this.dateTimePickerFinAbonnement.Size = new System.Drawing.Size(158, 20);
             this.dateTimePickerFinAbonnement.TabIndex = 8;
+            this.dateTimePickerFinAbonnement.ValueChanged += new System.EventHandler(this.dateTimePickerFinAbonnement_ValueChanged);
             // 
             // dateTimePickerDebutAbonnement
             // 
             this.dateTimePickerDebutAbonnement.Font = new System.Drawing.Font("Comic Sans MS", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerDebutAbonnement.Location = new System.Drawing.Point(118, 319);
+            this.dateTimePickerDebutAbonnement.Location = new System.Drawing.Point(118, 331);
             this.dateTimePickerDebutAbonnement.Name = "dateTimePickerDebutAbonnement";
             this.dateTimePickerDebutAbonnement.Size = new System.Drawing.Size(158, 20);
             this.dateTimePickerDebutAbonnement.TabIndex = 7;
+            this.dateTimePickerDebutAbonnement.ValueChanged += new System.EventHandler(this.dateTimePickerDebutAbonnement_ValueChanged);
             // 
             // dateTimePickerModifDateNaissance
             // 
             this.dateTimePickerModifDateNaissance.Font = new System.Drawing.Font("Comic Sans MS", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerModifDateNaissance.Location = new System.Drawing.Point(118, 283);
+            this.dateTimePickerModifDateNaissance.Location = new System.Drawing.Point(118, 295);
             this.dateTimePickerModifDateNaissance.Name = "dateTimePickerModifDateNaissance";
             this.dateTimePickerModifDateNaissance.Size = new System.Drawing.Size(158, 20);
             this.dateTimePickerModifDateNaissance.TabIndex = 6;
+            this.dateTimePickerModifDateNaissance.ValueChanged += new System.EventHandler(this.dateTimePickerModifDateNaissance_ValueChanged);
             // 
             // textBoxModifEmail
             // 
             this.textBoxModifEmail.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxModifEmail.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textBoxModifEmail.Location = new System.Drawing.Point(104, 235);
+            this.textBoxModifEmail.Location = new System.Drawing.Point(118, 245);
             this.textBoxModifEmail.Name = "textBoxModifEmail";
             this.textBoxModifEmail.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifEmail.TabIndex = 5;
+            this.textBoxModifEmail.TextChanged += new System.EventHandler(this.textBoxModifEmail_TextChanged);
             // 
             // textBoxModifAdresse
             // 
             this.textBoxModifAdresse.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxModifAdresse.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textBoxModifAdresse.Location = new System.Drawing.Point(104, 188);
+            this.textBoxModifAdresse.Location = new System.Drawing.Point(118, 206);
             this.textBoxModifAdresse.Name = "textBoxModifAdresse";
             this.textBoxModifAdresse.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifAdresse.TabIndex = 4;
+            this.textBoxModifAdresse.TextChanged += new System.EventHandler(this.textBoxModifAdresse_TextChanged);
             // 
             // textBoxModifTelephone
             // 
             this.textBoxModifTelephone.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxModifTelephone.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textBoxModifTelephone.Location = new System.Drawing.Point(104, 145);
+            this.textBoxModifTelephone.Location = new System.Drawing.Point(118, 165);
             this.textBoxModifTelephone.Name = "textBoxModifTelephone";
             this.textBoxModifTelephone.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifTelephone.TabIndex = 3;
+            this.textBoxModifTelephone.TextChanged += new System.EventHandler(this.textBoxModifTelephone_TextChanged);
             // 
             // textBoxModifPrenom
             // 
             this.textBoxModifPrenom.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxModifPrenom.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textBoxModifPrenom.Location = new System.Drawing.Point(104, 97);
+            this.textBoxModifPrenom.Location = new System.Drawing.Point(118, 121);
             this.textBoxModifPrenom.Name = "textBoxModifPrenom";
             this.textBoxModifPrenom.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifPrenom.TabIndex = 2;
+            this.textBoxModifPrenom.TextChanged += new System.EventHandler(this.textBoxModifPrenom_TextChanged);
             // 
             // textBoxModifNom
             // 
             this.textBoxModifNom.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxModifNom.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textBoxModifNom.Location = new System.Drawing.Point(104, 48);
+            this.textBoxModifNom.Location = new System.Drawing.Point(118, 75);
             this.textBoxModifNom.Name = "textBoxModifNom";
             this.textBoxModifNom.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifNom.TabIndex = 1;
+            this.textBoxModifNom.TextChanged += new System.EventHandler(this.textBoxModifNom_TextChanged);
             // 
             // groupBoxAjoutAbonne
             // 
@@ -1731,6 +1738,7 @@ namespace Mediateq_AP_SIO2
             // 
             // buttonAjouterAbonne
             // 
+            this.buttonAjouterAbonne.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.buttonAjouterAbonne.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAjouterAbonne.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAjouterAbonne.Location = new System.Drawing.Point(34, 350);
@@ -1738,7 +1746,7 @@ namespace Mediateq_AP_SIO2
             this.buttonAjouterAbonne.Size = new System.Drawing.Size(226, 59);
             this.buttonAjouterAbonne.TabIndex = 12;
             this.buttonAjouterAbonne.Text = "AJOUTER";
-            this.buttonAjouterAbonne.UseVisualStyleBackColor = true;
+            this.buttonAjouterAbonne.UseVisualStyleBackColor = false;
             this.buttonAjouterAbonne.Click += new System.EventHandler(this.buttonAjouterAbonne_Click);
             // 
             // labelDateNaissance
@@ -1861,11 +1869,44 @@ namespace Mediateq_AP_SIO2
             this.textBoxNom.TabIndex = 0;
             this.textBoxNom.TextChanged += new System.EventHandler(this.textBoxNom_TextChanged);
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(31, 28);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(23, 16);
+            this.label23.TabIndex = 21;
+            this.label23.Text = "ID";
+            // 
+            // textBoxID
+            // 
+            this.textBoxID.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxID.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.textBoxID.Location = new System.Drawing.Point(118, 30);
+            this.textBoxID.Name = "textBoxID";
+            this.textBoxID.Size = new System.Drawing.Size(158, 24);
+            this.textBoxID.TabIndex = 22;
+            // 
+            // buttonSupprimer
+            // 
+            this.buttonSupprimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.buttonSupprimer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSupprimer.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSupprimer.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.buttonSupprimer.Location = new System.Drawing.Point(897, 360);
+            this.buttonSupprimer.Name = "buttonSupprimer";
+            this.buttonSupprimer.Size = new System.Drawing.Size(220, 55);
+            this.buttonSupprimer.TabIndex = 20;
+            this.buttonSupprimer.Text = "SUPPRIMER";
+            this.buttonSupprimer.UseVisualStyleBackColor = false;
+            this.buttonSupprimer.Click += new System.EventHandler(this.buttonSupprimer_Click);
+            // 
             // FrmMediateq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1143, 520);
+            this.ClientSize = new System.Drawing.Size(1143, 535);
             this.Controls.Add(this.tabOngletsAbonne);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmMediateq";
@@ -1901,12 +1942,11 @@ namespace Mediateq_AP_SIO2
             this.tabPageDeteriore.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             this.tabAbonne.ResumeLayout(false);
-            this.tabAbonne.PerformLayout();
             this.groupBoxAbonnes.ResumeLayout(false);
             this.groupBoxAbonnes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbonnes)).EndInit();
-            this.groupBoxModifierAbo.ResumeLayout(false);
-            this.groupBoxModifierAbo.PerformLayout();
+            this.groupBoxModifierOuSupAbo.ResumeLayout(false);
+            this.groupBoxModifierOuSupAbo.PerformLayout();
             this.groupBoxAjoutAbonne.ResumeLayout(false);
             this.groupBoxAjoutAbonne.PerformLayout();
             this.ResumeLayout(false);
@@ -2058,7 +2098,7 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.TextBox textBoxPrenom;
         private System.Windows.Forms.TextBox textBoxNom;
         private System.Windows.Forms.Button buttonAjouterAbonne;
-        private System.Windows.Forms.GroupBox groupBoxModifierAbo;
+        private System.Windows.Forms.GroupBox groupBoxModifierOuSupAbo;
         private System.Windows.Forms.Label labelFinAbonnementModif;
         private System.Windows.Forms.Label labelDebutAboModif;
         private System.Windows.Forms.Label labelDateNaissanceModif;
@@ -2080,7 +2120,6 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridView dataGridViewAbonnes;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textBoxRechercheNom;
-        private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNomAbo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrenomAbo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTelAbo;
@@ -2090,6 +2129,9 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDebutAbo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFinAbo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIdAbo;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBoxID;
+        private System.Windows.Forms.Button buttonSupprimer;
     }
 }
 
