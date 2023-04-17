@@ -153,5 +153,83 @@ namespace Mediateq_AP_SIO2.modele
             DAOFactory.deconnecter();
             return lesParutions;
         }
+
+
+        //Récupèration de tous les Parutions signalé dans la bdd
+        public static List<SignalerParution> getAllSignalementParution()
+        {
+            List<SignalerParution> lesSignalementParutions = new List<SignalerParution>();
+            try
+            {
+                string req = "SELECT signalerparution.id, signalerparution.nom, signalerparution.prenom, signalerparution.dateSignaler, revue.id, revue.titre, revue.empruntable, revue.periodicite, revue.dateFinAbonnement, revue.delai_miseadispo, revue.idDesc, parution.numero, parution.dateParution, parution.photo, etat.id, etat.libelle FROM signalerparution inner join revue on revue.id = signalerparution.idRevue inner join parution on parution.numero = signalerparution.numeroRevue inner join etat on etat.id = parution.idEtat ";
+                DAOFactory.connecter();
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+                while (reader.Read())
+                {
+                    Revue revue = new Revue(reader[4].ToString(), reader[5].ToString(), char.Parse(reader[6].ToString()), reader[7].ToString(), DateTime.Parse(reader[8].ToString()), int.Parse(reader[9].ToString()), reader[10].ToString());
+                    Parution parution = new Parution(int.Parse(reader[11].ToString()), DateTime.Parse(reader[12].ToString()), reader[13].ToString(), revue, new Etat(int.Parse(reader[14].ToString()), reader[15].ToString()));
+                    SignalerParution signalerParution = new SignalerParution(reader[0].ToString(), revue, parution, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+
+                    lesSignalementParutions.Add(signalerParution);
+                }
+                DAOFactory.deconnecter();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return lesSignalementParutions;
+        }
+
+
+        //Récupérer les parutions signaler à partir de id de Revue
+        public static List<SignalerParution> getSignalerParutionByIdDoc(Revue sIdRevue)
+        {
+            List<SignalerParution> lesSignalementParutions = new List<SignalerParution>();
+            try
+            {
+                string req = "SELECT signalerparution.id, signalerparution.nom, signalerparution.prenom, signalerparution.dateSignaler, revue.id, revue.titre, revue.empruntable, revue.periodicite, revue.dateFinAbonnement, revue.delai_miseadispo, revue.idDesc, parution.numero, parution.dateParution, parution.photo, etat.id, etat.libelle FROM signalerparution inner join revue on revue.id = signalerparution.idRevue inner join parution on parution.numero = signalerparution.numeroRevue inner join etat on etat.id = parution.idEtat  where signalerparution.idRevue = " + sIdRevue.Id ;
+                DAOFactory.connecter();
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+                while (reader.Read())
+                {
+                    Revue revue = new Revue(reader[4].ToString(), reader[5].ToString(), char.Parse(reader[6].ToString()), reader[7].ToString(), DateTime.Parse(reader[8].ToString()), int.Parse(reader[9].ToString()), reader[10].ToString());
+                    Parution parution = new Parution(int.Parse(reader[11].ToString()), DateTime.Parse(reader[12].ToString()), reader[13].ToString(),  revue, new Etat(int.Parse(reader[14].ToString()), reader[15].ToString()));
+                    SignalerParution signalerParution = new SignalerParution(reader[0].ToString(), revue, parution, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+
+                    lesSignalementParutions.Add(signalerParution);
+                }
+                DAOFactory.deconnecter();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return lesSignalementParutions;
+        }
+
+
+        // AJOUT dun signalement a la bdd
+        public static void ajouterSignalement(SignalerParution signaler)
+        {
+            try
+            {
+                // GÉNÉRER UN ID UNIQUE
+                string id = Guid.NewGuid().ToString();
+
+                //Recupération de la date 
+                DateTime date = DateTime.Now.Date;
+
+                string query = "INSERT INTO signalerParution ( id , idRevue , numeroRevue , nom , prenom , dateSignaler)" + "VALUES('" + id + "' ,'" + signaler.Revue.Id.ToString() + "' ,'" + signaler.Parution.Numero.ToString() + "' ,  '" + signaler.Nom.ToString() + "' , '" + signaler.Prenom.ToString() + "' , '" + date.ToString("yyyy-MM-dd") + "' )";
+                DAOFactory.connecter();
+                DAOFactory.execSQLWrite(query);
+                DAOFactory.deconnecter();
+            }
+
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
     }
 }

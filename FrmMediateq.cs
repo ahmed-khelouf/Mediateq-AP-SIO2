@@ -35,7 +35,8 @@ namespace Mediateq_AP_SIO2
         static List<SignalerExemplaire> lesSignalerExemplaires;
         static List<Historique> lesHistoriques;
         static List<Abonne> lesAbonnes;
-        
+        static List<SignalerParution> lesSignalerParutions;
+
 
         #endregion
 
@@ -62,8 +63,9 @@ namespace Mediateq_AP_SIO2
                 lesParutions = DAORevues.getAllParution();
                 lesDocuments = DAODocuments.getAllDocument();
                 lesRevues = DAORevues.getAllRevue();
-                lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
+                lesSignalerExemplaires = DAODocuments.getAllSignalementExemplaire();
                 lesAbonnes = DAOAbonne.getAllAbonne();
+                lesSignalerParutions = DAORevues.getAllSignalementParution();
             }
             catch (ExceptionSIO exc)
             {
@@ -278,7 +280,10 @@ namespace Mediateq_AP_SIO2
                 // Parcours de la collection des exemplaires
                 foreach (Exemplaire exemplaire in lesExemplaires)
                 {
-                    dataGridViewDocument.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
+                    if(exemplaire.Etat.Libelle == "neuf")
+                    {
+                        dataGridViewDocument.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
+                    }
                 }
             }
         }
@@ -302,7 +307,10 @@ namespace Mediateq_AP_SIO2
                 // Parcours de la collection des parutions
                 foreach (Parution parution in lesParutions)
                 {
-                    dataGridViewRevue.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
+                    if(parution.Etat.Libelle == "neuf")
+                    {
+                        dataGridViewRevue.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
+                    }
                 }
             }
         }
@@ -495,89 +503,417 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+
         #endregion
 
 
         #region Signaler
-        // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES EXEMPLAIRES
-        private void button6_Click_1(object sender, EventArgs e)
-        {
 
-            bool reussi = false;
-            foreach (Exemplaire exemplaire in lesExemplaires)
+        // ALIMENTATION DE LA COMBOBOX et empecher d'ecrire dans les textBox
+        private void tabSignaler_Enter(object sender, EventArgs e)
+        {
+            // attribue la source de données de la combobox 
+            comboBoxDocPageSignaler.DataSource = lesDocuments;
+
+            //définition du champ qui doit être affiché dans la combobox
+            comboBoxDocPageSignaler.DisplayMember = "titre";
+
+            comboBoxRevuePageSignaler.DataSource = lesRevues;
+
+            comboBoxRevuePageSignaler.DisplayMember = "titre";
+
+            //ReadOnly a true
+            textBoxIdDoc.ReadOnly = true;
+            textBoxNumExemplaire.ReadOnly = true;
+            textBoxNomAbo.ReadOnly = true;
+            textBoxPrenomAbo.ReadOnly = true;
+
+            textBoxIdSignalerRevue.ReadOnly = true;
+            textBoxNumeroSignalerRevue.ReadOnly = true;
+            textBoxNomSignalerRevue.ReadOnly = true;
+            textBoxPrenomSignalerRevue.ReadOnly = true;
+
+            //Bloque les button
+            buttonSignalerExemplaire.Enabled = false;
+            buttonSignalerRevue.Enabled = false;
+        }
+
+
+        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        private void comboBoxDocPageSignaler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Récupération du document sélectionné dans la combobox
+            Document titreSelectionne = (Document)comboBoxDocPageSignaler.SelectedItem;
+
+            // Vérification qu'un document a été sélectionné
+            if (titreSelectionne != null)
             {
-                //SI ID EST EGALE A ID SAISIE DANS LE TEXTE BOX ON CONTINUE 
-                if (exemplaire.Document.IdDoc == textBox13.Text)
+                // Récupération des exemplaires pour le document sélectionné à partir de la base de données
+                lesExemplaires = DAODocuments.getDocumentByTitre(titreSelectionne);
+
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewDoc.Rows.Clear();
+
+                // Parcours de la collection des exemplaires
+                foreach (Exemplaire exemplaire in lesExemplaires)
                 {
-                    // SI EXEMPLAIRE EST DEJA EN DETERIORER ALORS IL CONTINUE PAS 
-                    if (exemplaire.Etat.Libelle != "détérioré")
+                    // si l'etat est differents de détérioré tu affiches 
+                    if(exemplaire.Etat.Libelle != "détérioré")
                     {
-                        // SI LE NUMERO EST EGALE AU NUMERO SAISIE DANS LE TEXTE BOX
-                        if (exemplaire.Numero == textBox16.Text)
-                        {
-                            // CHANGE L'ETAT en DETERIORE ET AJOUTE DANS LA TABLE SIGNALER LA PERSONNE A L'ORIGNE DE CETTE ETAT
-                            DAODocuments.modifierExemplaireDeteriore(exemplaire);
-                            // CREATION D'UN OBJET SIGNALER 
-                            SignalerExemplaire signaler = new SignalerExemplaire(textBox13.Text, exemplaire, textBox15.Text, textBox14.Text);
-                            DAOSignalerExemplaires.ajouterSignalement(signaler);
-                            reussi = true;
-                        }
+                        dataGridViewDoc.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
                     }
                 }
             }
+        }
 
-            // AFFICHE UN MESSAGE 
-            if (reussi)
+
+        //  appelée lorsqu'une revue est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        private void comboBoxRevuePageSignaler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Récupération du document sélectionné dans la combobox
+            Revue titreSelectionne = (Revue)comboBoxRevuePageSignaler.SelectedItem;
+
+            // Vérification qu'un document a été sélectionné
+            if (titreSelectionne != null)
             {
-                MessageBox.Show("changement d'etat: déterioré effectué");
+                // Récupération des exemplaires pour le document sélectionné à partir de la base de données
+                lesParutions = DAORevues.getParutionByTitre(titreSelectionne);
+
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewRev.Rows.Clear();
+
+                // Parcours de la collection des exemplaires
+                foreach (Parution parution in lesParutions)
+                {
+                    // si l'etat est differents de détérioré tu affiches 
+                    if (parution.Etat.Libelle != "détérioré")
+                    {
+                        dataGridViewRev.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
+                    }
+                }
+            }
+        }
+
+
+        // Recherche nom d'un abonne
+        private void textBoxRechercheNomAbo_TextChanged(object sender, EventArgs e)
+        {
+            dataGridViewAbo.Rows.Clear();
+
+            // On parcourt tous les abonnes. Si le nom matche avec la saisie, on l'affiche dans le dataGridViewAbonnes.
+            foreach (Abonne abonne in lesAbonnes)
+            {
+                // on passe le champ de saisie et le nom en minuscules car la méthode Contains
+                // tient compte de la casse.
+                string saisieMinuscules;
+                saisieMinuscules = textBoxRechercheNomAbo.Text.ToLower();
+                string titreMinuscules;
+                titreMinuscules = abonne.Nom.ToLower();
+
+
+                //on teste si le nom de l'abonne contient ce qui a été saisi
+                if (titreMinuscules.Contains(saisieMinuscules))
+                {
+                    dataGridViewAbo.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString()); ;
+                }
+            }
+        }
+
+
+        // Affichage des abonnes dans le dataGridViewAbo
+        private void dataGridViewAbo_SelectionChanged(object sender, EventArgs e)
+        {
+            // Vérification qu'une seule ligne est sélectionnée
+            if (dataGridViewAbo.SelectedRows.Count == 1)
+            {
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewAbo.SelectedRows[0];
+
+                if(row != null)
+                {
+                    // Récupération des valeurs de chaque cellule de la ligne
+                    string nom = row.Cells["nomAbo"].Value.ToString();
+                    string prenom = row.Cells["prenomAbo"].Value.ToString();
+
+                    
+                    // Affichage des valeurs dans les TextBox correspondantes
+                    textBoxNomAbo.Text = nom;
+                    textBoxPrenomAbo.Text = prenom;
+                    textBoxNomSignalerRevue.Text = nom;
+                    textBoxPrenomSignalerRevue.Text = prenom;
+                }
+            }
+        }
+
+
+        // Affichage des documents dans le dataGridViewDoc
+        private void dataGridViewDoc_SelectionChanged(object sender, EventArgs e)
+        {
+            // Vérification qu'une seule ligne est sélectionnée
+            if (dataGridViewDoc.SelectedRows.Count == 1)
+            {
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewDoc.SelectedRows[0];
+
+                if(row != null)
+                {
+                    // Récupération des valeurs de chaque cellule de la ligne
+                    string idDoc = row.Cells["idDocument"].Value.ToString();
+                    string numero = row.Cells["numExemplaire"].Value.ToString();
+
+                    // Affichage des valeurs dans les TextBox correspondantes
+                    textBoxIdDoc.Text = idDoc;
+                    textBoxNumExemplaire.Text = numero;
+                }
+            }
+        }
+
+
+        // Affichage des revues dans le dataGridViewRev
+        private void dataGridViewRev_SelectionChanged(object sender, EventArgs e)
+        {
+            // Vérification qu'une seule ligne est sélectionnée
+            if (dataGridViewRev.SelectedRows.Count == 1)
+            {
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewRev.SelectedRows[0];
+
+                if (row != null)
+                {
+                    // Récupération des valeurs de chaque cellule de la ligne
+                    string idRevue = row.Cells["idRevue"].Value.ToString();
+                    string numero = row.Cells["numParution"].Value.ToString();
+
+                    // Affichage des valeurs dans les TextBox correspondantes
+                    textBoxIdSignalerRevue.Text = idRevue;
+                    textBoxNumeroSignalerRevue.Text = numero;
+                }
+            }
+        }
+
+
+        // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES EXEMPLAIRES
+        private void buttonSignalerExemplaire_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Si les textBox sont différents de vide
+                if(textBoxIdDoc.Text!= "" && textBoxNumExemplaire.Text != "" && textBoxNomAbo.Text != "" && textBoxPrenomAbo.Text != "")
+                {
+                    // GÉNÉRER UN ID UNIQUE
+                    string id = Guid.NewGuid().ToString();
+
+                    // SPÉCIFIER La date
+                    DateTime date = DateTime.Now;
+
+                    //initialiser les objets
+                    Document document = new Document(textBoxIdDoc.Text, "", "", new Categorie("", ""));
+                    Exemplaire exemplaire = new Exemplaire(document, textBoxNumExemplaire.Text, DateTime.Now, "", new Etat(0, ""));
+                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(id.ToString(), document, exemplaire, textBoxNomAbo.Text, textBoxPrenomAbo.Text, date.Date);
+
+                    // Modifie l'exemplaire en détériorer 
+                    DAODocuments.modifierExemplaireDeteriore(exemplaire);
+                    // AJOUTER L'ABONNE DANS LA BDD
+                    DAODocuments.ajouterSignalement(signalerExemplaire);
+
+                    //Affiche un message
+                    MessageBox.Show("Signalement ajouté avec succès.");
+
+                    // Mettre à jour les données et rafraîchir le DataGridView
+                    lesAbonnes = DAOAbonne.getAllAbonne();
+                    lesExemplaires = DAODocuments.getAllExemplaire();
+
+                    // Parcour les abonnes pour les afficher dans le dataGridViewAbo
+                    foreach (Abonne abonne in lesAbonnes)
+                    {
+                        dataGridViewAbo.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString());
+                    }
+
+                    // Parcour les abonnes pour les afficher dans le dataGridViewAbo
+                    foreach (Exemplaire ex in lesExemplaires)
+                    {
+                        dataGridViewDoc.Rows.Add(ex.Document.IdDoc, ex.Document.Titre, ex.Numero, ex.Etat.Libelle);
+                    }
+                    dataGridViewDoc.Rows.Clear();
+                    dataGridViewAbo.Rows.Clear();
+                    textBoxRechercheNomAbo.Clear();
+
+                    // VIDER LES CHAMPS DE TEXTE
+                    textBoxIdDoc.Text = "";
+                    textBoxPrenomAbo.Text = "";
+                    textBoxNumExemplaire.Text = "";
+                    textBoxNomAbo.Text = "";
+
+                    textBoxNomSignalerRevue.Text = "";
+                    textBoxPrenomSignalerRevue.Text = "";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du signalement de l'abonné : " + ex.Message);
+            }
+        }
+
+
+        // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES PARUTIONS
+        private void buttonSignalerRevue_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Si les textBox sont différents de vide
+                if (textBoxIdSignalerRevue.Text != "" && textBoxNumeroSignalerRevue.Text != "" && textBoxNomSignalerRevue.Text != "" && textBoxPrenomSignalerRevue.Text != "")
+                {
+                    // GÉNÉRER UN ID UNIQUE
+                    string id = Guid.NewGuid().ToString();
+
+                    // SPÉCIFIER La date
+                    DateTime date = DateTime.Now;
+
+                    char empruntble = '0';
+
+                    //initialiser les objets
+                    Revue revue = new Revue(textBoxIdSignalerRevue.Text, "", empruntble, "" , DateTime.Now, 0 , "");
+                    Parution parution = new Parution(int.Parse(textBoxNumeroSignalerRevue.Text), DateTime.Now, "", revue , new Etat(0, ""));
+                    SignalerParution signalerParution = new SignalerParution(id.ToString(), revue, parution, textBoxNomSignalerRevue.Text, textBoxPrenomSignalerRevue.Text, date.Date);
+
+                    // Modifie l'exemplaire en détériorer 
+                    DAORevues.modifierParutionDeteriore(parution);
+                    // AJOUTER L'ABONNE DANS LA BDD
+                    DAORevues.ajouterSignalement(signalerParution);
+
+                    //Affiche un message
+                    MessageBox.Show("Signalement ajouté avec succès.");
+
+                    // Mettre à jour les données et rafraîchir le DataGridView
+                    lesAbonnes = DAOAbonne.getAllAbonne();
+                    lesParutions = DAORevues.getAllParution();
+
+                    // Parcour les abonnes pour les afficher dans le dataGridViewAbo
+                    foreach (Abonne abonne in lesAbonnes)
+                    {
+                        dataGridViewAbo.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString());
+                    }
+
+                    // Parcour les abonnes pour les afficher dans le dataGridViewAbo
+                    foreach (Parution paru in lesParutions)
+                    {
+                        dataGridViewRev.Rows.Add(paru.Revue.Id, paru.Revue.Titre, paru.Numero, paru.Etat.Libelle);
+                    }
+                    dataGridViewRev.Rows.Clear();
+                    dataGridViewAbo.Rows.Clear();
+                    textBoxRechercheNomAbo.Clear();
+
+                    // VIDER LES CHAMPS DE TEXTE
+                    textBoxIdSignalerRevue.Text = "";
+                    textBoxPrenomSignalerRevue.Text = "";
+                    textBoxNumeroSignalerRevue.Text = "";
+                    textBoxNomSignalerRevue.Text = "";
+
+                    textBoxNomAbo.Text = "";
+                    textBoxPrenomAbo.Text = "";
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du signalement de l'abonné : " + ex.Message);
+            }
+        }
+
+
+        //Vérification de la saisie de champs  pour activer le bouton signaler exemplaire 
+        private void verifTextBoxSignalerExemplaire(object sender, EventArgs e)
+        {
+            // Vérifier si tous les champs obligatoires sont remplis
+            if (textBoxIdDoc.Text != "" && textBoxPrenomAbo.Text != "" && textBoxNumExemplaire.Text != "" && textBoxNomAbo.Text != "")
+            {
+              // Active le bouton
+              buttonSignalerExemplaire.Enabled = true;
+
             }
             else
             {
-                MessageBox.Show("erreur code numero ou numero document invalide ");
+                // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
+                buttonSignalerExemplaire.Enabled = false;
             }
         }
 
 
-        // INTERDIRE LA SAISIE DE CARACTERE SUR LES 4 TEXTES BOX
-        private void textBox13_KeyPress(object sender, KeyPressEventArgs e)
+        //Vérification de la saisie de champs  pour activer le bouton revue parution 
+        private void verifTextBoxSignalerRevue(object sender, EventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = false;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
+            // Vérifier si tous les champs obligatoires sont remplis
+            if (textBoxIdSignalerRevue.Text != "" && textBoxPrenomSignalerRevue.Text != "" && textBoxNumeroSignalerRevue.Text != "" && textBoxNomSignalerRevue.Text != "")
+            {
+                // Active le bouton
+                buttonSignalerRevue.Enabled = true;
+
+            }
             else
-                e.Handled = true;
-        }
-        private void textBox16_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = false;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = true;
+            {
+                // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
+                buttonSignalerRevue.Enabled = false;
+            }
         }
 
-        private void textBox14_KeyPress(object sender, KeyPressEventArgs e)
+
+        //Verification textBox Revue
+        private void textBoxIdSignalerRevue_TextChanged(object sender, EventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = true;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = false;
+            verifTextBoxSignalerRevue(sender, e);
         }
 
-        private void textBox15_KeyPress(object sender, KeyPressEventArgs e)
+
+        //Verification textBoxRevue
+        private void textBoxNumeroSignalerRevue_TextChanged(object sender, EventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-                e.Handled = true;
-            else if (char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = false;
+            verifTextBoxSignalerRevue(sender, e);
         }
 
+
+        //Verification textBox Revue
+        private void textBoxNomSignalerRevue_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxSignalerRevue(sender, e);
+        }
+
+
+        //Verification textBox Revue
+        private void textBoxPrenomSignalerRevue_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxSignalerRevue(sender, e);
+        }
+
+
+        //Verification textBox Exemplaire
+        private void textBoxIdDoc_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxSignalerExemplaire(sender, e);
+        }
+
+
+        //Verification textBox Exemplaire
+        private void textBoxNumExemplaire_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxSignalerExemplaire(sender, e);
+        }
+
+
+        //Verification textBox Exemplaire
+        private void textBoxNomAbo_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxSignalerExemplaire(sender, e);
+        }
+
+
+        //Verification textBox Exemplaire
+        private void textBoxPrenomAbo_TextChanged(object sender, EventArgs e)
+        {
+            verifTextBoxSignalerExemplaire(sender, e);
+        }
         #endregion
 
 
@@ -659,6 +995,9 @@ namespace Mediateq_AP_SIO2
                 }
             }
         }
+
+
+       
         #endregion
 
 
@@ -667,20 +1006,79 @@ namespace Mediateq_AP_SIO2
         // ONGLET "DOCUMENT OU REVUE DETERIORE !n"
         //-----------------------------------------------------------
 
+        // ALLIMENTATION COMBOBOX DES DOCUMENTS ET REVUES
         private void tabPage4_Enter(object sender, EventArgs e)
         {
-            dataGridView6.Rows.Clear();
-            lesSignalerExemplaires = DAOSignalerExemplaires.getAllSignalementExemplaire();
-            foreach (SignalerExemplaire signalerExemplaire in lesSignalerExemplaires)
+            // attribue la source de données de la combobox 
+            comboBoxDocumentDeteriore.DataSource = lesDocuments;
+
+            //définition du champ qui doit être affiché dans la combobox
+            comboBoxDocumentDeteriore.DisplayMember = "titre";
+          
+            // Value = idDoc
+            comboBoxDocumentDeteriore.ValueMember = "idDoc";
+
+            // attribue la source de données de la combobox 
+            comboBoxParutionDeteriore.DataSource = lesRevues;
+
+            //définition du champ qui doit être affiché dans la combobox
+            comboBoxParutionDeteriore.DisplayMember = "titre";
+
+            // Value = idRevue
+            comboBoxParutionDeteriore.ValueMember = "id";
+        }
+
+
+        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        private void comboBoxDocumentDeteriore_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Récupération du document sélectionné dans la combobox
+            Document titreSelectionne = (Document)comboBoxDocumentDeteriore.SelectedItem;
+
+            // Vérification qu'un document a été sélectionné
+            if (titreSelectionne != null)
             {
-                if (signalerExemplaire.Exemplaire.Etat.Libelle == "détérioré")
+                // Récupération des exemplaires pour le document sélectionné à partir de la base de données
+                lesSignalerExemplaires = DAODocuments.getSignalerExemplairesByIdDoc(titreSelectionne);
+
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewDocDeteriore.Rows.Clear();
+
+
+                // Parcours de la collection des SignalerExemplaire
+                foreach (SignalerExemplaire signaler in lesSignalerExemplaires)
                 {
-                    dataGridView6.Rows.Add(signalerExemplaire.Exemplaire.Document.IdDoc, signalerExemplaire.Exemplaire.Document.Titre, signalerExemplaire.Exemplaire.Numero, signalerExemplaire.Nom, signalerExemplaire.Prenom, signalerExemplaire.Date.ToString());
+                    dataGridViewDocDeteriore.Rows.Add(signaler.Document.IdDoc , signaler.Document.Titre, signaler.Exemplaire.Numero , signaler.Nom, signaler.Prenom, signaler.Date.ToString("yyyy-MM-dd"));
                 }
+
             }
         }
 
 
+        //  appelée lorsqu'unz revue est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        private void comboBoxParutionDeteriore_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Récupération du document sélectionné dans la combobox
+            Revue titreSelectionne = (Revue)comboBoxParutionDeteriore.SelectedItem;
+
+            // Vérification qu'un document a été sélectionné
+            if (titreSelectionne != null)
+            {
+                // Récupération des exemplaires pour le document sélectionné à partir de la base de données
+                lesSignalerParutions = DAORevues.getSignalerParutionByIdDoc(titreSelectionne);
+
+                // Effacement des lignes existantes dans le dataGridView
+                dataGridViewRevDeteriore.Rows.Clear();
+
+
+                // Parcours de la collection des SignalerExemplaire
+                foreach (SignalerParution signaler in lesSignalerParutions)
+                {
+                    dataGridViewRevDeteriore.Rows.Add(signaler.Revue.Id, signaler.Revue.Titre, signaler.Parution.Numero, signaler.Nom, signaler.Prenom, signaler.Date.ToString("yyyy-MM-dd"));
+                }
+
+            }
+        }
         #endregion
 
 
@@ -737,7 +1135,7 @@ namespace Mediateq_AP_SIO2
                 textBoxEmail.Text = "";
                 dateTimePickerDateNaissance.Value = DateTime.Now;
             }
-            catch (Exception ex)
+            catch (ExceptionSIO ex)
             {
                 MessageBox.Show("Erreur lors de l'ajout de l'abonné : " + ex.Message);
             }
@@ -833,41 +1231,43 @@ namespace Mediateq_AP_SIO2
         {
             try
             {
-                // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte 
-                Abonne abonneModifie = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
+                
+                    // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte 
+                    Abonne abonneModifie = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
 
-                  // Modification de l'abonné dans la base de données avec les nouvelles valeurs
-                  DAOAbonne.modifierAbonne(abonneModifie);
+                    // Modification de l'abonné dans la base de données avec les nouvelles valeurs
+                    DAOAbonne.modifierAbonne(abonneModifie);
 
-                  MessageBox.Show("Abonné modifié avec succès.");
+                    MessageBox.Show("Abonné modifié avec succès.");
 
-               
-                // Mettre à jour les données et rafraîchir le DataGridView
-                lesAbonnes = DAOAbonne.getAllAbonne();
 
-                // Parcours les abonnées pour afficher dans le dataGridViewAbonnes
-                foreach (Abonne abonne in lesAbonnes)
-                  {
-                      dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString());
-                }
+                    // Mettre à jour les données et rafraîchir le DataGridView
+                    lesAbonnes = DAOAbonne.getAllAbonne();
 
-                // CLEAR dataGridViewAbonnes
-                dataGridViewAbonnes.Rows.Clear();
+                    // Parcours les abonnées pour afficher dans le dataGridViewAbonnes
+                    foreach (Abonne abonne in lesAbonnes)
+                    {
+                        dataGridViewAbonnes.Rows.Add(abonne.Nom.ToString(), abonne.Prenom.ToString(), abonne.Telephone.ToString(), abonne.Adresse.ToString(), abonne.Email.ToString(), abonne.DateNaissance.ToString("yyyy-MM-dd"), abonne.DebutAbonnement.ToString("yyyy-MM-dd"), abonne.FinAbonnement.ToString("yyyy-MM-dd"), abonne.Id.ToString());
+                    }
 
-                // VIDER LES CHAMPS DE TEXTE
-                textBoxID.Text = "";
-                textBoxRechercheNom.Text = "";
-                textBoxModifNom.Text = "";
-                textBoxModifPrenom.Text = "";
-                textBoxModifTelephone.Text = "";
-                textBoxModifAdresse.Text = "";
-                textBoxModifEmail.Text = "";
-                dateTimePickerModifDateNaissance.Value = DateTime.Now; 
-                dateTimePickerDebutAbonnement.Value = DateTime.Now;
-                dateTimePickerFinAbonnement.Value = DateTime.Now;
+                    // CLEAR dataGridViewAbonnes
+                    dataGridViewAbonnes.Rows.Clear();
+
+                    // VIDER LES CHAMPS DE TEXTE
+                    textBoxID.Text = "";
+                    textBoxRechercheNom.Text = "";
+                    textBoxModifNom.Text = "";
+                    textBoxModifPrenom.Text = "";
+                    textBoxModifTelephone.Text = "";
+                    textBoxModifAdresse.Text = "";
+                    textBoxModifEmail.Text = "";
+                    dateTimePickerModifDateNaissance.Value = DateTime.Now;
+                    dateTimePickerDebutAbonnement.Value = DateTime.Now;
+                    dateTimePickerFinAbonnement.Value = DateTime.Now;
+                
 
             }
-            catch (Exception ex)
+            catch (ExceptionSIO ex)
             {
                 MessageBox.Show("Une erreur s'est produite lors de la modification de l'abonné : " + ex.Message);
             }
@@ -951,9 +1351,6 @@ namespace Mediateq_AP_SIO2
                             MessageBox.Show("L'abonnement va bientot expirer dans : " + differenceEnJours.ToString() + " " + "jours"); 
                         }
                     }
-
-
-
                 }
                 else
                 {
@@ -965,12 +1362,9 @@ namespace Mediateq_AP_SIO2
 
         //Vérification de la saisie de champs obligatoires pour activer le bouton Modifier Abonné
         private void verifTextBoxModifier(object sender, EventArgs e)
-        {
-            foreach (Abonne abonne in lesAbonnes)
-            {
-                 
+        {   
                 // Vérifier si tous les champs obligatoires sont remplis
-                if (textBoxModifNom.Text != abonne.Nom || textBoxModifPrenom.Text != abonne.Prenom || textBoxModifTelephone.Text != abonne.Telephone || textBoxModifAdresse.Text != abonne.Adresse || textBoxModifEmail.Text != abonne.Email || dateTimePickerModifDateNaissance.Value.Date != abonne.DateNaissance || dateTimePickerDebutAbonnement.Value.Date != abonne.DebutAbonnement || dateTimePickerFinAbonnement.Value.Date != abonne.FinAbonnement)
+                if (textBoxModifNom.Text != "" || textBoxModifPrenom.Text != "" || textBoxModifTelephone.Text != "" || textBoxModifAdresse.Text != "" || textBoxModifEmail.Text != "" || dateTimePickerModifDateNaissance.Value.Date != DateTime.Today || dateTimePickerDebutAbonnement.Value.Date != DateTime.Today || dateTimePickerFinAbonnement.Value.Date != DateTime.Today)
                 {
                     // Vérifier si le nom et le prénom ne contiennent pas de caractères spéciaux ou de chiffres
                     string regex = @"^[A-Za-zÀ-ÿ\s]+$";
@@ -993,21 +1387,19 @@ namespace Mediateq_AP_SIO2
                     {
                         // Activer le bouton si tous les champs obligatoires sont remplis et qui respect le modèle de format valide
                         buttonModifierAbonne.Enabled = true;
-                        buttonSupprimer.Enabled = true;
                     }
                     else
                     {
                         // Désactiver si pas valide 
                         buttonModifierAbonne.Enabled = false;
-                        buttonSupprimer.Enabled = false;
-                    }
+                        buttonSupprimer.Enabled = true;
+                }
                 }
                 else
                 {
                     // Désactiver le bouton si tous les champs obligatoires ne sont pas remplis
                     buttonModifierAbonne.Enabled = false;
                 }
-            }
         }
 
 
@@ -1077,7 +1469,6 @@ namespace Mediateq_AP_SIO2
                 DAOAbonne.supprimerAbonne(abonneSup);
                 MessageBox.Show("Abonne supprimé");
 
-                buttonSupprimer.Enabled = true;
                 // Mettre à jour les données et rafraîchir le DataGridView
                 lesAbonnes = DAOAbonne.getAllAbonne();
 
@@ -1105,8 +1496,29 @@ namespace Mediateq_AP_SIO2
 
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #endregion
 
-
+       
     }
 }

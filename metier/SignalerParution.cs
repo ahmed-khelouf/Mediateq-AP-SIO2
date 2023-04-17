@@ -3,33 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Mediateq_AP_SIO2.metier
 {
-     class SignalerExemplaire
+    class SignalerParution
     {
         private string id;
-        private Document document;
-        private Exemplaire exemplaire;
+        private Revue revue;
+        private Parution parution;
         private string nom;
         private string prenom;
         private DateTime date;
-        
 
-        public SignalerExemplaire( string unId , Document unDocument, Exemplaire unExemplaire, string unNom, string unPrenom , DateTime uneDate)
+
+        public SignalerParution(string unId, Revue uneRevue, Parution uneParution, string unNom, string unPrenom, DateTime uneDate)
         {
             id = unId;
-            document = unDocument;
-            exemplaire = unExemplaire;
+            revue = uneRevue;
+            parution = uneParution;
             nom = unNom;
             prenom = unPrenom;
             date = uneDate;
         }
 
         public string Id { get => id; set => id = value; }
-        public Document Document { get => document; set => document = value; }
-        public Exemplaire Exemplaire { get => exemplaire; set => exemplaire = value; }
+        public Revue Revue { get => revue; set => revue = value; }
+        public Parution Parution { get => parution; set => parution = value; }
         public string Nom { get => nom; set => nom = value; }
         public string Prenom { get => prenom; set => prenom = value; }
         public DateTime Date { get => date; set => date = value; }

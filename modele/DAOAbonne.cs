@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Mediateq_AP_SIO2.modele
 {
@@ -69,6 +70,7 @@ namespace Mediateq_AP_SIO2.modele
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();
+                MessageBox.Show("Abonné modifié avec succès.");
             }
             catch (Exception exc)
             {

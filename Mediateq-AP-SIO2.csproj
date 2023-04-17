@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +46,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -92,6 +111,18 @@
     <Compile Include="bdd\DAOFactory.cs" />
     <Compile Include="divers\ExceptionSio.cs" />
     <Compile Include="Exception\ExceptionSIO.cs" />
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login-register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login-register.Designer.cs">
+      <DependentUpon>login-register.cs</DependentUpon>
+    </Compile>
     <Compile Include="metier\Abonne.cs" />
     <Compile Include="metier\Categorie.cs" />
     <Compile Include="metier\Document.cs" />
@@ -104,11 +135,13 @@
     <Compile Include="metier\Parution.cs" />
     <Compile Include="metier\Revue.cs" />
     <Compile Include="metier\SignalerExemplaire.cs" />
+    <Compile Include="metier\SignalerParution.cs" />
+    <Compile Include="metier\Utilisateur.cs" />
     <Compile Include="modele\DAOAbonne.cs" />
     <Compile Include="modele\DAODocuments.cs" />
     <Compile Include="modele\DAOPresse.cs" />
     <Compile Include="modele\DAORevues.cs" />
-    <Compile Include="modele\DAOSignalerExemplaires.cs" />
+    <Compile Include="modele\DAOUtilisateur.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FrmMediateq.cs">
@@ -117,6 +150,12 @@
     <Compile Include="FrmMediateq.designer.cs">
       <DependentUpon>FrmMediateq.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login-register.resx">
+      <DependentUpon>login-register.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -146,6 +185,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\R.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

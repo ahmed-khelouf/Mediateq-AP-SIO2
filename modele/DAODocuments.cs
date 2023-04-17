@@ -330,5 +330,83 @@ namespace Mediateq_AP_SIO2
             DAOFactory.deconnecter();
             return lesExemplaires;
         }
+
+
+        //Récupèration de tous les documents signalé dans la bdd
+        public static List<SignalerExemplaire> getAllSignalementExemplaire()
+        {
+            List<SignalerExemplaire> lesSignalementExemplaires = new List<SignalerExemplaire>();
+            try
+            {
+                string req = "SELECT signalerExemplaire.id,  signalerexemplaire.nom, signalerexemplaire.prenom, signalerexemplaire.dateSignaler, document.id, document.titre, document.image, categorie.id, categorie.libelle, exemplaire.numero, exemplaire.dateAchat, exemplaire.idRayon, etat.id, etat.libelle FROM categorie INNER JOIN document ON document.idCategorie = categorie.id INNER JOIN signalerexemplaire ON signalerexemplaire.idDoc = document.id INNER JOIN exemplaire ON exemplaire.numero = signalerexemplaire.numeroExemplaire INNER JOIN etat ON etat.id = exemplaire.idEtat GROUP BY signalerexemplaire.id ";
+                DAOFactory.connecter();
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+                while (reader.Read())
+                {
+                    Document document = new Document(reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), new Categorie(reader[7].ToString(), reader[8].ToString()));
+                    Exemplaire exemplaire = new Exemplaire(document, reader[9].ToString(), DateTime.Parse(reader[10].ToString()), reader[11].ToString(), new Etat(int.Parse(reader[12].ToString()), reader[13].ToString()));
+                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(reader[0].ToString(), document, exemplaire, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+
+                    lesSignalementExemplaires.Add(signalerExemplaire);
+                }
+                DAOFactory.deconnecter();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return lesSignalementExemplaires;
+        }
+
+
+        //Récupérer les exemplaires signaler à partir de id du Document
+        public static List<SignalerExemplaire> getSignalerExemplairesByIdDoc(Document sIdDoc)
+        {
+            List<SignalerExemplaire> lesSignalementExemplaires = new List<SignalerExemplaire>();
+            try
+            {
+                string req = "SELECT signalerExemplaire.id,  signalerexemplaire.nom, signalerexemplaire.prenom, signalerexemplaire.dateSignaler, document.id, document.titre, document.image, categorie.id, categorie.libelle, exemplaire.numero, exemplaire.dateAchat, exemplaire.idRayon, etat.id, etat.libelle FROM categorie INNER JOIN document ON document.idCategorie = categorie.id INNER JOIN signalerexemplaire ON signalerexemplaire.idDoc = document.id INNER JOIN exemplaire ON exemplaire.numero = signalerexemplaire.numeroExemplaire INNER JOIN etat ON etat.id = exemplaire.idEtat  where signalerexemplaire.idDoc  = " + sIdDoc.IdDoc ;
+                DAOFactory.connecter();
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+                while (reader.Read())
+                {
+                    Document document = new Document(reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), new Categorie(reader[7].ToString(), reader[8].ToString()));
+                    Exemplaire exemplaire = new Exemplaire(document, reader[9].ToString(), DateTime.Parse(reader[10].ToString()), reader[11].ToString(), new Etat(int.Parse(reader[12].ToString()), reader[13].ToString()));
+                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(reader[0].ToString(), document, exemplaire, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+
+                    lesSignalementExemplaires.Add(signalerExemplaire);
+                }
+                DAOFactory.deconnecter();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return lesSignalementExemplaires;
+        }
+
+
+        // AJOUT dun signalement a la bdd
+        public static void ajouterSignalement(SignalerExemplaire signaler)
+        {
+            try
+            {
+                // GÉNÉRER UN ID UNIQUE
+                string id = Guid.NewGuid().ToString();
+
+                //Recupération de la date 
+                DateTime date = DateTime.Now.Date;
+
+                string query = "INSERT INTO signalerExemplaire ( id , idDoc , numeroExemplaire , nom , prenom , dateSignaler)" + "VALUES('" + id + "' ,'" + signaler.Exemplaire.Document.IdDoc.ToString() + "' ,'" + signaler.Exemplaire.Numero.ToString() + "' ,  '" + signaler.Nom.ToString() + "' , '" + signaler.Prenom.ToString() + "' , '" + date.ToString("yyyy-MM-dd") + "' )";
+                DAOFactory.connecter();
+                DAOFactory.execSQLWrite(query);
+                DAOFactory.deconnecter();
+            }
+
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
     }
 }
