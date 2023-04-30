@@ -107,10 +107,6 @@ namespace Mediateq_AP_SIO2
             this.buttonRevueInutilisable = new System.Windows.Forms.Button();
             this.buttonRevueUsage = new System.Windows.Forms.Button();
             this.dataGridViewRevue = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changement_etat_revue = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.dataGridViewDocument = new System.Windows.Forms.DataGridView();
@@ -122,11 +118,30 @@ namespace Mediateq_AP_SIO2
             this.buttonDocumentUsage = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.tabSignaler = new System.Windows.Forms.TabPage();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.comboBoxRevuePageSignaler = new System.Windows.Forms.ComboBox();
+            this.dataGridViewRev = new System.Windows.Forms.DataGridView();
+            this.idRevue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxRechercheNomAbo = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.dataGridViewAbo = new System.Windows.Forms.DataGridView();
             this.nomAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prenomAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label25 = new System.Windows.Forms.Label();
-            this.textBoxRechercheNomAbo = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSignalerRevue = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.textBoxPrenomSignalerRevue = new System.Windows.Forms.TextBox();
+            this.textBoxNomSignalerRevue = new System.Windows.Forms.TextBox();
+            this.textBoxNumeroSignalerRevue = new System.Windows.Forms.TextBox();
+            this.textBoxIdSignalerRevue = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxIdDoc = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
@@ -159,6 +174,16 @@ namespace Mediateq_AP_SIO2
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageDeteriore = new System.Windows.Forms.TabPage();
+            this.label39 = new System.Windows.Forms.Label();
+            this.comboBoxParutionDeteriore = new System.Windows.Forms.ComboBox();
+            this.dataGridViewRevDeteriore = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label27 = new System.Windows.Forms.Label();
             this.comboBoxDocumentDeteriore = new System.Windows.Forms.ComboBox();
             this.dataGridViewDocDeteriore = new System.Windows.Forms.DataGridView();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -216,35 +241,10 @@ namespace Mediateq_AP_SIO2
             this.textBoxPrenom = new System.Windows.Forms.TextBox();
             this.textBoxNom = new System.Windows.Forms.TextBox();
             this.buttonModifierAbonne = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewRev = new System.Windows.Forms.DataGridView();
-            this.comboBoxRevuePageSignaler = new System.Windows.Forms.ComboBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textBoxIdSignalerRevue = new System.Windows.Forms.TextBox();
-            this.textBoxNumeroSignalerRevue = new System.Windows.Forms.TextBox();
-            this.textBoxNomSignalerRevue = new System.Windows.Forms.TextBox();
-            this.textBoxPrenomSignalerRevue = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.buttonSignalerRevue = new System.Windows.Forms.Button();
-            this.idRevue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewRevDeteriore = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBoxParutionDeteriore = new System.Windows.Forms.ComboBox();
-            this.label39 = new System.Windows.Forms.Label();
+            this.ColumnIdRevue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabOngletsAbonne.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -261,22 +261,22 @@ namespace Mediateq_AP_SIO2
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocument)).BeginInit();
             this.tabSignaler.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbo)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDoc)).BeginInit();
             this.tabPageInutilisable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevuesInutilisable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentsInutilisable)).BeginInit();
             this.tabPageDeteriore.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevDeteriore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocDeteriore)).BeginInit();
             this.tabAbonne.SuspendLayout();
             this.groupBoxAbonnes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbonnes)).BeginInit();
             this.groupBoxModifierOuSupAbo.SuspendLayout();
             this.groupBoxAjoutAbonne.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRev)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevDeteriore)).BeginInit();
             this.SuspendLayout();
             // 
             // tabOngletsAbonne
@@ -1028,7 +1028,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.dataGridViewRevue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRevue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
+            this.ColumnIdRevue,
             this.Column18,
             this.Column3,
             this.Column19});
@@ -1036,26 +1036,6 @@ namespace Mediateq_AP_SIO2
             this.dataGridViewRevue.Name = "dataGridViewRevue";
             this.dataGridViewRevue.Size = new System.Drawing.Size(439, 191);
             this.dataGridViewRevue.TabIndex = 16;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "ID";
-            this.Column1.Name = "Column1";
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "Titre";
-            this.Column18.Name = "Column18";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Numero";
-            this.Column3.Name = "Column3";
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "Etat";
-            this.Column19.Name = "Column19";
             // 
             // changement_etat_revue
             // 
@@ -1168,6 +1148,97 @@ namespace Mediateq_AP_SIO2
             this.tabSignaler.Text = "Signaler";
             this.tabSignaler.Enter += new System.EventHandler(this.tabSignaler_Enter);
             // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(507, 23);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(75, 15);
+            this.label34.TabIndex = 30;
+            this.label34.Text = "Nom abonne :";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(705, 271);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(71, 15);
+            this.label33.TabIndex = 29;
+            this.label33.Text = "Titre revue :";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(686, 16);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(90, 15);
+            this.label28.TabIndex = 28;
+            this.label28.Text = "Titre document :";
+            // 
+            // comboBoxRevuePageSignaler
+            // 
+            this.comboBoxRevuePageSignaler.FormattingEnabled = true;
+            this.comboBoxRevuePageSignaler.Location = new System.Drawing.Point(803, 269);
+            this.comboBoxRevuePageSignaler.Name = "comboBoxRevuePageSignaler";
+            this.comboBoxRevuePageSignaler.Size = new System.Drawing.Size(190, 21);
+            this.comboBoxRevuePageSignaler.TabIndex = 27;
+            this.comboBoxRevuePageSignaler.SelectedIndexChanged += new System.EventHandler(this.comboBoxRevuePageSignaler_SelectedIndexChanged);
+            // 
+            // dataGridViewRev
+            // 
+            this.dataGridViewRev.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRev.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idRevue,
+            this.dataGridViewTextBoxColumn3,
+            this.numParution,
+            this.dataGridViewTextBoxColumn6});
+            this.dataGridViewRev.Location = new System.Drawing.Point(689, 310);
+            this.dataGridViewRev.Name = "dataGridViewRev";
+            this.dataGridViewRev.Size = new System.Drawing.Size(439, 191);
+            this.dataGridViewRev.TabIndex = 26;
+            this.dataGridViewRev.SelectionChanged += new System.EventHandler(this.dataGridViewRev_SelectionChanged);
+            // 
+            // idRevue
+            // 
+            this.idRevue.HeaderText = "ID";
+            this.idRevue.Name = "idRevue";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Titre";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // numParution
+            // 
+            this.numParution.HeaderText = "Numero";
+            this.numParution.Name = "numParution";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Etat";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // textBoxRechercheNomAbo
+            // 
+            this.textBoxRechercheNomAbo.Location = new System.Drawing.Point(469, 80);
+            this.textBoxRechercheNomAbo.Name = "textBoxRechercheNomAbo";
+            this.textBoxRechercheNomAbo.Size = new System.Drawing.Size(174, 20);
+            this.textBoxRechercheNomAbo.TabIndex = 3;
+            this.textBoxRechercheNomAbo.TextChanged += new System.EventHandler(this.textBoxRechercheNomAbo_TextChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(437, 55);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(206, 13);
+            this.label25.TabIndex = 2;
+            this.label25.Text = "Saisir le nom ou la partie d\'un nom:";
+            // 
             // dataGridViewAbo
             // 
             this.dataGridViewAbo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1190,23 +1261,118 @@ namespace Mediateq_AP_SIO2
             this.prenomAbo.HeaderText = "Prenom";
             this.prenomAbo.Name = "prenomAbo";
             // 
-            // label25
+            // groupBox2
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(437, 55);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(206, 13);
-            this.label25.TabIndex = 2;
-            this.label25.Text = "Saisir le nom ou la partie d\'un nom:";
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.groupBox2.Controls.Add(this.buttonSignalerRevue);
+            this.groupBox2.Controls.Add(this.label38);
+            this.groupBox2.Controls.Add(this.label37);
+            this.groupBox2.Controls.Add(this.label36);
+            this.groupBox2.Controls.Add(this.label35);
+            this.groupBox2.Controls.Add(this.textBoxPrenomSignalerRevue);
+            this.groupBox2.Controls.Add(this.textBoxNomSignalerRevue);
+            this.groupBox2.Controls.Add(this.textBoxNumeroSignalerRevue);
+            this.groupBox2.Controls.Add(this.textBoxIdSignalerRevue);
+            this.groupBox2.Location = new System.Drawing.Point(224, 23);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(207, 349);
+            this.groupBox2.TabIndex = 25;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Parution";
             // 
-            // textBoxRechercheNomAbo
+            // buttonSignalerRevue
             // 
-            this.textBoxRechercheNomAbo.Location = new System.Drawing.Point(469, 80);
-            this.textBoxRechercheNomAbo.Name = "textBoxRechercheNomAbo";
-            this.textBoxRechercheNomAbo.Size = new System.Drawing.Size(174, 20);
-            this.textBoxRechercheNomAbo.TabIndex = 3;
-            this.textBoxRechercheNomAbo.TextChanged += new System.EventHandler(this.textBoxRechercheNomAbo_TextChanged);
+            this.buttonSignalerRevue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.buttonSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSignalerRevue.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.buttonSignalerRevue.Location = new System.Drawing.Point(10, 253);
+            this.buttonSignalerRevue.Name = "buttonSignalerRevue";
+            this.buttonSignalerRevue.Size = new System.Drawing.Size(181, 69);
+            this.buttonSignalerRevue.TabIndex = 15;
+            this.buttonSignalerRevue.Text = "SGNALER UNE REVUE";
+            this.buttonSignalerRevue.UseVisualStyleBackColor = false;
+            this.buttonSignalerRevue.Click += new System.EventHandler(this.buttonSignalerRevue_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label38.Location = new System.Drawing.Point(6, 200);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(47, 16);
+            this.label38.TabIndex = 14;
+            this.label38.Text = "Prénom";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label37.Location = new System.Drawing.Point(7, 154);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(32, 16);
+            this.label37.TabIndex = 13;
+            this.label37.Text = "Nom";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label36.Location = new System.Drawing.Point(7, 112);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(51, 16);
+            this.label36.TabIndex = 12;
+            this.label36.Text = "Numero";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label35.Location = new System.Drawing.Point(6, 64);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(65, 16);
+            this.label35.TabIndex = 11;
+            this.label35.Text = " Id Revue";
+            // 
+            // textBoxPrenomSignalerRevue
+            // 
+            this.textBoxPrenomSignalerRevue.Location = new System.Drawing.Point(86, 200);
+            this.textBoxPrenomSignalerRevue.Name = "textBoxPrenomSignalerRevue";
+            this.textBoxPrenomSignalerRevue.Size = new System.Drawing.Size(115, 20);
+            this.textBoxPrenomSignalerRevue.TabIndex = 10;
+            this.textBoxPrenomSignalerRevue.TextChanged += new System.EventHandler(this.textBoxPrenomSignalerRevue_TextChanged);
+            // 
+            // textBoxNomSignalerRevue
+            // 
+            this.textBoxNomSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNomSignalerRevue.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.textBoxNomSignalerRevue.Location = new System.Drawing.Point(87, 151);
+            this.textBoxNomSignalerRevue.Name = "textBoxNomSignalerRevue";
+            this.textBoxNomSignalerRevue.Size = new System.Drawing.Size(114, 24);
+            this.textBoxNomSignalerRevue.TabIndex = 9;
+            this.textBoxNomSignalerRevue.TextChanged += new System.EventHandler(this.textBoxNomSignalerRevue_TextChanged);
+            // 
+            // textBoxNumeroSignalerRevue
+            // 
+            this.textBoxNumeroSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNumeroSignalerRevue.Location = new System.Drawing.Point(87, 104);
+            this.textBoxNumeroSignalerRevue.Name = "textBoxNumeroSignalerRevue";
+            this.textBoxNumeroSignalerRevue.Size = new System.Drawing.Size(114, 24);
+            this.textBoxNumeroSignalerRevue.TabIndex = 8;
+            this.textBoxNumeroSignalerRevue.TextChanged += new System.EventHandler(this.textBoxNumeroSignalerRevue_TextChanged);
+            // 
+            // textBoxIdSignalerRevue
+            // 
+            this.textBoxIdSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxIdSignalerRevue.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.textBoxIdSignalerRevue.Location = new System.Drawing.Point(87, 61);
+            this.textBoxIdSignalerRevue.Name = "textBoxIdSignalerRevue";
+            this.textBoxIdSignalerRevue.Size = new System.Drawing.Size(114, 24);
+            this.textBoxIdSignalerRevue.TabIndex = 1;
+            this.textBoxIdSignalerRevue.TextChanged += new System.EventHandler(this.textBoxIdSignalerRevue_TextChanged);
             // 
             // groupBox1
             // 
@@ -1501,6 +1667,83 @@ namespace Mediateq_AP_SIO2
             this.tabPageDeteriore.TabIndex = 8;
             this.tabPageDeteriore.Text = "doc deteriore";
             this.tabPageDeteriore.Enter += new System.EventHandler(this.tabPage4_Enter);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label39.Location = new System.Drawing.Point(783, 293);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(108, 19);
+            this.label39.TabIndex = 5;
+            this.label39.Text = "Revue détérioré";
+            // 
+            // comboBoxParutionDeteriore
+            // 
+            this.comboBoxParutionDeteriore.FormattingEnabled = true;
+            this.comboBoxParutionDeteriore.Location = new System.Drawing.Point(769, 326);
+            this.comboBoxParutionDeteriore.Name = "comboBoxParutionDeteriore";
+            this.comboBoxParutionDeteriore.Size = new System.Drawing.Size(178, 21);
+            this.comboBoxParutionDeteriore.TabIndex = 4;
+            this.comboBoxParutionDeteriore.SelectedIndexChanged += new System.EventHandler(this.comboBoxParutionDeteriore_SelectedIndexChanged);
+            // 
+            // dataGridViewRevDeteriore
+            // 
+            this.dataGridViewRevDeteriore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRevDeteriore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10});
+            this.dataGridViewRevDeteriore.Location = new System.Drawing.Point(24, 275);
+            this.dataGridViewRevDeteriore.Name = "dataGridViewRevDeteriore";
+            this.dataGridViewRevDeteriore.Size = new System.Drawing.Size(693, 226);
+            this.dataGridViewRevDeteriore.TabIndex = 3;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Titre";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Numero";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Nom";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Prenom";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Date";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label27.Location = new System.Drawing.Point(783, 43);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(133, 19);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "Document détérioré";
             // 
             // comboBoxDocumentDeteriore
             // 
@@ -2059,268 +2302,25 @@ namespace Mediateq_AP_SIO2
             this.buttonModifierAbonne.UseVisualStyleBackColor = false;
             this.buttonModifierAbonne.Click += new System.EventHandler(this.buttonModifierAbonne_Click);
             // 
-            // label27
+            // ColumnIdRevue
             // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label27.Location = new System.Drawing.Point(783, 43);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(133, 19);
-            this.label27.TabIndex = 2;
-            this.label27.Text = "Document détérioré";
+            this.ColumnIdRevue.HeaderText = "ID";
+            this.ColumnIdRevue.Name = "ColumnIdRevue";
             // 
-            // groupBox2
+            // Column18
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.groupBox2.Controls.Add(this.buttonSignalerRevue);
-            this.groupBox2.Controls.Add(this.label38);
-            this.groupBox2.Controls.Add(this.label37);
-            this.groupBox2.Controls.Add(this.label36);
-            this.groupBox2.Controls.Add(this.label35);
-            this.groupBox2.Controls.Add(this.textBoxPrenomSignalerRevue);
-            this.groupBox2.Controls.Add(this.textBoxNomSignalerRevue);
-            this.groupBox2.Controls.Add(this.textBoxNumeroSignalerRevue);
-            this.groupBox2.Controls.Add(this.textBoxIdSignalerRevue);
-            this.groupBox2.Location = new System.Drawing.Point(224, 23);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(207, 349);
-            this.groupBox2.TabIndex = 25;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Parution";
+            this.Column18.HeaderText = "Titre";
+            this.Column18.Name = "Column18";
             // 
-            // dataGridViewRev
+            // Column3
             // 
-            this.dataGridViewRev.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRev.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idRevue,
-            this.dataGridViewTextBoxColumn3,
-            this.numParution,
-            this.dataGridViewTextBoxColumn6});
-            this.dataGridViewRev.Location = new System.Drawing.Point(689, 310);
-            this.dataGridViewRev.Name = "dataGridViewRev";
-            this.dataGridViewRev.Size = new System.Drawing.Size(439, 191);
-            this.dataGridViewRev.TabIndex = 26;
-            this.dataGridViewRev.SelectionChanged += new System.EventHandler(this.dataGridViewRev_SelectionChanged);
+            this.Column3.HeaderText = "Numero";
+            this.Column3.Name = "Column3";
             // 
-            // comboBoxRevuePageSignaler
+            // Column19
             // 
-            this.comboBoxRevuePageSignaler.FormattingEnabled = true;
-            this.comboBoxRevuePageSignaler.Location = new System.Drawing.Point(803, 269);
-            this.comboBoxRevuePageSignaler.Name = "comboBoxRevuePageSignaler";
-            this.comboBoxRevuePageSignaler.Size = new System.Drawing.Size(190, 21);
-            this.comboBoxRevuePageSignaler.TabIndex = 27;
-            this.comboBoxRevuePageSignaler.SelectedIndexChanged += new System.EventHandler(this.comboBoxRevuePageSignaler_SelectedIndexChanged);
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(686, 16);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(90, 15);
-            this.label28.TabIndex = 28;
-            this.label28.Text = "Titre document :";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(705, 271);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(71, 15);
-            this.label33.TabIndex = 29;
-            this.label33.Text = "Titre revue :";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(507, 23);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(75, 15);
-            this.label34.TabIndex = 30;
-            this.label34.Text = "Nom abonne :";
-            // 
-            // textBoxIdSignalerRevue
-            // 
-            this.textBoxIdSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxIdSignalerRevue.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.textBoxIdSignalerRevue.Location = new System.Drawing.Point(87, 61);
-            this.textBoxIdSignalerRevue.Name = "textBoxIdSignalerRevue";
-            this.textBoxIdSignalerRevue.Size = new System.Drawing.Size(114, 24);
-            this.textBoxIdSignalerRevue.TabIndex = 1;
-            this.textBoxIdSignalerRevue.TextChanged += new System.EventHandler(this.textBoxIdSignalerRevue_TextChanged);
-            // 
-            // textBoxNumeroSignalerRevue
-            // 
-            this.textBoxNumeroSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNumeroSignalerRevue.Location = new System.Drawing.Point(87, 104);
-            this.textBoxNumeroSignalerRevue.Name = "textBoxNumeroSignalerRevue";
-            this.textBoxNumeroSignalerRevue.Size = new System.Drawing.Size(114, 24);
-            this.textBoxNumeroSignalerRevue.TabIndex = 8;
-            this.textBoxNumeroSignalerRevue.TextChanged += new System.EventHandler(this.textBoxNumeroSignalerRevue_TextChanged);
-            // 
-            // textBoxNomSignalerRevue
-            // 
-            this.textBoxNomSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNomSignalerRevue.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.textBoxNomSignalerRevue.Location = new System.Drawing.Point(87, 151);
-            this.textBoxNomSignalerRevue.Name = "textBoxNomSignalerRevue";
-            this.textBoxNomSignalerRevue.Size = new System.Drawing.Size(114, 24);
-            this.textBoxNomSignalerRevue.TabIndex = 9;
-            this.textBoxNomSignalerRevue.TextChanged += new System.EventHandler(this.textBoxNomSignalerRevue_TextChanged);
-            // 
-            // textBoxPrenomSignalerRevue
-            // 
-            this.textBoxPrenomSignalerRevue.Location = new System.Drawing.Point(86, 200);
-            this.textBoxPrenomSignalerRevue.Name = "textBoxPrenomSignalerRevue";
-            this.textBoxPrenomSignalerRevue.Size = new System.Drawing.Size(115, 20);
-            this.textBoxPrenomSignalerRevue.TabIndex = 10;
-            this.textBoxPrenomSignalerRevue.TextChanged += new System.EventHandler(this.textBoxPrenomSignalerRevue_TextChanged);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label35.Location = new System.Drawing.Point(6, 64);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(65, 16);
-            this.label35.TabIndex = 11;
-            this.label35.Text = " Id Revue";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label36.Location = new System.Drawing.Point(7, 112);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(51, 16);
-            this.label36.TabIndex = 12;
-            this.label36.Text = "Numero";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label37.Location = new System.Drawing.Point(7, 154);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(32, 16);
-            this.label37.TabIndex = 13;
-            this.label37.Text = "Nom";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Comic Sans MS", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label38.Location = new System.Drawing.Point(6, 200);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(47, 16);
-            this.label38.TabIndex = 14;
-            this.label38.Text = "Prénom";
-            // 
-            // buttonSignalerRevue
-            // 
-            this.buttonSignalerRevue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.buttonSignalerRevue.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSignalerRevue.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.buttonSignalerRevue.Location = new System.Drawing.Point(10, 253);
-            this.buttonSignalerRevue.Name = "buttonSignalerRevue";
-            this.buttonSignalerRevue.Size = new System.Drawing.Size(181, 69);
-            this.buttonSignalerRevue.TabIndex = 15;
-            this.buttonSignalerRevue.Text = "SGNALER UNE REVUE";
-            this.buttonSignalerRevue.UseVisualStyleBackColor = false;
-            this.buttonSignalerRevue.Click += new System.EventHandler(this.buttonSignalerRevue_Click);
-            // 
-            // idRevue
-            // 
-            this.idRevue.HeaderText = "ID";
-            this.idRevue.Name = "idRevue";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Titre";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // numParution
-            // 
-            this.numParution.HeaderText = "Numero";
-            this.numParution.Name = "numParution";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Etat";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewRevDeteriore
-            // 
-            this.dataGridViewRevDeteriore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRevDeteriore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
-            this.dataGridViewRevDeteriore.Location = new System.Drawing.Point(24, 275);
-            this.dataGridViewRevDeteriore.Name = "dataGridViewRevDeteriore";
-            this.dataGridViewRevDeteriore.Size = new System.Drawing.Size(693, 226);
-            this.dataGridViewRevDeteriore.TabIndex = 3;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Titre";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Numero";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Nom";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Prenom";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Date";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // comboBoxParutionDeteriore
-            // 
-            this.comboBoxParutionDeteriore.FormattingEnabled = true;
-            this.comboBoxParutionDeteriore.Location = new System.Drawing.Point(769, 326);
-            this.comboBoxParutionDeteriore.Name = "comboBoxParutionDeteriore";
-            this.comboBoxParutionDeteriore.Size = new System.Drawing.Size(178, 21);
-            this.comboBoxParutionDeteriore.TabIndex = 4;
-            this.comboBoxParutionDeteriore.SelectedIndexChanged += new System.EventHandler(this.comboBoxParutionDeteriore_SelectedIndexChanged);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label39.Location = new System.Drawing.Point(783, 293);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(108, 19);
-            this.label39.TabIndex = 5;
-            this.label39.Text = "Revue détérioré";
+            this.Column19.HeaderText = "Etat";
+            this.Column19.Name = "Column19";
             // 
             // FrmMediateq
             // 
@@ -2331,6 +2331,7 @@ namespace Mediateq_AP_SIO2
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmMediateq";
             this.Text = "Gestion Médiathèque";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMediateq_FormClosed);
             this.Load += new System.EventHandler(this.FrmMediateq_Load);
             this.tabOngletsAbonne.ResumeLayout(false);
             this.tabParutions.ResumeLayout(false);
@@ -2355,7 +2356,10 @@ namespace Mediateq_AP_SIO2
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocument)).EndInit();
             this.tabSignaler.ResumeLayout(false);
             this.tabSignaler.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbo)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDoc)).EndInit();
@@ -2365,6 +2369,7 @@ namespace Mediateq_AP_SIO2
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentsInutilisable)).EndInit();
             this.tabPageDeteriore.ResumeLayout(false);
             this.tabPageDeteriore.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevDeteriore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocDeteriore)).EndInit();
             this.tabAbonne.ResumeLayout(false);
             this.groupBoxAbonnes.ResumeLayout(false);
@@ -2374,10 +2379,6 @@ namespace Mediateq_AP_SIO2
             this.groupBoxModifierOuSupAbo.PerformLayout();
             this.groupBoxAjoutAbonne.ResumeLayout(false);
             this.groupBoxAjoutAbonne.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRev)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRevDeteriore)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2480,10 +2481,6 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridView dataGridViewDocDeteriore;
         private System.Windows.Forms.Label REVUES;
         private System.Windows.Forms.Label DOCUMENTS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn numeroExemplaire;
@@ -2600,6 +2597,10 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIdRevue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
     }
 }
 

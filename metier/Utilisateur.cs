@@ -8,7 +8,7 @@ namespace Mediateq_AP_SIO2.metier
 {
     class Utilisateur
     {
-        private string id;
+        private int id;
         private string userName;
         private string nom;
         private string prenom;
@@ -16,7 +16,7 @@ namespace Mediateq_AP_SIO2.metier
 
 
 
-        public Utilisateur(string unId, string unUserName, string unNom, string unPrenom, string unPassword)
+        public Utilisateur(int unId, string unUserName, string unNom, string unPrenom, string unPassword)
         {
             id = unId;
             userName = unUserName;
@@ -26,7 +26,7 @@ namespace Mediateq_AP_SIO2.metier
            
         }
 
-        public string Id { get => id; set => id = value; }
+        public int Id { get => id; set => id = value; }
         public string Nom { get => nom; set => nom = value; }
         public string Prenom { get => prenom; set => prenom = value; }
         public string UserName { get => userName; set => userName = value; }

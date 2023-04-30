@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,15 @@ namespace Mediateq_AP_SIO2
         #region Variables globales
 
         static List<Utilisateur> lesUtilisateurs;
-    
-    
 
 
         #endregion
+
+
+        #region Login
+
+
+        //Initialisation de la connexion à la base de données et chargement des utilisateurs
         private void frmLogin_Load(object sender, EventArgs e)
         {
             try
@@ -44,16 +49,20 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Vérification des informations d'identification de l'utilisateur et ouverture de la fenêtre principale en cas de réussite
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            
             // Récupérer l'utilisateur avec le nom d'utilisateur donné
-            Utilisateur utilisateur = new Utilisateur("", textBoxUserName.Text, "", "", textBoxPassword.Text);
-            DAOUtilisateur.recupereUtilisateur(utilisateur);
+            Utilisateur utili = DAOUtilisateur.recupereUtilisateur(textBoxUserName.Text);
 
-           
+
+            // CRYPTER LE MOT DE PASSE AVEC SHA256
+            string passwordHash = BitConverter.ToString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(textBoxPassword.Text))).Replace("-", "");
 
             // Comparer les hachages de mot de passe
-            if (textBoxPassword.Text == utilisateur.Password)
+            if (utili.Password == passwordHash)
             {
                 // Si les hachages sont identiques, connecter l'utilisateur et afficher le formulaire principal
                 new FrmMediateq().Show();
@@ -71,7 +80,7 @@ namespace Mediateq_AP_SIO2
 
 
 
-
+        //Button Clear des champs de saisie
         private void buttonClear_Click(object sender, EventArgs e)
         {
             textBoxUserName.Text = "";
@@ -79,6 +88,8 @@ namespace Mediateq_AP_SIO2
             textBoxUserName.Focus();
         }
 
+
+        // Affichage / masquage du caractère de mot de passe dans le champ de saisie de mot de passe en fonction de la case à cocher
         private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShowPassword.Checked)
@@ -89,14 +100,20 @@ namespace Mediateq_AP_SIO2
             else
             {
                 textBoxPassword.PasswordChar = '*';
-              
             }
         }
 
+
+        //Ouverture de la fenêtre d'inscription à partir de l'étiquette de création de compte
         private void labelCreateAccount_Click(object sender, EventArgs e)
         {
             new frmRegister().Show();
             this.Hide();
         }
+
+
+        #endregion
+
+
     }
 }

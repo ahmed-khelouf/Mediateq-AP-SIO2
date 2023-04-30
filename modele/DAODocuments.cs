@@ -44,12 +44,12 @@ namespace Mediateq_AP_SIO2
 
 
         //Modifier l'état d'un exemplaire en deterioré dans la base de données
-        public static void modifierExemplaireDeteriore(Exemplaire exemplaire)
+        public static void modifierExemplaireDeteriore(string unDoc , string unNumero)
         {
             try
             {
          
-                string query = "UPDATE exemplaire set exemplaire.idEtat='00003' where exemplaire.idDoc='" + exemplaire.Document.IdDoc + "'AND exemplaire.numero= '" + exemplaire.Numero + "'";
+                string query = "UPDATE exemplaire set exemplaire.idEtat='00003' where exemplaire.idDoc='" + unDoc + "'AND exemplaire.numero= '" + unNumero + "'";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();
@@ -345,7 +345,7 @@ namespace Mediateq_AP_SIO2
                 {
                     Document document = new Document(reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), new Categorie(reader[7].ToString(), reader[8].ToString()));
                     Exemplaire exemplaire = new Exemplaire(document, reader[9].ToString(), DateTime.Parse(reader[10].ToString()), reader[11].ToString(), new Etat(int.Parse(reader[12].ToString()), reader[13].ToString()));
-                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(reader[0].ToString(), document, exemplaire, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(int.Parse(reader[0].ToString()), document, exemplaire, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
 
                     lesSignalementExemplaires.Add(signalerExemplaire);
                 }
@@ -372,7 +372,7 @@ namespace Mediateq_AP_SIO2
                 {
                     Document document = new Document(reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), new Categorie(reader[7].ToString(), reader[8].ToString()));
                     Exemplaire exemplaire = new Exemplaire(document, reader[9].ToString(), DateTime.Parse(reader[10].ToString()), reader[11].ToString(), new Etat(int.Parse(reader[12].ToString()), reader[13].ToString()));
-                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(reader[0].ToString(), document, exemplaire, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(int.Parse(reader[0].ToString()), document, exemplaire, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
 
                     lesSignalementExemplaires.Add(signalerExemplaire);
                 }
@@ -387,17 +387,16 @@ namespace Mediateq_AP_SIO2
 
 
         // AJOUT dun signalement a la bdd
-        public static void ajouterSignalement(SignalerExemplaire signaler)
+        public static void ajouterSignalement(string idDoc , string numeroExemplaire , string nom , string prenom , DateTime signaler)
         {
             try
             {
-                // GÉNÉRER UN ID UNIQUE
-                string id = Guid.NewGuid().ToString();
+
 
                 //Recupération de la date 
                 DateTime date = DateTime.Now.Date;
 
-                string query = "INSERT INTO signalerExemplaire ( id , idDoc , numeroExemplaire , nom , prenom , dateSignaler)" + "VALUES('" + id + "' ,'" + signaler.Exemplaire.Document.IdDoc.ToString() + "' ,'" + signaler.Exemplaire.Numero.ToString() + "' ,  '" + signaler.Nom.ToString() + "' , '" + signaler.Prenom.ToString() + "' , '" + date.ToString("yyyy-MM-dd") + "' )";
+                string query = "INSERT INTO signalerExemplaire (  idDoc , numeroExemplaire , nom , prenom , dateSignaler)" + "VALUES('"  + idDoc + "' ,'" + numeroExemplaire + "' ,  '" + nom + "' , '" + prenom + "' , '" + signaler.ToString("yyyy-MM-dd") + "' )";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();

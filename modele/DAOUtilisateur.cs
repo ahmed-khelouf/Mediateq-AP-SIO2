@@ -11,17 +11,12 @@ namespace Mediateq_AP_SIO2.modele
 {
      class DAOUtilisateur
     {
-        public static void ajouterUtilisateur(Utilisateur utilisateur)
+        //Ajout d'un utilisateur dans la bdd
+        public static void ajouterUtilisateur(string unUserName , string unNom , string unPrenom , string unPassword)
         {
             try
             {
-                // GÉNÉRER UN ID D'ABONNÉ UNIQUE
-                string id = Guid.NewGuid().ToString();
-
-                // CRYPTER LE MOT DE PASSE AVEC SHA256
-                string passwordHash = BitConverter.ToString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(utilisateur.Password))).Replace("-", "");
-
-                string query = "INSERT INTO utilisateur (id , userName, nom, prenom, password) VALUES ('" + id + "', '" + utilisateur.UserName.ToString() + "', '" + utilisateur.Nom.ToString() + "', '" + utilisateur.Prenom.ToString() + "', '" + passwordHash + "')";
+                string query = "INSERT INTO utilisateur ( userName, nom, prenom, password) VALUES ('" + unUserName + "', '" + unNom + "', '" + unPrenom + "', '" + unPassword + "')";
 
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
@@ -45,7 +40,7 @@ namespace Mediateq_AP_SIO2.modele
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
                 while (reader.Read())
                 {
-                    Utilisateur utilisateur = new Utilisateur(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
+                    Utilisateur utilisateur = new Utilisateur(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
                     lesUtilisateurs.Add(utilisateur);
                 }
                 DAOFactory.deconnecter();
@@ -57,23 +52,28 @@ namespace Mediateq_AP_SIO2.modele
             return lesUtilisateurs;
         }
 
-        public static void recupereUtilisateur(Utilisateur utilisateur)
+
+        // recupere un utilisateur de la bdd
+        public static Utilisateur recupereUtilisateur(string unUserName)
         {
             try
             {
-                
-
-                string query = " SELECT * FROM utilisateur where userName = '" + utilisateur.UserName + "' and password = '" + utilisateur.Password + "'";
+                Utilisateur utilisateur = null;
+                string req = " SELECT * FROM utilisateur where userName = '" + unUserName +"'";
 
                 DAOFactory.connecter();
-                DAOFactory.execSQLWrite(query);
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+                while (reader.Read())
+                {
+                    utilisateur = new Utilisateur(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
+                }
                 DAOFactory.deconnecter();
+                return utilisateur;
             }
             catch (Exception exc)
             {
                 throw exc;
             }
-
         }
     }
 }

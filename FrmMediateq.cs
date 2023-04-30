@@ -259,6 +259,12 @@ namespace Mediateq_AP_SIO2
             comboBoxRevues.DataSource = lesRevues;
 
             comboBoxRevues.DisplayMember = "titre";
+
+            // Définir la propriété ReadOnly au datagridview
+            dataGridViewDocument.ReadOnly = true;
+
+            dataGridViewRevue.ReadOnly = true;
+
         }
 
 
@@ -280,7 +286,7 @@ namespace Mediateq_AP_SIO2
                 // Parcours de la collection des exemplaires
                 foreach (Exemplaire exemplaire in lesExemplaires)
                 {
-                    if(exemplaire.Etat.Libelle == "neuf")
+                    if(exemplaire.Etat.Libelle == "neuf" || exemplaire.Etat.Libelle == "usagé")
                     {
                         dataGridViewDocument.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
                     }
@@ -307,7 +313,7 @@ namespace Mediateq_AP_SIO2
                 // Parcours de la collection des parutions
                 foreach (Parution parution in lesParutions)
                 {
-                    if(parution.Etat.Libelle == "neuf")
+                    if(parution.Etat.Libelle == "neuf" || parution.Etat.Libelle == "usagé")
                     {
                         dataGridViewRevue.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
                     }
@@ -328,22 +334,27 @@ namespace Mediateq_AP_SIO2
                 // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
                 int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
 
-                // Récupérer l'exemplaire correspondant à l'index sélectionné
-                Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
-
-                // Vérifier si l'état de l'exemplaire est déjà "usagé"
-                if (exemplaire.Etat.Libelle == "usagé")
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewDocument.SelectedRows[0];
+                if (row != null && row.Cells["id"].Value != null)
                 {
-                    // Afficher un message si l'exemplaire est déjà en usage
-                    MessageBox.Show("Ce document est déjà en usage !");
-                }
-                else // Si l'exemplaire n'est pas déjà en usage
-                {
-                    // Modifier l'état de l'exemplaire à "usagé" dans la base de données 
-                    DAODocuments.modifierExemplaireUsage(exemplaire);
+                    // Récupérer l'exemplaire correspondant à l'index sélectionné
+                    Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
 
-                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                    reussi = true;
+                    // Vérifier si l'état de l'exemplaire est déjà "usagé"
+                    if (exemplaire.Etat.Libelle == "usagé")
+                    {
+                        // Afficher un message si l'exemplaire est déjà en usage
+                        MessageBox.Show("Ce document est déjà en usage !");
+                    }
+                    else // Si l'exemplaire n'est pas déjà en usage
+                    {
+                        // Modifier l'état de l'exemplaire à "usagé" dans la base de données 
+                        DAODocuments.modifierExemplaireUsage(exemplaire);
+
+                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                        reussi = true;
+                    }
                 }
             }
             else // Si la liste d'exemplaires est nulle
@@ -369,28 +380,33 @@ namespace Mediateq_AP_SIO2
             // Variable pour vérifier si le changement d'état a réussi
             bool reussi = false;
 
-            // Vérifier si la liste d'exemplaires est non nulle
+            // Vérifier si la liste d'exemplaires est non null
             if (lesExemplaires != null)
             {
-                // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
-                int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
-
-                // Récupérer l'exemplaire correspondant à l'index sélectionné
-                Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
-
-                // Vérifier si l'état de l'exemplaire est déjà "inutilisable"
-                if (exemplaire.Etat.Libelle == "inutilisable")
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewDocument.SelectedRows[0];
+                if (row != null && row.Cells["id"].Value != null)
                 {
-                    // Afficher un message si l'exemplaire est déjà en inutilisable
-                    MessageBox.Show("Ce document est déjà en inutilisable !");
-                }
-                else // Si l'exemplaire n'est pas déjà en inutilisable
-                {
-                    // Modifier l'état de l'exemplaire à "inutilisable" dans la base de données 
-                    DAODocuments.modifierExemplaireInutilisable(exemplaire);
+                    // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
+                    int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
 
-                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                    reussi = true;
+                    // Récupérer l'exemplaire correspondant à l'index sélectionné
+                    Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
+
+                    // Vérifier si l'état de l'exemplaire est déjà "inutilisable"
+                    if (exemplaire.Etat.Libelle == "inutilisable")
+                    {
+                        // Afficher un message si l'exemplaire est déjà en inutilisable
+                        MessageBox.Show("Ce document est déjà en inutilisable !");
+                    }
+                    else // Si l'exemplaire n'est pas déjà en inutilisable
+                    {
+                        // Modifier l'état de l'exemplaire à "inutilisable" dans la base de données 
+                        DAODocuments.modifierExemplaireInutilisable(exemplaire);
+
+                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                        reussi = true;
+                    }
                 }
             }
             else // Si la liste d'exemplaires est nulle
@@ -419,25 +435,30 @@ namespace Mediateq_AP_SIO2
             // Vérifier si la liste de parutions est non nulle
             if (lesParutions != null)
             {
-                // Récupérer l'index de la parution sélectionné dans la DataGridView
-                int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
-
-                // Récupérer la parution correspondant à l'index sélectionné
-                Parution parution = lesParutions.ElementAt(selectedParution);
-
-                // Vérifier si l'état de la parution est déjà "usagé"
-                if (parution.Etat.Libelle == "usagé")
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewRevue.SelectedRows[0];
+                if (row != null && row.Cells["ColumnIdRevue"].Value != null)
                 {
-                    // Afficher un message si la parution est déjà en usagé
-                    MessageBox.Show("Cette parution est déjà en usagé !");
-                }
-                else // Si la parution n'est pas déjà en usagé
-                {
-                    // Modifier l'état de la parution à "usagé" dans la base de données 
-                    DAORevues.modifierParutionUsage(parution);
+                    // Récupérer l'index de la parution sélectionné dans la DataGridView
+                    int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
 
-                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                    reussi = true;
+                    // Récupérer la parution correspondant à l'index sélectionné
+                    Parution parution = lesParutions.ElementAt(selectedParution);
+
+                    // Vérifier si l'état de la parution est déjà "usagé"
+                    if (parution.Etat.Libelle == "usagé")
+                    {
+                        // Afficher un message si la parution est déjà en usagé
+                        MessageBox.Show("Cette parution est déjà en usagé !");
+                    }
+                    else // Si la parution n'est pas déjà en usagé
+                    {
+                        // Modifier l'état de la parution à "usagé" dans la base de données 
+                        DAORevues.modifierParutionUsage(parution);
+
+                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                        reussi = true;
+                    }
                 }
             }
             else // Si la liste de parution est nulle
@@ -466,25 +487,30 @@ namespace Mediateq_AP_SIO2
             // Vérifier si la liste de parutions est non nulle
             if (lesParutions != null)
             {
-                // Récupérer l'index de la parution sélectionné dans la DataGridView
-                int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
-
-                // Récupérer la parution correspondant à l'index sélectionné
-                Parution parution = lesParutions.ElementAt(selectedParution);
-
-                // Vérifier si l'état de la parution est déjà "inutilisable"
-                if (parution.Etat.Libelle == "inutilisable")
+                // Récupération de la ligne sélectionnée
+                DataGridViewRow row = dataGridViewRevue.SelectedRows[0];
+                if (row != null && row.Cells["ColumnIdRevue"].Value != null)
                 {
-                    // Afficher un message si la parution est déjà en inutilisable
-                    MessageBox.Show("Cette parution est déjà en inutilisable !");
-                }
-                else // Si la parution n'est pas déjà en inutilisable
-                {
-                    // Modifier l'état de la parution à "inutilisable" dans la base de données 
-                    DAORevues.modifierParutionInutilisable(parution);
+                    // Récupérer l'index de la parution sélectionné dans la DataGridView
+                    int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
 
-                    // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                    reussi = true;
+                    // Récupérer la parution correspondant à l'index sélectionné
+                    Parution parution = lesParutions.ElementAt(selectedParution);
+
+                    // Vérifier si l'état de la parution est déjà "inutilisable"
+                    if (parution.Etat.Libelle == "inutilisable")
+                    {
+                        // Afficher un message si la parution est déjà en inutilisable
+                        MessageBox.Show("Cette parution est déjà en inutilisable !");
+                    }
+                    else // Si la parution n'est pas déjà en inutilisable
+                    {
+                        // Modifier l'état de la parution à "inutilisable" dans la base de données 
+                        DAORevues.modifierParutionInutilisable(parution);
+
+                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                        reussi = true;
+                    }
                 }
             }
             else // Si la liste de parution est nulle
@@ -537,6 +563,13 @@ namespace Mediateq_AP_SIO2
             //Bloque les button
             buttonSignalerExemplaire.Enabled = false;
             buttonSignalerRevue.Enabled = false;
+
+            // Définir la propriété ReadOnly au datagridview
+            dataGridViewAbo.ReadOnly = true;
+
+            dataGridViewDoc.ReadOnly = true;
+
+            dataGridViewRev.ReadOnly = true;
         }
 
 
@@ -559,7 +592,7 @@ namespace Mediateq_AP_SIO2
                 foreach (Exemplaire exemplaire in lesExemplaires)
                 {
                     // si l'etat est differents de détérioré tu affiches 
-                    if(exemplaire.Etat.Libelle != "détérioré")
+                    if(exemplaire.Etat.Libelle != "détérioré" && exemplaire.Etat.Libelle != "inutilisable")
                     {
                         dataGridViewDoc.Rows.Add(exemplaire.Document.IdDoc, exemplaire.Document.Titre, exemplaire.Numero, exemplaire.Etat.Libelle);
                     }
@@ -587,7 +620,7 @@ namespace Mediateq_AP_SIO2
                 foreach (Parution parution in lesParutions)
                 {
                     // si l'etat est differents de détérioré tu affiches 
-                    if (parution.Etat.Libelle != "détérioré")
+                    if (parution.Etat.Libelle != "détérioré" && parution.Etat.Libelle != "inutilisable")
                     {
                         dataGridViewRev.Rows.Add(parution.Revue.Id, parution.Revue.Titre, parution.Numero, parution.Etat.Libelle);
                     }
@@ -630,7 +663,7 @@ namespace Mediateq_AP_SIO2
                 // Récupération de la ligne sélectionnée
                 DataGridViewRow row = dataGridViewAbo.SelectedRows[0];
 
-                if(row != null)
+                if(row != null && row.Cells["nomAbo"].Value != null)
                 {
                     // Récupération des valeurs de chaque cellule de la ligne
                     string nom = row.Cells["nomAbo"].Value.ToString();
@@ -656,15 +689,17 @@ namespace Mediateq_AP_SIO2
                 // Récupération de la ligne sélectionnée
                 DataGridViewRow row = dataGridViewDoc.SelectedRows[0];
 
-                if(row != null)
+                if(row != null && row.Cells["idDocument"].Value != null && row.Cells["numExemplaire"].Value != null)
                 {
                     // Récupération des valeurs de chaque cellule de la ligne
                     string idDoc = row.Cells["idDocument"].Value.ToString();
                     string numero = row.Cells["numExemplaire"].Value.ToString();
 
-                    // Affichage des valeurs dans les TextBox correspondantes
-                    textBoxIdDoc.Text = idDoc;
-                    textBoxNumExemplaire.Text = numero;
+                        // Affichage des valeurs dans les TextBox correspondantes
+                        textBoxIdDoc.Text = idDoc;
+                        textBoxNumExemplaire.Text = numero;
+
+                    
                 }
             }
         }
@@ -679,7 +714,7 @@ namespace Mediateq_AP_SIO2
                 // Récupération de la ligne sélectionnée
                 DataGridViewRow row = dataGridViewRev.SelectedRows[0];
 
-                if (row != null)
+                if (row != null && row.Cells["idRevue"].Value != null && row.Cells["numParution"].Value != null)
                 {
                     // Récupération des valeurs de chaque cellule de la ligne
                     string idRevue = row.Cells["idRevue"].Value.ToString();
@@ -701,28 +736,24 @@ namespace Mediateq_AP_SIO2
                 // Si les textBox sont différents de vide
                 if(textBoxIdDoc.Text!= "" && textBoxNumExemplaire.Text != "" && textBoxNomAbo.Text != "" && textBoxPrenomAbo.Text != "")
                 {
-                    // GÉNÉRER UN ID UNIQUE
-                    string id = Guid.NewGuid().ToString();
 
                     // SPÉCIFIER La date
                     DateTime date = DateTime.Now;
 
-                    //initialiser les objets
-                    Document document = new Document(textBoxIdDoc.Text, "", "", new Categorie("", ""));
-                    Exemplaire exemplaire = new Exemplaire(document, textBoxNumExemplaire.Text, DateTime.Now, "", new Etat(0, ""));
-                    SignalerExemplaire signalerExemplaire = new SignalerExemplaire(id.ToString(), document, exemplaire, textBoxNomAbo.Text, textBoxPrenomAbo.Text, date.Date);
-
                     // Modifie l'exemplaire en détériorer 
-                    DAODocuments.modifierExemplaireDeteriore(exemplaire);
+                    DAODocuments.modifierExemplaireDeteriore(textBoxIdDoc.Text , textBoxNumExemplaire.Text);
                     // AJOUTER L'ABONNE DANS LA BDD
-                    DAODocuments.ajouterSignalement(signalerExemplaire);
+                    DAODocuments.ajouterSignalement(textBoxIdDoc.Text, textBoxNumExemplaire.Text, textBoxNomAbo.Text, textBoxPrenomAbo.Text, date.Date);
 
                     //Affiche un message
                     MessageBox.Show("Signalement ajouté avec succès.");
 
+                    // Rafraîchir les données de la DataGridView en appelant la méthode "comboBoxDocuments_SelectedIndexChanged"
+                    comboBoxDocPageSignaler_SelectedIndexChanged(sender, e);
+
                     // Mettre à jour les données et rafraîchir le DataGridView
                     lesAbonnes = DAOAbonne.getAllAbonne();
-                    lesExemplaires = DAODocuments.getAllExemplaire();
+                
 
                     // Parcour les abonnes pour les afficher dans le dataGridViewAbo
                     foreach (Abonne abonne in lesAbonnes)
@@ -771,17 +802,13 @@ namespace Mediateq_AP_SIO2
                     // SPÉCIFIER La date
                     DateTime date = DateTime.Now;
 
-                    char empruntble = '0';
+             
 
-                    //initialiser les objets
-                    Revue revue = new Revue(textBoxIdSignalerRevue.Text, "", empruntble, "" , DateTime.Now, 0 , "");
-                    Parution parution = new Parution(int.Parse(textBoxNumeroSignalerRevue.Text), DateTime.Now, "", revue , new Etat(0, ""));
-                    SignalerParution signalerParution = new SignalerParution(id.ToString(), revue, parution, textBoxNomSignalerRevue.Text, textBoxPrenomSignalerRevue.Text, date.Date);
-
+                
                     // Modifie l'exemplaire en détériorer 
-                    DAORevues.modifierParutionDeteriore(parution);
+                    DAORevues.modifierParutionDeteriore(textBoxIdSignalerRevue.Text, textBoxNumeroSignalerRevue.Text);
                     // AJOUTER L'ABONNE DANS LA BDD
-                    DAORevues.ajouterSignalement(signalerParution);
+                    DAORevues.ajouterSignalement(textBoxIdSignalerRevue.Text, textBoxNumeroSignalerRevue.Text, textBoxNomSignalerRevue.Text, textBoxPrenomSignalerRevue.Text, date.Date);
 
                     //Affiche un message
                     MessageBox.Show("Signalement ajouté avec succès.");
@@ -938,6 +965,11 @@ namespace Mediateq_AP_SIO2
 
             // Rafraîchir les données de la DataGridView en appelant la méthode "comboBox_Rev_SelectedIndexChanged"
             comboBox_Rev_SelectedIndexChanged(sender, e);
+
+            // Définir la propriété ReadOnly au datagridview
+            dataGridViewDocumentsInutilisable.ReadOnly = true;
+
+            dataGridViewRevuesInutilisable.ReadOnly = true;
         }
 
 
@@ -1026,6 +1058,11 @@ namespace Mediateq_AP_SIO2
 
             // Value = idRevue
             comboBoxParutionDeteriore.ValueMember = "id";
+
+            // Définir la propriété ReadOnly au datagridview
+            dataGridViewDocDeteriore.ReadOnly = true;
+
+            dataGridViewRevDeteriore.ReadOnly = true;
         }
 
 
@@ -1092,6 +1129,9 @@ namespace Mediateq_AP_SIO2
             textBoxID.ReadOnly = true;
             buttonModifierAbonne.Enabled=false;
             buttonSupprimer.Enabled = false;
+
+            // Définir la propriété ReadOnly au datagridview
+            dataGridViewAbonnes.ReadOnly = true;
         }
 
 
@@ -1103,17 +1143,16 @@ namespace Mediateq_AP_SIO2
                 // CREATION DE l'abonne ET L'AJOUTE DANS LA COLLECTION
                 DateTime dateNaissance = dateTimePickerDateNaissance.Value;
 
-                // GÉNÉRER UN ID D'ABONNÉ UNIQUE
-                string id = Guid.NewGuid().ToString();
+
+
 
                 // SPÉCIFIER LES DATES DE DÉBUT ET DE FIN D'ABONNEMENT
-                DateTime debutAbonnement = DateTime.Now;
-                DateTime finAbonnement = debutAbonnement.AddDays(60);
+                
+                DateTime finAbonnement = DateTime.Now.AddDays(60);
 
-                Abonne abo = new Abonne(id.ToString(), textBoxNom.Text, textBoxPrenom.Text, textBoxTelephone.Text, textBoxAdresse.Text, textBoxEmail.Text, dateNaissance, debutAbonnement, finAbonnement );
 
                 // AJOUTER L'ABONNE DANS LA BDD
-                DAOAbonne.ajouterAbonne(abo);
+                DAOAbonne.ajouterAbonne(textBoxNom.Text, textBoxPrenom.Text, textBoxTelephone.Text, textBoxAdresse.Text, textBoxEmail.Text, dateNaissance , finAbonnement);
 
                 MessageBox.Show("Abonné ajouté avec succès.");
 
@@ -1233,7 +1272,7 @@ namespace Mediateq_AP_SIO2
             {
                 
                     // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte 
-                    Abonne abonneModifie = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
+                    Abonne abonneModifie = new Abonne(int.Parse(textBoxID.Text), textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
 
                     // Modification de l'abonné dans la base de données avec les nouvelles valeurs
                     DAOAbonne.modifierAbonne(abonneModifie);
@@ -1308,7 +1347,7 @@ namespace Mediateq_AP_SIO2
             {
                 // Récupération de la ligne sélectionnée
                 DataGridViewRow row = dataGridViewAbonnes.SelectedRows[0];
-                if (row.Cells != null)
+                if (row.Cells != null && row.Cells["ColumnNomAbo"].Value != null && row.Cells["ColumnPrenomAbo"].Value != null && row.Cells["ColumnTelAbo"].Value != null && row.Cells["ColumnAdresseAbo"].Value != null && row.Cells["ColumnEmailAbo"].Value != null && row.Cells["ColumnNaissanceAbo"].Value != null && row.Cells["ColumnDebutAbo"].Value != null && row.Cells["ColumnFinAbo"].Value != null && row.Cells["ColumnIdAbo"].Value != null)
                 {
                     // Récupération des valeurs de chaque cellule de la ligne
                     string nom = row.Cells["ColumnNomAbo"].Value.ToString();
@@ -1351,10 +1390,6 @@ namespace Mediateq_AP_SIO2
                             MessageBox.Show("L'abonnement va bientot expirer dans : " + differenceEnJours.ToString() + " " + "jours"); 
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("ligne null ");
                 }
             }
         }
@@ -1465,7 +1500,7 @@ namespace Mediateq_AP_SIO2
             if(textBoxID.Text!= "")
             {
                 // Création d'un nouvel objet Abonne avec les nouvelles valeurs entrées dans les zones de texte 
-                Abonne abonneSup = new Abonne(textBoxID.Text, textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
+                Abonne abonneSup = new Abonne(int.Parse(textBoxID.Text), textBoxModifNom.Text, textBoxModifPrenom.Text, textBoxModifTelephone.Text, textBoxModifAdresse.Text, textBoxModifEmail.Text, dateTimePickerModifDateNaissance.Value, dateTimePickerDebutAbonnement.Value, dateTimePickerFinAbonnement.Value);
                 DAOAbonne.supprimerAbonne(abonneSup);
                 MessageBox.Show("Abonne supprimé");
 
@@ -1496,29 +1531,16 @@ namespace Mediateq_AP_SIO2
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #endregion
 
-       
+
+        #region Exit
+        //Exit application
+        private void FrmMediateq_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        #endregion
     }
 }

@@ -8,7 +8,7 @@ namespace Mediateq_AP_SIO2.metier
 {
     class SignalerParution
     {
-        private string id;
+        private int id;
         private Revue revue;
         private Parution parution;
         private string nom;
@@ -16,7 +16,7 @@ namespace Mediateq_AP_SIO2.metier
         private DateTime date;
 
 
-        public SignalerParution(string unId, Revue uneRevue, Parution uneParution, string unNom, string unPrenom, DateTime uneDate)
+        public SignalerParution(int unId, Revue uneRevue, Parution uneParution, string unNom, string unPrenom, DateTime uneDate)
         {
             id = unId;
             revue = uneRevue;
@@ -26,7 +26,7 @@ namespace Mediateq_AP_SIO2.metier
             date = uneDate;
         }
 
-        public string Id { get => id; set => id = value; }
+        public int Id { get => id; set => id = value; }
         public Revue Revue { get => revue; set => revue = value; }
         public Parution Parution { get => parution; set => parution = value; }
         public string Nom { get => nom; set => nom = value; }

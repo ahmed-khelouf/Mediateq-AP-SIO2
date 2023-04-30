@@ -11,11 +11,11 @@ namespace Mediateq_AP_SIO2.modele
     class DAORevues
     {
         //Modifier l'état d'une parution en deterioré dans la base de données
-        public static void modifierParutionDeteriore(Parution parution)
+        public static void modifierParutionDeteriore(string revue , string numero)
         {
             try
             {
-                string query = "UPDATE parution set parution.idEtat='00003' where parution.idRevue='" + parution.Revue.Id + "' AND parution.numero= '" + parution.Numero + "'"; ;
+                string query = "UPDATE parution set parution.idEtat='00003' where parution.idRevue='" + revue + "' AND parution.numero= '" + numero + "'"; ;
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();
@@ -72,7 +72,7 @@ namespace Mediateq_AP_SIO2.modele
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
                 while (reader.Read())
                 {
-                    Parution parution = new Parution(int.Parse(reader[0].ToString()), DateTime.Parse(reader[1].ToString()), reader[2].ToString(), new Revue(reader[3].ToString(), reader[4].ToString(), Char.Parse(reader[5].ToString()), reader[6].ToString(), DateTime.Parse(reader[7].ToString()), int.Parse(reader[8].ToString()), reader[9].ToString()), new Etat(int.Parse(reader[10].ToString()), reader[11].ToString()));
+                    Parution parution = new Parution(reader[0].ToString(), DateTime.Parse(reader[1].ToString()), reader[2].ToString(), new Revue(reader[3].ToString(), reader[4].ToString(), Char.Parse(reader[5].ToString()), reader[6].ToString(), DateTime.Parse(reader[7].ToString()), int.Parse(reader[8].ToString()), reader[9].ToString()), new Etat(int.Parse(reader[10].ToString()), reader[11].ToString()));
                     lesParutions.Add(parution);
                 }
                 DAOFactory.deconnecter();
@@ -147,7 +147,7 @@ namespace Mediateq_AP_SIO2.modele
 
             while (reader.Read())
             {
-                Parution parution = new Parution(int.Parse(reader[0].ToString()), DateTime.Parse(reader[1].ToString()), reader[2].ToString(), new Revue(reader[3].ToString(), reader[4].ToString(), Char.Parse(reader[5].ToString()), reader[6].ToString(), DateTime.Parse(reader[7].ToString()), int.Parse(reader[8].ToString()), reader[9].ToString()), new Etat(int.Parse(reader[10].ToString()), reader[11].ToString()));
+                Parution parution = new Parution(reader[0].ToString(), DateTime.Parse(reader[1].ToString()), reader[2].ToString(), new Revue(reader[3].ToString(), reader[4].ToString(), Char.Parse(reader[5].ToString()), reader[6].ToString(), DateTime.Parse(reader[7].ToString()), int.Parse(reader[8].ToString()), reader[9].ToString()), new Etat(int.Parse(reader[10].ToString()), reader[11].ToString()));
                 lesParutions.Add(parution);
             }
             DAOFactory.deconnecter();
@@ -167,8 +167,8 @@ namespace Mediateq_AP_SIO2.modele
                 while (reader.Read())
                 {
                     Revue revue = new Revue(reader[4].ToString(), reader[5].ToString(), char.Parse(reader[6].ToString()), reader[7].ToString(), DateTime.Parse(reader[8].ToString()), int.Parse(reader[9].ToString()), reader[10].ToString());
-                    Parution parution = new Parution(int.Parse(reader[11].ToString()), DateTime.Parse(reader[12].ToString()), reader[13].ToString(), revue, new Etat(int.Parse(reader[14].ToString()), reader[15].ToString()));
-                    SignalerParution signalerParution = new SignalerParution(reader[0].ToString(), revue, parution, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+                    Parution parution = new Parution(reader[11].ToString(), DateTime.Parse(reader[12].ToString()), reader[13].ToString(), revue, new Etat(int.Parse(reader[14].ToString()), reader[15].ToString()));
+                    SignalerParution signalerParution = new SignalerParution(int.Parse(reader[0].ToString()), revue, parution, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
 
                     lesSignalementParutions.Add(signalerParution);
                 }
@@ -194,8 +194,8 @@ namespace Mediateq_AP_SIO2.modele
                 while (reader.Read())
                 {
                     Revue revue = new Revue(reader[4].ToString(), reader[5].ToString(), char.Parse(reader[6].ToString()), reader[7].ToString(), DateTime.Parse(reader[8].ToString()), int.Parse(reader[9].ToString()), reader[10].ToString());
-                    Parution parution = new Parution(int.Parse(reader[11].ToString()), DateTime.Parse(reader[12].ToString()), reader[13].ToString(),  revue, new Etat(int.Parse(reader[14].ToString()), reader[15].ToString()));
-                    SignalerParution signalerParution = new SignalerParution(reader[0].ToString(), revue, parution, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
+                    Parution parution = new Parution(reader[11].ToString(), DateTime.Parse(reader[12].ToString()), reader[13].ToString(),  revue, new Etat(int.Parse(reader[14].ToString()), reader[15].ToString()));
+                    SignalerParution signalerParution = new SignalerParution(int.Parse(reader[0].ToString()), revue, parution, reader[1].ToString(), reader[2].ToString(), DateTime.Parse(reader[3].ToString()));
 
                     lesSignalementParutions.Add(signalerParution);
                 }
@@ -210,17 +210,16 @@ namespace Mediateq_AP_SIO2.modele
 
 
         // AJOUT dun signalement a la bdd
-        public static void ajouterSignalement(SignalerParution signaler)
+        public static void ajouterSignalement(string idRevue , string numeroRevue , string nom , string prenom , DateTime signaler)
         {
             try
             {
-                // GÉNÉRER UN ID UNIQUE
-                string id = Guid.NewGuid().ToString();
+
 
                 //Recupération de la date 
                 DateTime date = DateTime.Now.Date;
 
-                string query = "INSERT INTO signalerParution ( id , idRevue , numeroRevue , nom , prenom , dateSignaler)" + "VALUES('" + id + "' ,'" + signaler.Revue.Id.ToString() + "' ,'" + signaler.Parution.Numero.ToString() + "' ,  '" + signaler.Nom.ToString() + "' , '" + signaler.Prenom.ToString() + "' , '" + date.ToString("yyyy-MM-dd") + "' )";
+                string query = "INSERT INTO signalerParution (  idRevue , numeroRevue , nom , prenom , dateSignaler)" + "VALUES('" + idRevue + "' ,'" + numeroRevue + "' ,  '" + nom + "' , '" + prenom + "' , '" + signaler.ToString("yyyy-MM-dd") + "' )";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();

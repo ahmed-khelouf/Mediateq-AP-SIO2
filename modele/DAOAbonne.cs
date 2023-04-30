@@ -23,7 +23,7 @@ namespace Mediateq_AP_SIO2.modele
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
                 while (reader.Read())
                 {
-                    Abonne abonne = new Abonne(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString() , reader[4].ToString(), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), DateTime.Parse(reader[7].ToString()), DateTime.Parse(reader[8].ToString()));
+                    Abonne abonne = new Abonne(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString() , reader[4].ToString(), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), DateTime.Parse(reader[7].ToString()), DateTime.Parse(reader[8].ToString()));
                     lesAbonnes.Add(abonne);
                 }
                 DAOFactory.deconnecter();
@@ -37,18 +37,18 @@ namespace Mediateq_AP_SIO2.modele
 
 
         // AJout d'un nouveau abonne dans a bdd
-        public static void ajouterAbonne(Abonne abonne)
+        public static void ajouterAbonne(string unNom , string unPrenom , string unTele , string uneAdresse , string unMail , DateTime uneDateNaiss ,  DateTime uneFinAbonnement)
         {
             try
             {
-                // GÉNÉRER UN ID D'ABONNÉ UNIQUE
-                string id = Guid.NewGuid().ToString();
-
+  
                 // SPÉCIFIER LES DATES DE DÉBUT ET DE FIN D'ABONNEMENT
-                DateTime debutAbonnement = DateTime.Now;
-                DateTime finAbonnement = debutAbonnement.AddDays(60);
 
-                string query = "INSERT INTO abonne (id , nom, prenom, telephone, adresse, email, dateNaissance, dateDebutAbonnement, dateFinAbonnement) VALUES ('" + id +  "', '" + abonne.Nom.ToString() + "', '" + abonne.Prenom.ToString() + "', '" + abonne.Telephone.ToString() + "', '" + abonne.Adresse.ToString() + "', '" + abonne.Email.ToString() + "', '" + abonne.DateNaissance.ToString("yyyy-MM-dd") + "', '" + debutAbonnement.ToString("yyyy-MM-dd") + "', '" + finAbonnement.ToString("yyyy-MM-dd") + "')";
+                DateTime finAbonnement = uneFinAbonnement.AddDays(60);
+                DateTime unDebutAbonnement = DateTime.Now;
+                string date1 = DateTime.Now.ToString();
+
+                string query = "INSERT INTO abonne ( nom, prenom, telephone, adresse, email, dateNaissance, dateDebutAbonnement, dateFinAbonnement) VALUES ('" + unNom + "', '" + unPrenom + "', '" + unTele + "', '" + uneAdresse + "', '" + unMail + "', '" + uneDateNaiss.ToString("yyyy-MM-dd") + "', '" + unDebutAbonnement.ToString("yyyy-MM-dd") + "', '" + finAbonnement.ToString("yyyy-MM-dd") + "')";
 
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
@@ -93,7 +93,7 @@ namespace Mediateq_AP_SIO2.modele
 
                 while (reader.Read())
                 {
-                    Abonne abonne = new Abonne(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), DateTime.Parse(reader[7].ToString()), DateTime.Parse(reader[8].ToString()));
+                    Abonne abonne = new Abonne(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), DateTime.Parse(reader[7].ToString()), DateTime.Parse(reader[8].ToString()));
                     lesAbonnes.Add(abonne);
                 }
                 DAOFactory.deconnecter();

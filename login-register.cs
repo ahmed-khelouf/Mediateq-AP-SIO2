@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Mediateq_AP_SIO2
             InitializeComponent();
         }
 
+        #region Register
+        //Initialisation de la connexion à la base de données 
         private void frmRegister_Load(object sender, EventArgs e)
         {
             try
@@ -36,24 +39,25 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Validation des informations d'enregistrement de l'utilisateur et ajout dans la base de données
         private void buttonRegister_Click(object sender, EventArgs e)
         {
+            //Vérification que les champs son vide ou non
             if(textBoxUserName.Text == "" && textBoxName.Text == "" && textBoxFirstName.Text == "" && textBoxPassword.Text == "" && textBoxCompPassword.Text == "")
             {
                 MessageBox.Show("Les champs sont vides" , "Enregistrement échoué" , MessageBoxButtons.OK , MessageBoxIcon.Error);
             }else if (textBoxPassword.Text == textBoxCompPassword.Text)
             {
-                // GÉNÉRER UN ID D'ABONNÉ UNIQUE
-                string id = Guid.NewGuid().ToString();
+
 
                 // CRYPTER LE MOT DE PASSE AVEC SHA256
                 string passwordHash = BitConverter.ToString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(textBoxPassword.Text))).Replace("-", "");
+                
+                // Ajout d'un utilisateur dans la bdd
+                DAOUtilisateur.ajouterUtilisateur(textBoxUserName.Text.ToString(), textBoxName.Text.ToString(), textBoxFirstName.Text.ToString(), passwordHash);
 
-
-                Utilisateur utilisateur = new Utilisateur(id, textBoxUserName.Text.ToString(), textBoxName.Text.ToString(), textBoxFirstName.Text.ToString(), passwordHash);
-
-                DAOUtilisateur.ajouterUtilisateur(utilisateur);
-
+                //Clear textBox
                 textBoxUserName.Text = "";
                 textBoxName.Text = "";
                 textBoxFirstName.Text = "";
@@ -72,6 +76,8 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Affichage ou masquage du texte  dans les champs de mot de passe
         private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShowPassword.Checked)
@@ -86,6 +92,8 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        //Button Clear des champs de saisie
         private void buttonClear_Click(object sender, EventArgs e)
         {
             textBoxUserName.Text = "";
@@ -96,10 +104,16 @@ namespace Mediateq_AP_SIO2
             textBoxPassword.Focus();
         }
 
+
+        //Retour à la page de connexion
         private void labelCliqueBackLogin_Click(object sender, EventArgs e)
         {
             new frmLogin().Show();
             this.Hide();
         }
+
+        #endregion
+
+
     }
 }

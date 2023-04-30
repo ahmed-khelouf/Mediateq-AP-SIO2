@@ -139,7 +139,6 @@
     <Compile Include="metier\Utilisateur.cs" />
     <Compile Include="modele\DAOAbonne.cs" />
     <Compile Include="modele\DAODocuments.cs" />
-    <Compile Include="modele\DAOPresse.cs" />
     <Compile Include="modele\DAORevues.cs" />
     <Compile Include="modele\DAOUtilisateur.cs" />
     <Compile Include="Program.cs" />

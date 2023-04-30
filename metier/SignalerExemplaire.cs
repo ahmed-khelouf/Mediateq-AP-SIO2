@@ -9,7 +9,7 @@ namespace Mediateq_AP_SIO2.metier
 {
      class SignalerExemplaire
     {
-        private string id;
+        private int id;
         private Document document;
         private Exemplaire exemplaire;
         private string nom;
@@ -17,7 +17,7 @@ namespace Mediateq_AP_SIO2.metier
         private DateTime date;
         
 
-        public SignalerExemplaire( string unId , Document unDocument, Exemplaire unExemplaire, string unNom, string unPrenom , DateTime uneDate)
+        public SignalerExemplaire( int unId , Document unDocument, Exemplaire unExemplaire, string unNom, string unPrenom , DateTime uneDate)
         {
             id = unId;
             document = unDocument;
@@ -27,7 +27,7 @@ namespace Mediateq_AP_SIO2.metier
             date = uneDate;
         }
 
-        public string Id { get => id; set => id = value; }
+        public int Id { get => id; set => id = value; }
         public Document Document { get => document; set => document = value; }
         public Exemplaire Exemplaire { get => exemplaire; set => exemplaire = value; }
         public string Nom { get => nom; set => nom = value; }
