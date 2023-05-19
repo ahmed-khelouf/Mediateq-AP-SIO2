@@ -19,6 +19,7 @@ namespace Mediateq_AP_SIO2
         public frmLogin()
         {
             InitializeComponent();
+            
         }
 
         #region Variables globales
@@ -55,17 +56,18 @@ namespace Mediateq_AP_SIO2
         {
             
             // Récupérer l'utilisateur avec le nom d'utilisateur donné
-            Utilisateur utili = DAOUtilisateur.recupereUtilisateur(textBoxUserName.Text);
+            Utilisateur user = DAOUtilisateur.recupereUtilisateur(textBoxUserName.Text);
 
 
             // CRYPTER LE MOT DE PASSE AVEC SHA256
             string passwordHash = BitConverter.ToString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(textBoxPassword.Text))).Replace("-", "");
 
             // Comparer les hachages de mot de passe
-            if (utili.Password == passwordHash)
+            
+            if (user.Password == passwordHash)
             {
                 // Si les hachages sont identiques, connecter l'utilisateur et afficher le formulaire principal
-                new FrmMediateq().Show();
+                new FrmMediateq(user).Show(); //  crée une nouvelle instance de la classe FrmMediateq en passant l'objet user en tant que paramètre
                 this.Hide();
             }
             else
@@ -112,8 +114,17 @@ namespace Mediateq_AP_SIO2
         }
 
 
+
         #endregion
 
 
+        #region Exit
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        #endregion
     }
+
 }

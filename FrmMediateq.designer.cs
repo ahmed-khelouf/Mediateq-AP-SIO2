@@ -29,7 +29,7 @@ namespace Mediateq_AP_SIO2
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabOngletsAbonne = new System.Windows.Forms.TabControl();
+            this.tabOngletsAppli = new System.Windows.Forms.TabControl();
             this.tabParutions = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvParutions = new System.Windows.Forms.DataGridView();
@@ -107,6 +107,10 @@ namespace Mediateq_AP_SIO2
             this.buttonRevueInutilisable = new System.Windows.Forms.Button();
             this.buttonRevueUsage = new System.Windows.Forms.Button();
             this.dataGridViewRevue = new System.Windows.Forms.DataGridView();
+            this.ColumnIdRevue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changement_etat_revue = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.dataGridViewDocument = new System.Windows.Forms.DataGridView();
@@ -241,11 +245,7 @@ namespace Mediateq_AP_SIO2
             this.textBoxPrenom = new System.Windows.Forms.TextBox();
             this.textBoxNom = new System.Windows.Forms.TextBox();
             this.buttonModifierAbonne = new System.Windows.Forms.Button();
-            this.ColumnIdRevue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabOngletsAbonne.SuspendLayout();
+            this.tabOngletsAppli.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
             this.tabTitres.SuspendLayout();
@@ -279,24 +279,24 @@ namespace Mediateq_AP_SIO2
             this.groupBoxAjoutAbonne.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabOngletsAbonne
+            // tabOngletsAppli
             // 
-            this.tabOngletsAbonne.Controls.Add(this.tabParutions);
-            this.tabOngletsAbonne.Controls.Add(this.tabTitres);
-            this.tabOngletsAbonne.Controls.Add(this.tabLivres);
-            this.tabOngletsAbonne.Controls.Add(this.tabDVD);
-            this.tabOngletsAbonne.Controls.Add(this.tabPageAjoutDVD);
-            this.tabOngletsAbonne.Controls.Add(this.tabPageChangerEtat);
-            this.tabOngletsAbonne.Controls.Add(this.tabSignaler);
-            this.tabOngletsAbonne.Controls.Add(this.tabPageInutilisable);
-            this.tabOngletsAbonne.Controls.Add(this.tabPageDeteriore);
-            this.tabOngletsAbonne.Controls.Add(this.tabAbonne);
-            this.tabOngletsAbonne.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabOngletsAbonne.Location = new System.Drawing.Point(0, 0);
-            this.tabOngletsAbonne.Name = "tabOngletsAbonne";
-            this.tabOngletsAbonne.SelectedIndex = 0;
-            this.tabOngletsAbonne.Size = new System.Drawing.Size(1143, 535);
-            this.tabOngletsAbonne.TabIndex = 0;
+            this.tabOngletsAppli.Controls.Add(this.tabParutions);
+            this.tabOngletsAppli.Controls.Add(this.tabTitres);
+            this.tabOngletsAppli.Controls.Add(this.tabLivres);
+            this.tabOngletsAppli.Controls.Add(this.tabDVD);
+            this.tabOngletsAppli.Controls.Add(this.tabPageAjoutDVD);
+            this.tabOngletsAppli.Controls.Add(this.tabPageChangerEtat);
+            this.tabOngletsAppli.Controls.Add(this.tabSignaler);
+            this.tabOngletsAppli.Controls.Add(this.tabPageInutilisable);
+            this.tabOngletsAppli.Controls.Add(this.tabPageDeteriore);
+            this.tabOngletsAppli.Controls.Add(this.tabAbonne);
+            this.tabOngletsAppli.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabOngletsAppli.Location = new System.Drawing.Point(0, 0);
+            this.tabOngletsAppli.Name = "tabOngletsAppli";
+            this.tabOngletsAppli.SelectedIndex = 0;
+            this.tabOngletsAppli.Size = new System.Drawing.Size(1143, 535);
+            this.tabOngletsAppli.TabIndex = 0;
             // 
             // tabParutions
             // 
@@ -1036,6 +1036,26 @@ namespace Mediateq_AP_SIO2
             this.dataGridViewRevue.Name = "dataGridViewRevue";
             this.dataGridViewRevue.Size = new System.Drawing.Size(439, 191);
             this.dataGridViewRevue.TabIndex = 16;
+            // 
+            // ColumnIdRevue
+            // 
+            this.ColumnIdRevue.HeaderText = "ID";
+            this.ColumnIdRevue.Name = "ColumnIdRevue";
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "Titre";
+            this.Column18.Name = "Column18";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Numero";
+            this.Column3.Name = "Column3";
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "Etat";
+            this.Column19.Name = "Column19";
             // 
             // changement_etat_revue
             // 
@@ -2089,7 +2109,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxModifEmail.Name = "textBoxModifEmail";
             this.textBoxModifEmail.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifEmail.TabIndex = 5;
-            this.textBoxModifEmail.TextChanged += new System.EventHandler(this.textBoxModifEmail_TextChanged);
             // 
             // textBoxModifAdresse
             // 
@@ -2099,7 +2118,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxModifAdresse.Name = "textBoxModifAdresse";
             this.textBoxModifAdresse.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifAdresse.TabIndex = 4;
-            this.textBoxModifAdresse.TextChanged += new System.EventHandler(this.textBoxModifAdresse_TextChanged);
             // 
             // textBoxModifTelephone
             // 
@@ -2109,7 +2127,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxModifTelephone.Name = "textBoxModifTelephone";
             this.textBoxModifTelephone.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifTelephone.TabIndex = 3;
-            this.textBoxModifTelephone.TextChanged += new System.EventHandler(this.textBoxModifTelephone_TextChanged);
             // 
             // textBoxModifPrenom
             // 
@@ -2119,7 +2136,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxModifPrenom.Name = "textBoxModifPrenom";
             this.textBoxModifPrenom.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifPrenom.TabIndex = 2;
-            this.textBoxModifPrenom.TextChanged += new System.EventHandler(this.textBoxModifPrenom_TextChanged);
             // 
             // textBoxModifNom
             // 
@@ -2129,7 +2145,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxModifNom.Name = "textBoxModifNom";
             this.textBoxModifNom.Size = new System.Drawing.Size(158, 24);
             this.textBoxModifNom.TabIndex = 1;
-            this.textBoxModifNom.TextChanged += new System.EventHandler(this.textBoxModifNom_TextChanged);
             // 
             // groupBoxAjoutAbonne
             // 
@@ -2247,7 +2262,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(164, 26);
             this.textBoxEmail.TabIndex = 4;
-            this.textBoxEmail.TextChanged += new System.EventHandler(this.textBoxEmail_TextChanged);
             // 
             // textBoxAdresse
             // 
@@ -2257,7 +2271,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxAdresse.Name = "textBoxAdresse";
             this.textBoxAdresse.Size = new System.Drawing.Size(164, 26);
             this.textBoxAdresse.TabIndex = 3;
-            this.textBoxAdresse.TextChanged += new System.EventHandler(this.textBoxAdresse_TextChanged);
             // 
             // textBoxTelephone
             // 
@@ -2267,7 +2280,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxTelephone.Name = "textBoxTelephone";
             this.textBoxTelephone.Size = new System.Drawing.Size(164, 26);
             this.textBoxTelephone.TabIndex = 2;
-            this.textBoxTelephone.TextChanged += new System.EventHandler(this.textBoxTelephone_TextChanged);
             // 
             // textBoxPrenom
             // 
@@ -2277,7 +2289,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxPrenom.Name = "textBoxPrenom";
             this.textBoxPrenom.Size = new System.Drawing.Size(164, 26);
             this.textBoxPrenom.TabIndex = 1;
-            this.textBoxPrenom.TextChanged += new System.EventHandler(this.textBoxPrenom_TextChanged);
             // 
             // textBoxNom
             // 
@@ -2287,7 +2298,6 @@ namespace Mediateq_AP_SIO2
             this.textBoxNom.Name = "textBoxNom";
             this.textBoxNom.Size = new System.Drawing.Size(164, 26);
             this.textBoxNom.TabIndex = 0;
-            this.textBoxNom.TextChanged += new System.EventHandler(this.textBoxNom_TextChanged);
             // 
             // buttonModifierAbonne
             // 
@@ -2302,38 +2312,18 @@ namespace Mediateq_AP_SIO2
             this.buttonModifierAbonne.UseVisualStyleBackColor = false;
             this.buttonModifierAbonne.Click += new System.EventHandler(this.buttonModifierAbonne_Click);
             // 
-            // ColumnIdRevue
-            // 
-            this.ColumnIdRevue.HeaderText = "ID";
-            this.ColumnIdRevue.Name = "ColumnIdRevue";
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "Titre";
-            this.Column18.Name = "Column18";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Numero";
-            this.Column3.Name = "Column3";
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "Etat";
-            this.Column19.Name = "Column19";
-            // 
             // FrmMediateq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1143, 535);
-            this.Controls.Add(this.tabOngletsAbonne);
+            this.Controls.Add(this.tabOngletsAppli);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmMediateq";
             this.Text = "Gestion Médiathèque";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMediateq_FormClosed);
             this.Load += new System.EventHandler(this.FrmMediateq_Load);
-            this.tabOngletsAbonne.ResumeLayout(false);
+            this.tabOngletsAppli.ResumeLayout(false);
             this.tabParutions.ResumeLayout(false);
             this.tabParutions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).EndInit();
@@ -2385,7 +2375,7 @@ namespace Mediateq_AP_SIO2
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabOngletsAbonne;
+        private System.Windows.Forms.TabControl tabOngletsAppli;
         private System.Windows.Forms.TabPage tabParutions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbxTitres;

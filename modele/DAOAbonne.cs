@@ -79,25 +79,27 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupérer les exemplaires d'un document à partir de son titre
-        public static List<Abonne> getAbonneById(Abonne aId)
+        // Récupération d'un abonné avec son id 
+        public static Abonne getRecupAbonneById(int abonneId)
         {
             try
             {
-                List<Abonne> lesAbonnes = new List<Abonne>();
-                string req = "SELECT * FROM abonne WHERE id = '" + aId.Id +  "'";
-
+                string req = "SELECT * FROM abonne WHERE id = '" + abonneId + "'";
                 DAOFactory.connecter();
 
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
 
-                while (reader.Read())
+                if (reader.Read())
                 {
                     Abonne abonne = new Abonne(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), DateTime.Parse(reader[7].ToString()), DateTime.Parse(reader[8].ToString()));
-                    lesAbonnes.Add(abonne);
+                    DAOFactory.deconnecter();
+                    return abonne;
                 }
-                DAOFactory.deconnecter();
-                return lesAbonnes;
+                else
+                {
+                    DAOFactory.deconnecter();
+                    return null;
+                }
             }
             catch (Exception exc)
             {

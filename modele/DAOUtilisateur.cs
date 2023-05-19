@@ -29,6 +29,7 @@ namespace Mediateq_AP_SIO2.modele
 
         }
 
+
         //Récupération de tous les utilisateurs dans la base de données
         public static List<Utilisateur> getAllUtilisateur()
         {
@@ -40,7 +41,7 @@ namespace Mediateq_AP_SIO2.modele
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
                 while (reader.Read())
                 {
-                    Utilisateur utilisateur = new Utilisateur(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
+                    Utilisateur utilisateur = new Utilisateur(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString() , reader[5].ToString());
                     lesUtilisateurs.Add(utilisateur);
                 }
                 DAOFactory.deconnecter();
@@ -56,7 +57,7 @@ namespace Mediateq_AP_SIO2.modele
         // recupere un utilisateur de la bdd
         public static Utilisateur recupereUtilisateur(string unUserName)
         {
-            try
+            try 
             {
                 Utilisateur utilisateur = null;
                 string req = " SELECT * FROM utilisateur where userName = '" + unUserName +"'";
@@ -65,7 +66,7 @@ namespace Mediateq_AP_SIO2.modele
                 MySqlDataReader reader = DAOFactory.execSQLRead(req);
                 while (reader.Read())
                 {
-                    utilisateur = new Utilisateur(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
+                    utilisateur = new Utilisateur(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString() , reader[5].ToString());
                 }
                 DAOFactory.deconnecter();
                 return utilisateur;
