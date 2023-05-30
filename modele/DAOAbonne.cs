@@ -9,10 +9,15 @@ using System.Windows.Forms;
 
 namespace Mediateq_AP_SIO2.modele
 {
+    /// <summary>
+    /// Connexion à la base de données pour Abonnés
+    /// </summary>
     class DAOAbonne
     {
-
-        //Récupération de tous les abonnes dans la base de données
+        /// <summary>
+        /// Récupération de tous les abonnes dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Abonne> getAllAbonne()
         {
             List<Abonne> lesAbonnes = new List<Abonne>();
@@ -36,7 +41,17 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        // AJout d'un nouveau abonne dans a bdd
+
+        /// <summary>
+        /// AJout d'un nouveau abonne dans a bdd
+        /// </summary>
+        /// <param name="unNom"></param>
+        /// <param name="unPrenom"></param>
+        /// <param name="unTele"></param>
+        /// <param name="uneAdresse"></param>
+        /// <param name="unMail"></param>
+        /// <param name="uneDateNaiss"></param>
+        /// <param name="uneFinAbonnement"></param>
         public static void ajouterAbonne(string unNom , string unPrenom , string unTele , string uneAdresse , string unMail , DateTime uneDateNaiss ,  DateTime uneFinAbonnement)
         {
             try
@@ -61,7 +76,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        // Modification des informations d'un abonnes
+
+        /// <summary>
+        /// Modification des informations d'un abonnes
+        /// </summary>
+        /// <param name="abonne"></param>
         public static void modifierAbonne(Abonne abonne)
         {
             try
@@ -79,7 +98,12 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        // Récupération d'un abonné avec son id 
+
+        /// <summary>
+        /// Récupération d'un abonné avec son id 
+        /// </summary>
+        /// <param name="abonneId"></param>
+        /// <returns></returns>
         public static Abonne getRecupAbonneById(int abonneId)
         {
             try
@@ -108,7 +132,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        // Supprimer un abonne 
+
+        /// <summary>
+        /// Supprimer un abonne 
+        /// </summary>
+        /// <param name="abonne"></param>
         public static void supprimerAbonne(Abonne abonne)
         {
             try

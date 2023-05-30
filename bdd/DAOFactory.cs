@@ -4,10 +4,17 @@ using Mediateq_AP_SIO2.divers;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Class DAOFactory
+    /// </summary>
     class DAOFactory
     {
         private static MySqlConnection connexion;
 
+        /// <summary>
+        /// Crée une connexion à la base de données
+        /// </summary>
+        /// <exception cref="ExceptionSio"></exception>
         public static void creerConnection()
         {
             string serverIp = "127.0.0.1";
@@ -29,6 +36,10 @@ namespace Mediateq_AP_SIO2
 
         }
 
+        /// <summary>
+        /// Ouverture connexion à la base de données
+        /// </summary>
+        /// <exception cref="ExceptionSio"></exception>
         public static void connecter()
         {
             try
@@ -41,12 +52,21 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+        /// <summary>
+        /// Déconnexion à la base de données
+        /// </summary>
         public static void deconnecter()
         {
             connexion.Close();
         }
 
 
+        /// <summary>
+        /// Lecture à la base de données
+        /// </summary>
+        /// <param name="requete"></param>
+        /// <returns></returns>
+        /// <exception cref="ExceptionSio"></exception>
         // Exécution d'une requête de lecture ; retourne un Datareader
         public static MySqlDataReader execSQLRead(string requete)
         {
@@ -74,6 +94,11 @@ namespace Mediateq_AP_SIO2
             return dataReader;
         }
 
+        /// <summary>
+        /// Ecriture à la base de données
+        /// </summary>
+        /// <param name="requete"></param>
+        /// <exception cref="ExceptionSio"></exception>
         // Exécution d'une requete d'écriture (Insert ou Update) ; ne retourne rien
         public static void execSQLWrite(string requete)
         {

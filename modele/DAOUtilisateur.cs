@@ -9,9 +9,19 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2.modele
 {
-     class DAOUtilisateur
+    /// <summary>
+    /// Connexion à la base de données pour les utilisiateurs
+    /// </summary>
+    class DAOUtilisateur
     {
-        //Ajout d'un utilisateur dans la bdd
+
+        /// <summary>
+        /// Ajout d'un utilisateur dans la bdd
+        /// </summary>
+        /// <param name="unUserName"></param>
+        /// <param name="unNom"></param>
+        /// <param name="unPrenom"></param>
+        /// <param name="unPassword"></param>
         public static void ajouterUtilisateur(string unUserName , string unNom , string unPrenom , string unPassword)
         {
             try
@@ -30,7 +40,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupération de tous les utilisateurs dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les utilisateurs dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Utilisateur> getAllUtilisateur()
         {
             List<Utilisateur> lesUtilisateurs = new List<Utilisateur>();
@@ -54,7 +68,12 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        // recupere un utilisateur de la bdd
+
+        /// <summary>
+        /// recupere un utilisateur de la bdd
+        /// </summary>
+        /// <param name="unUserName"></param>
+        /// <returns></returns>
         public static Utilisateur recupereUtilisateur(string unUserName)
         {
             try 

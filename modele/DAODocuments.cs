@@ -10,9 +10,16 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Connexion à la base de données pour les documents
+    /// </summary>
     class DAODocuments
     {
-        //Récupération de tous les exemplaires dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les exemplaires dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Exemplaire> getAllExemplaire()
         {
             List<Exemplaire> lesExemplaires = new List<Exemplaire>();
@@ -42,8 +49,11 @@ namespace Mediateq_AP_SIO2
             return lesExemplaires;
         }
 
-
-        //Modifier l'état d'un exemplaire en deterioré dans la base de données
+        /// <summary>
+        /// Modifier l'état d'un exemplaire en deterioré dans la base de données
+        /// </summary>
+        /// <param name="unDoc"></param>
+        /// <param name="unNumero"></param>
         public static void modifierExemplaireDeteriore(string unDoc , string unNumero)
         {
             try
@@ -61,7 +71,10 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Modifier l'état d'un exemplaire en usagé dans la base de données
+        /// <summary>
+        /// Modifier l'état d'un exemplaire en usagé dans la base de données
+        /// </summary>
+        /// <param name="exemplaire"></param>
         public static void modifierExemplaireUsage(Exemplaire exemplaire)
         {
             try
@@ -78,7 +91,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Modifier l'état d'un exemplaire en inutilisable dans la base de données
+
+        /// <summary>
+        /// Modifier l'état d'un exemplaire en inutilisable dans la base de données
+        /// </summary>
+        /// <param name="exemplaire"></param>
         public static void modifierExemplaireInutilisable(Exemplaire exemplaire)
         {
             try
@@ -95,7 +112,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Ajout d'un DVD dans la base de données
+
+        /// <summary>
+        /// Ajout d'un DVD dans la base de données
+        /// </summary>
+        /// <param name="dvd"></param>
         public static void ajouterDvd(DVD dvd)
         {
             try
@@ -115,7 +136,12 @@ namespace Mediateq_AP_SIO2
 
         }
 
-        //Récupération de tous les documents dans la base de données
+
+
+        /// <summary>
+        /// Récupération de tous les documents dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Document> getAllDocument()
         {
             List<Document> lesDocuments = new List<Document>();
@@ -140,7 +166,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupération de tous les dvd dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les dvd dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<DVD> getAllDvd()
         {
             List<DVD> lesDvd = new List<DVD>();
@@ -165,7 +195,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupération de tous les categories dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les categories dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Categorie> getAllCategories()
         {
             List<Categorie> lesCategories = new List<Categorie>();
@@ -193,7 +227,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupération de tous les descripteurs dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les descripteurs dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Descripteur> getAllDescripteurs()
         {
             List<Descripteur> lesDescripteurs = new List<Descripteur>();
@@ -221,7 +259,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupération de tous les livres dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les livres dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Livre> getAllLivres()
         {
             List<Livre> lesLivres = new List<Livre>();
@@ -251,7 +293,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupère tous les descripteurs associés aux livres dans la liste donnée et les associe aux livres correspondants
+
+        /// <summary>
+        /// Récupère tous les descripteurs associés aux livres dans la liste donnée et les associe aux livres correspondants
+        /// </summary>
+        /// <param name="lesLivres"></param>
         public static void setDescripteurs(List<Livre> lesLivres)
         {
             try
@@ -281,7 +327,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Obtenir la catégorie d'un livre dans la base de données
+
+        /// <summary>
+        /// Obtenir la catégorie d'un livre dans la base de données
+        /// </summary>
+        /// <param name="pLivre"></param>
+        /// <returns></returns>
         public static Categorie getCategorieByLivre(Livre pLivre)
         {
             Categorie categorie;
@@ -312,7 +363,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupérer les exemplaires d'un document à partir de son titre
+
+        /// <summary>
+        /// Récupérer les exemplaires d'un document à partir de son titre
+        /// </summary>
+        /// <param name="dTitre"></param>
+        /// <returns></returns>
         public static List<Exemplaire> getDocumentByTitre(Document dTitre)
         {
             List<Exemplaire> lesExemplaires = new List<Exemplaire>();
@@ -332,7 +388,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupèration de tous les documents signalé dans la bdd
+
+        /// <summary>
+        /// Récupèration de tous les documents signalé dans la bdd
+        /// </summary>
+        /// <returns></returns>
         public static List<SignalerExemplaire> getAllSignalementExemplaire()
         {
             List<SignalerExemplaire> lesSignalementExemplaires = new List<SignalerExemplaire>();
@@ -359,7 +419,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Récupérer les exemplaires signaler à partir de id du Document
+
+        /// <summary>
+        /// Récupérer les exemplaires signaler à partir de id du Document
+        /// </summary>
+        /// <param name="sIdDoc"></param>
+        /// <returns></returns>
         public static List<SignalerExemplaire> getSignalerExemplairesByIdDoc(Document sIdDoc)
         {
             List<SignalerExemplaire> lesSignalementExemplaires = new List<SignalerExemplaire>();
@@ -386,7 +451,15 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // AJOUT dun signalement a la bdd
+
+        /// <summary>
+        ///  AJOUT dun signalement a la bdd
+        /// </summary>
+        /// <param name="idDoc"></param>
+        /// <param name="numeroExemplaire"></param>
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        /// <param name="signaler"></param>
         public static void ajouterSignalement(string idDoc , string numeroExemplaire , string nom , string prenom , DateTime signaler)
         {
             try

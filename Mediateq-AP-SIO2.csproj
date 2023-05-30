@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Mediateq-AP-SIO2.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -130,7 +131,6 @@
     <Compile Include="metier\DVD.cs" />
     <Compile Include="metier\Etat.cs" />
     <Compile Include="metier\Exemplaire.cs" />
-    <Compile Include="metier\Historique.cs" />
     <Compile Include="metier\Livre.cs" />
     <Compile Include="metier\Parution.cs" />
     <Compile Include="metier\Revue.cs" />

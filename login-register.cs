@@ -17,15 +17,25 @@ using System.Windows.Forms;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Fenêtre register de l'application
+    /// </summary>
     public partial class frmRegister : Form
     {
+        /// <summary>
+        /// Constructeur de la classe frmRegister.
+        /// </summary>
         public frmRegister()
         {
             InitializeComponent();
         }
 
         #region Register
-        //Initialisation de la connexion à la base de données 
+        /// <summary>
+        /// Initialisation de la connexion à la base de données 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmRegister_Load(object sender, EventArgs e)
         {
             try
@@ -43,7 +53,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Validation des informations d'enregistrement de l'utilisateur et ajout dans la base de données
+        /// <summary>
+        /// Validation des informations d'enregistrement de l'utilisateur et ajout dans la base de données
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRegister_Click(object sender, EventArgs e)
         {
             //Vérification que les champs sont vides ou non
@@ -105,7 +119,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Affichage ou masquage du texte  dans les champs de mot de passe
+        /// <summary>
+        /// Affichage ou masquage du texte  dans les champs de mot de passe
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShowPassword.Checked)
@@ -121,7 +139,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Button Clear des champs de saisie
+        /// <summary>
+        /// Button Clear des champs de saisie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonClear_Click(object sender, EventArgs e)
         {
             textBoxUserName.Text = "";
@@ -133,7 +155,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Retour à la page de connexion
+        /// <summary>
+        /// Retour à la page de connexion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelCliqueBackLogin_Click(object sender, EventArgs e)
         {
             new frmLogin().Show();
@@ -145,6 +171,11 @@ namespace Mediateq_AP_SIO2
 
 
         #region Exit
+        /// <summary>
+        /// Exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmRegister_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Windows.Forms.Application.Exit();

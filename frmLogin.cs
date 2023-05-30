@@ -14,8 +14,15 @@ using System.Windows.Forms;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Fenêtre login de l'application
+    /// </summary>
     public partial class frmLogin : Form
     {
+
+        /// <summary>
+        ///  Constructeur de la classe FrmLogin.
+        /// </summary>
         public frmLogin()
         {
             InitializeComponent();
@@ -33,7 +40,11 @@ namespace Mediateq_AP_SIO2
         #region Login
 
 
-        //Initialisation de la connexion à la base de données et chargement des utilisateurs
+        /// <summary>
+        /// Initialisation de la connexion à la base de données et chargement des utilisateurs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmLogin_Load(object sender, EventArgs e)
         {
             try
@@ -51,7 +62,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Vérification des informations d'identification de l'utilisateur et ouverture de la fenêtre principale en cas de réussite
+        /// <summary>
+        /// Vérification des informations d'identification de l'utilisateur et ouverture de la fenêtre principale en cas de réussite
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             
@@ -82,7 +97,11 @@ namespace Mediateq_AP_SIO2
 
 
 
-        //Button Clear des champs de saisie
+        /// <summary>
+        /// Button Clear des champs de saisie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonClear_Click(object sender, EventArgs e)
         {
             textBoxUserName.Text = "";
@@ -91,7 +110,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Affichage / masquage du caractère de mot de passe dans le champ de saisie de mot de passe en fonction de la case à cocher
+        /// <summary>
+        /// Affichage / masquage du caractère de mot de passe dans le champ de saisie de mot de passe en fonction de la case à cocher
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxShowPassword.Checked)
@@ -106,7 +129,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Ouverture de la fenêtre d'inscription à partir de l'étiquette de création de compte
+        /// <summary>
+        /// Ouverture de la fenêtre d'inscription à partir de l'étiquette de création de compte
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelCreateAccount_Click(object sender, EventArgs e)
         {
             new frmRegister().Show();
@@ -119,6 +146,11 @@ namespace Mediateq_AP_SIO2
 
 
         #region Exit
+        /// <summary>
+        /// Exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Windows.Forms.Application.Exit();

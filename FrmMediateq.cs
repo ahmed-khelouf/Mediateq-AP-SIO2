@@ -19,6 +19,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Fenêtre principale de l'application
+    /// </summary>
     public partial class FrmMediateq : Form
     {
         #region Variables globales
@@ -33,12 +36,14 @@ namespace Mediateq_AP_SIO2
         static List<Document> lesDocuments;
         static List<Revue> lesRevues;
         static List<SignalerExemplaire> lesSignalerExemplaires;
-        static List<Historique> lesHistoriques;
         static List<Abonne> lesAbonnes;
         static List<SignalerParution> lesSignalerParutions;
 
 
         //la gestion de l'utilisateur connecté en fournissant un moyen pratique d'accéder à ses informations et de les utiliser dans diverses fonctionnalités de l'application.
+        /// <summary>
+        ///Objet Utilisateur correspondant à l'utilisateur connecté
+        /// </summary>
         public Utilisateur user { get; set; }
 
         #endregion
@@ -46,12 +51,22 @@ namespace Mediateq_AP_SIO2
 
         #region Procédures évènementielles
 
+
+        /// <summary>
+        /// Constructeur de la classe de l'application principale
+        /// </summary>
+        /// <param name="utilisateur"></param>
         public FrmMediateq(Utilisateur utilisateur)
         {
             InitializeComponent();
             user = utilisateur;
         }
 
+        /// <summary>
+        /// Fermeture des pages selon le role utilisateur et récupération de certaines données.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmMediateq_Load(object sender, EventArgs e)
         {
             try
@@ -109,12 +124,23 @@ namespace Mediateq_AP_SIO2
         //-----------------------------------------------------------
         // ONGLET "PARUTIONS"
         //------------------------------------------------------------
+
+        /// <summary>
+        ///  Données dans le combobox Titres.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabParutions_Enter(object sender, EventArgs e)
         {
             cbxTitres.DataSource = lesTitres;
             cbxTitres.DisplayMember = "titre";
         }
 
+        /// <summary>
+        /// Changement  lors de la selection d'un titre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxTitres_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Parution> lesParutions;
@@ -140,12 +166,23 @@ namespace Mediateq_AP_SIO2
         //-----------------------------------------------------------
         // ONGLET "TITRES"
         //------------------------------------------------------------
+
+        /// <summary>
+        ///  données dans le combobox Descripteurs.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabTitres_Enter(object sender, EventArgs e)
         {
             cbxDomaines.DataSource = lesDescripteurs;
             cbxDomaines.DisplayMember = "libelle";
         }
 
+        /// <summary>
+        /// Changements  des revues lors de la selection d'un Descripteur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxDomaines_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Objet Domaine sélectionné dans la comboBox
@@ -171,6 +208,11 @@ namespace Mediateq_AP_SIO2
         // ONGLET "LIVRES"
         //-----------------------------------------------------------
 
+        /// <summary>
+        /// Récupérations des données Categories, Descripteurs et Livres de la BDD.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabLivres_Enter(object sender, EventArgs e)
         {
             // Chargement des objets en mémoire
@@ -180,6 +222,11 @@ namespace Mediateq_AP_SIO2
             //DAODocuments.setDescripteurs(lesLivres);
         }
 
+        /// <summary>
+        /// variation de l'affichage lors de la recherche par numéro de Livre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRechercher_Click(object sender, EventArgs e)
         {
             // On réinitialise les labels
@@ -212,6 +259,11 @@ namespace Mediateq_AP_SIO2
                 MessageBox.Show("Document non trouvé dans les livres");
         }
 
+        /// <summary>
+        /// recherche par titre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txbTitre_TextChanged(object sender, EventArgs e)
         {
             dgvLivres.Rows.Clear();
@@ -241,7 +293,12 @@ namespace Mediateq_AP_SIO2
         // ONGLET "DVD"
         //-----------------------------------------------------------
 
-        // AFFICHAGE DATAGRIDVIEW DVD
+
+        /// <summary>
+        ///  AFFICHAGE DATAGRIDVIEW DVD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabDVD_Enter(object sender, EventArgs e)
         {
             // PARCOUR DE COLLECTION ET AJOUTE DES DVD DANS LE DATAGRIDVIEW
@@ -258,7 +315,12 @@ namespace Mediateq_AP_SIO2
         #region ajouter DVD
         //ONGLET AJOUTER DVD
 
-        // AJOUTER UN DVD DANS LA BDD
+
+        /// <summary>
+        /// bouton AJOUTER UN DVD DANS LA BDD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             // CREATION DE DVD ET L'AJOUTE DANS LA COLLECTION
@@ -274,7 +336,12 @@ namespace Mediateq_AP_SIO2
         // ONGLET "CHANGER ETAT D'UN DOCUMENT OU REVUE"
         //-----------------------------------------------------------
 
-        // ALLIMENTATION COMBOBOX DES DOCUMENTS ET REVUES
+
+        /// <summary>
+        /// ALLIMENTATION COMBOBOX DES DOCUMENTS ET REVUES
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             // attribue la source de données de la combobox 
@@ -295,7 +362,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+
+        /// <summary>
+        ///  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxDocuments_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
@@ -322,7 +394,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        
+        /// <summary>
+        ///  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxRevues_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération de la revue sélectionné dans la combobox
@@ -349,7 +426,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // BOUTON POUR EXEMPLAIRE ETAT = USAGE
+
+        /// <summary>
+        /// BOUTON POUR EXEMPLAIRE ETAT = USAGE
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDocumentUsage_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
@@ -361,26 +443,31 @@ namespace Mediateq_AP_SIO2
                 // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
                 int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
 
-                // Récupération de la ligne sélectionnée
-                DataGridViewRow row = dataGridViewDocument.SelectedRows[0];
-                if (row != null && row.Cells["id"].Value != null)
+                if (dataGridViewDocument.SelectedRows.Count > 0)
                 {
-                    // Récupérer l'exemplaire correspondant à l'index sélectionné
-                    Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
+                    // Récupération de la ligne sélectionnée
+                    DataGridViewRow row = dataGridViewDocument.SelectedRows[0];
+                    
 
-                    // Vérifier si l'état de l'exemplaire est déjà "usagé"
-                    if (exemplaire.Etat.Libelle == "usagé")
+                    if (row != null && row.Cells["id"].Value != null)
                     {
-                        // Afficher un message si l'exemplaire est déjà en usage
-                        MessageBox.Show("Ce document est déjà en usage !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else // Si l'exemplaire n'est pas déjà en usage
-                    {
-                        // Modifier l'état de l'exemplaire à "usagé" dans la base de données 
-                        DAODocuments.modifierExemplaireUsage(exemplaire);
+                        // Récupérer l'exemplaire correspondant à l'index sélectionné
+                        Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
 
-                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                        reussi = true;
+                        // Vérifier si l'état de l'exemplaire est déjà "usagé"
+                        if (exemplaire.Etat.Libelle == "usagé")
+                        {
+                            // Afficher un message si l'exemplaire est déjà en usage
+                            MessageBox.Show("Ce document est déjà en usage !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else // Si l'exemplaire n'est pas déjà en usage
+                        {
+                            // Modifier l'état de l'exemplaire à "usagé" dans la base de données 
+                            DAODocuments.modifierExemplaireUsage(exemplaire);
+
+                            // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                            reussi = true;
+                        }
                     }
                 }
             }
@@ -401,7 +488,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // BOUTON POUR EXEMPLAIRE ETAT = INUTILISBALE 
+
+        /// <summary>
+        /// BOUTON POUR EXEMPLAIRE ETAT = INUTILISBALE 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDocumentInutilisable_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
@@ -410,29 +502,32 @@ namespace Mediateq_AP_SIO2
             // Vérifier si la liste d'exemplaires est non null
             if (lesExemplaires != null)
             {
-                // Récupération de la ligne sélectionnée
-                DataGridViewRow row = dataGridViewDocument.SelectedRows[0];
-                if (row != null && row.Cells["id"].Value != null)
+                if (dataGridViewDocument.SelectedRows.Count > 0)
                 {
-                    // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
-                    int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
-
-                    // Récupérer l'exemplaire correspondant à l'index sélectionné
-                    Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
-
-                    // Vérifier si l'état de l'exemplaire est déjà "inutilisable"
-                    if (exemplaire.Etat.Libelle == "inutilisable")
+                    // Récupération de la ligne sélectionnée
+                    DataGridViewRow row = dataGridViewDocument.SelectedRows[0];
+                    if (row != null && row.Cells["id"].Value != null)
                     {
-                        // Afficher un message si l'exemplaire est déjà en inutilisable
-                        MessageBox.Show("Ce document est déjà en inutilisable !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else // Si l'exemplaire n'est pas déjà en inutilisable
-                    {
-                        // Modifier l'état de l'exemplaire à "inutilisable" dans la base de données 
-                        DAODocuments.modifierExemplaireInutilisable(exemplaire);
+                        // Récupérer l'index de l'exemplaire sélectionné dans la DataGridView
+                        int selectedExemplaire = dataGridViewDocument.CurrentCell.RowIndex;
 
-                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                        reussi = true;
+                        // Récupérer l'exemplaire correspondant à l'index sélectionné
+                        Exemplaire exemplaire = lesExemplaires.ElementAt(selectedExemplaire);
+
+                        // Vérifier si l'état de l'exemplaire est déjà "inutilisable"
+                        if (exemplaire.Etat.Libelle == "inutilisable")
+                        {
+                            // Afficher un message si l'exemplaire est déjà en inutilisable
+                            MessageBox.Show("Ce document est déjà en inutilisable !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else // Si l'exemplaire n'est pas déjà en inutilisable
+                        {
+                            // Modifier l'état de l'exemplaire à "inutilisable" dans la base de données 
+                            DAODocuments.modifierExemplaireInutilisable(exemplaire);
+
+                            // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                            reussi = true;
+                        }
                     }
                 }
             }
@@ -453,7 +548,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // BOUTON POUR PARUTION ETAT = USAGE
+
+        /// <summary>
+        /// BOUTON POUR PARUTION ETAT = USAGE
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRevueUsage_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
@@ -462,29 +562,32 @@ namespace Mediateq_AP_SIO2
             // Vérifier si la liste de parutions est non nulle
             if (lesParutions != null)
             {
-                // Récupération de la ligne sélectionnée
-                DataGridViewRow row = dataGridViewRevue.SelectedRows[0];
-                if (row != null && row.Cells["ColumnIdRevue"].Value != null)
+                if (dataGridViewRevue.SelectedRows.Count > 0)
                 {
-                    // Récupérer l'index de la parution sélectionné dans la DataGridView
-                    int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
-
-                    // Récupérer la parution correspondant à l'index sélectionné
-                    Parution parution = lesParutions.ElementAt(selectedParution);
-
-                    // Vérifier si l'état de la parution est déjà "usagé"
-                    if (parution.Etat.Libelle == "usagé")
+                    // Récupération de la ligne sélectionnée
+                    DataGridViewRow row = dataGridViewRevue.SelectedRows[0];
+                    if (row != null && row.Cells["ColumnIdRevue"].Value != null)
                     {
-                        // Afficher un message si la parution est déjà en usagé
-                        MessageBox.Show("Cette parution est déjà en usagé !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else // Si la parution n'est pas déjà en usagé
-                    {
-                        // Modifier l'état de la parution à "usagé" dans la base de données 
-                        DAORevues.modifierParutionUsage(parution);
+                        // Récupérer l'index de la parution sélectionné dans la DataGridView
+                        int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
 
-                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                        reussi = true;
+                        // Récupérer la parution correspondant à l'index sélectionné
+                        Parution parution = lesParutions.ElementAt(selectedParution);
+
+                        // Vérifier si l'état de la parution est déjà "usagé"
+                        if (parution.Etat.Libelle == "usagé")
+                        {
+                            // Afficher un message si la parution est déjà en usagé
+                            MessageBox.Show("Cette parution est déjà en usagé !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else // Si la parution n'est pas déjà en usagé
+                        {
+                            // Modifier l'état de la parution à "usagé" dans la base de données 
+                            DAORevues.modifierParutionUsage(parution);
+
+                            // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                            reussi = true;
+                        }
                     }
                 }
             }
@@ -505,7 +608,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // BOUTON POUR UNE PARUTION ETAT = INUTILISBALE 
+
+        /// <summary>
+        /// BOUTON POUR UNE PARUTION ETAT = INUTILISBALE 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRevueInutilisable_Click(object sender, EventArgs e)
         {
             // Variable pour vérifier si le changement d'état a réussi
@@ -514,29 +622,32 @@ namespace Mediateq_AP_SIO2
             // Vérifier si la liste de parutions est non nulle
             if (lesParutions != null)
             {
-                // Récupération de la ligne sélectionnée
-                DataGridViewRow row = dataGridViewRevue.SelectedRows[0];
-                if (row != null && row.Cells["ColumnIdRevue"].Value != null)
+                if (dataGridViewRevue.SelectedRows.Count > 0)
                 {
-                    // Récupérer l'index de la parution sélectionné dans la DataGridView
-                    int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
-
-                    // Récupérer la parution correspondant à l'index sélectionné
-                    Parution parution = lesParutions.ElementAt(selectedParution);
-
-                    // Vérifier si l'état de la parution est déjà "inutilisable"
-                    if (parution.Etat.Libelle == "inutilisable")
+                    // Récupération de la ligne sélectionnée
+                    DataGridViewRow row = dataGridViewRevue.SelectedRows[0];
+                    if (row != null && row.Cells["ColumnIdRevue"].Value != null)
                     {
-                        // Afficher un message si la parution est déjà en inutilisable
-                        MessageBox.Show("Cette parution est déjà en inutilisable !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else // Si la parution n'est pas déjà en inutilisable
-                    {
-                        // Modifier l'état de la parution à "inutilisable" dans la base de données 
-                        DAORevues.modifierParutionInutilisable(parution);
+                        // Récupérer l'index de la parution sélectionné dans la DataGridView
+                        int selectedParution = dataGridViewRevue.CurrentCell.RowIndex;
 
-                        // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
-                        reussi = true;
+                        // Récupérer la parution correspondant à l'index sélectionné
+                        Parution parution = lesParutions.ElementAt(selectedParution);
+
+                        // Vérifier si l'état de la parution est déjà "inutilisable"
+                        if (parution.Etat.Libelle == "inutilisable")
+                        {
+                            // Afficher un message si la parution est déjà en inutilisable
+                            MessageBox.Show("Cette parution est déjà en inutilisable !", "Enregistrement échoué", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else // Si la parution n'est pas déjà en inutilisable
+                        {
+                            // Modifier l'état de la parution à "inutilisable" dans la base de données 
+                            DAORevues.modifierParutionInutilisable(parution);
+
+                            // Mettre la variable "reussi" à "true" pour indiquer que le changement d'état a réussi
+                            reussi = true;
+                        }
                     }
                 }
             }
@@ -563,7 +674,12 @@ namespace Mediateq_AP_SIO2
 
         #region Signaler
 
-        // ALIMENTATION DE LA COMBOBOX et empecher d'ecrire dans les textBox
+
+        /// <summary>
+        /// ALIMENTATION DE LA COMBOBOX et empecher d'ecrire dans les textBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabSignaler_Enter(object sender, EventArgs e)
         {
             // attribue la source de données de la combobox 
@@ -600,7 +716,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+
+        /// <summary>
+        ///  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxDocPageSignaler_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
@@ -628,7 +749,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'une revue est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+
+        /// <summary>
+        ///  appelée lorsqu'une revue est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxRevuePageSignaler_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
@@ -656,7 +782,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Recherche nom d'un abonne
+
+        /// <summary>
+        /// Recherche nom d'un abonne
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxRechercheNomAbo_TextChanged(object sender, EventArgs e)
         {
             dataGridViewAbo.Rows.Clear();
@@ -681,7 +812,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Affichage des abonnes dans le dataGridViewAbo
+
+        /// <summary>
+        /// Affichage des abonnes dans le dataGridViewAbo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewAbo_SelectionChanged(object sender, EventArgs e)
         {
             // Vérification qu'une seule ligne est sélectionnée
@@ -707,7 +843,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Affichage des documents dans le dataGridViewDoc
+
+        /// <summary>
+        /// Affichage des documents dans le dataGridViewDoc
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDoc_SelectionChanged(object sender, EventArgs e)
         {
             // Vérification qu'une seule ligne est sélectionnée
@@ -732,7 +873,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Affichage des revues dans le dataGridViewRev
+
+        /// <summary>
+        /// Affichage des revues dans le dataGridViewRev
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewRev_SelectionChanged(object sender, EventArgs e)
         {
             // Vérification qu'une seule ligne est sélectionnée
@@ -755,7 +901,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES EXEMPLAIRES
+
+        /// <summary>
+        /// BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES EXEMPLAIRES
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSignalerExemplaire_Click(object sender, EventArgs e)
         {
             try
@@ -815,7 +966,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES PARUTIONS
+
+        /// <summary>
+        /// BOUTON POUR CHANGER L'ETAT EN DETERIORE POUR LES PARUTIONS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSignalerRevue_Click(object sender, EventArgs e)
         {
             try
@@ -878,7 +1034,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Vérification de la saisie de champs  pour activer le bouton signaler exemplaire 
+
+        /// <summary>
+        /// Vérification de la saisie de champs  pour activer le bouton signaler exemplaire 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void verifTextBoxSignalerExemplaire(object sender, EventArgs e)
         {
             // Vérifier si tous les champs obligatoires sont remplis
@@ -896,7 +1057,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Vérification de la saisie de champs  pour activer le bouton revue parution 
+
+        /// <summary>
+        /// Vérification de la saisie de champs  pour activer le bouton revue parution 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void verifTextBoxSignalerRevue(object sender, EventArgs e)
         {
             // Vérifier si tous les champs obligatoires sont remplis
@@ -914,56 +1080,94 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Verification textBox Revue
+
+        /// <summary>
+        /// Verification textBox Revue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxIdSignalerRevue_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerRevue(sender, e);
         }
 
 
-        //Verification textBoxRevue
+
+        /// <summary>
+        /// Verification textBoxRevue numero
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxNumeroSignalerRevue_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerRevue(sender, e);
         }
 
 
-        //Verification textBox Revue
+
+        /// <summary>
+        /// Verification textBox Revue nom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxNomSignalerRevue_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerRevue(sender, e);
         }
 
 
-        //Verification textBox Revue
+
+        /// <summary>
+        /// Verification textBox Revue prenom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxPrenomSignalerRevue_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerRevue(sender, e);
         }
 
 
-        //Verification textBox Exemplaire
+
+        /// <summary>
+        /// Verification textBox Exemplaire idDoc
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxIdDoc_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerExemplaire(sender, e);
         }
 
 
-        //Verification textBox Exemplaire
+
+        /// <summary>
+        /// Verification textBox Exemplaire numExemplaire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxNumExemplaire_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerExemplaire(sender, e);
         }
 
 
-        //Verification textBox Exemplaire
+        /// <summary>
+        /// Verification textBox Exemplaire nom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxNomAbo_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerExemplaire(sender, e);
         }
 
 
-        //Verification textBox Exemplaire
+        /// <summary>
+        /// Verification textBox Exemplaire prenom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxPrenomAbo_TextChanged(object sender, EventArgs e)
         {
             verifTextBoxSignalerExemplaire(sender, e);
@@ -975,6 +1179,11 @@ namespace Mediateq_AP_SIO2
         //-----------------------------------------------------------
         // ONGLET "DOCUMENT OU REVUE INUTILISABLE"
         //-----------------------------------------------------------
+        /// <summary>
+        /// Rafrechissement des données , attribution de données et attribution datagridview en readOnly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabPage3_Enter(object sender, EventArgs e)
         {
             // attribue la source de données de la combobox 
@@ -1000,7 +1209,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires inutilisable correspondants dans le dataGridView
+
+        /// <summary>
+        /// appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires inutilisable correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox_document_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
@@ -1028,7 +1242,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les parutions inutilisable correspondants dans le dataGridView
+        /// <summary>
+        /// appelée lorsqu'un document est sélectionné dans la combobox pour afficher les parutions inutilisable correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox_Rev_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération de la revue sélectionné dans la combobox
@@ -1056,7 +1274,7 @@ namespace Mediateq_AP_SIO2
         }
 
 
-       
+
         #endregion
 
 
@@ -1065,7 +1283,12 @@ namespace Mediateq_AP_SIO2
         // ONGLET "DOCUMENT OU REVUE DETERIORE !n"
         //-----------------------------------------------------------
 
-        // ALLIMENTATION COMBOBOX DES DOCUMENTS ET REVUES
+
+        /// <summary>
+        /// ALLIMENTATION COMBOBOX DES DOCUMENTS ET REVUES
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabPage4_Enter(object sender, EventArgs e)
         {
             // attribue la source de données de la combobox 
@@ -1093,7 +1316,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        /// <summary>
+        /// appelée lorsqu'un document est sélectionné dans la combobox pour afficher les exemplaires correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxDocumentDeteriore_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
@@ -1119,7 +1346,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //  appelée lorsqu'unz revue est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        /// <summary>
+        /// appelée lorsqu'unz revue est sélectionné dans la combobox pour afficher les parutions correspondants dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxParutionDeteriore_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Récupération du document sélectionné dans la combobox
@@ -1149,7 +1380,11 @@ namespace Mediateq_AP_SIO2
         #region ABONNE
         // ONGLET ABONNE
 
-        // Empeche l'utilisation de bouton 
+        /// <summary>
+        /// Empeche l'utilisation de bouton 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabAbonne_Enter(object sender, EventArgs e)
         {
  
@@ -1170,7 +1405,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // AJOUTER UN ABONNE DANS LA BDD
+        /// <summary>
+        /// AJOUTER UN ABONNE DANS LA BDD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAjouterAbonne_Click(object sender, EventArgs e)
         {
             try
@@ -1269,7 +1508,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Vérification de la date saisie dans le dataPicker DateNaissance
+        /// <summary>
+        /// Vérification de la date saisie dans le dataPicker DateNaissance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dateTimePickerDateNaissance_ValueChanged(object sender, EventArgs e)
         {
             // Vérifier si l'année sélectionnée est inférieure à 1900
@@ -1288,7 +1531,12 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Comparer Informations Abonne
+        /// <summary>
+        /// Comparer Informations Abonne
+        /// </summary>
+        /// <param name="abonne1"></param>
+        /// <param name="abonne2"></param>
+        /// <returns></returns>
         private bool AbonneIdentique(Abonne abonne1, Abonne abonne2)
         {
             // Comparer les propriétés de l'abonné
@@ -1303,7 +1551,11 @@ namespace Mediateq_AP_SIO2
         }
 
       
-        // Bouton pour modifier les informations d'un abonne dans la bdd
+        /// <summary>
+        /// Bouton pour modifier les informations d'un abonne dans la bdd
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonModifierAbonne_Click(object sender, EventArgs e)
         {
             try
@@ -1426,7 +1678,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Vérification de la date saisie dans le dataPicker ModifDateNaissance
+        /// <summary>
+        /// Vérification de la date saisie dans le dataPicker ModifDateNaissance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dateTimePickerModifDateNaissance_ValueChanged(object sender, EventArgs e)
         {
             // Vérifier si l'année sélectionnée est inférieure à 1900
@@ -1445,7 +1701,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Vérification de la date saisie dans le dataPicker Debut Abonnement
+        /// <summary>
+        /// Vérification de la date saisie dans le dataPicker Debut Abonnement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dateTimePickerDebutAbonnement_ValueChanged(object sender, EventArgs e)
         {
             // Vérifier si l'année sélectionnée est inférieure à 1900
@@ -1457,7 +1717,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Vérification de la date saisie dans le dataPicker Fin Abonnement
+        /// <summary>
+        /// Vérification de la date saisie dans le dataPicker Fin Abonnement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dateTimePickerFinAbonnement_ValueChanged(object sender, EventArgs e)
         {
             // Vérifier si l'année sélectionnée est inférieure à 1900
@@ -1469,7 +1733,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Recherche nom d'un abonne 
+        /// <summary>
+        /// Recherche nom d'un abonne 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxRechercheNom_TextChanged(object sender, EventArgs e)
         {
             dataGridViewAbonnes.Rows.Clear();
@@ -1495,7 +1763,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        // Affichage des abonnes dans le dataGridViewAbonnes
+        /// <summary>
+        /// Affichage des abonnes dans le dataGridViewAbonnes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewAbonnes_SelectionChanged(object sender, EventArgs e)
         {
             // Vérification qu'une seule ligne est sélectionnée
@@ -1561,7 +1833,11 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Supprimer un abonne
+        /// <summary>
+        /// Supprimer un abonne
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSupprimer_Click(object sender, EventArgs e)
         {
             if(textBoxID.Text!= "")
@@ -1609,11 +1885,18 @@ namespace Mediateq_AP_SIO2
 
 
         #region Exit
-        //Exit application
+
+        /// <summary>
+        /// Exit application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmMediateq_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
+
+
 
 
 

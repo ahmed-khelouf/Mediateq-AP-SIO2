@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2.modele
 {
+    /// <summary>
+    /// Connexion à la base de données pour les revues
+    /// </summary>
     class DAORevues
     {
-        //Modifier l'état d'une parution en deterioré dans la base de données
+
+        /// <summary>
+        /// Modifier l'état d'une parution en deterioré dans la base de données
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <param name="numero"></param>
         public static void modifierParutionDeteriore(string revue , string numero)
         {
             try
@@ -27,7 +35,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Modifier l'état d'une parution en usagé dans la base de données
+
+        /// <summary>
+        /// Modifier l'état d'une parution en usagé dans la base de données
+        /// </summary>
+        /// <param name="parution"></param>
         public static void modifierParutionUsage(Parution parution)
         {
             try
@@ -44,7 +56,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Modifier l'état d'un exemplaire en inutilisable dans la base de données
+
+        /// <summary>
+        /// Modifier l'état d'un exemplaire en inutilisable dans la base de données
+        /// </summary>
+        /// <param name="parution"></param>
         public static void modifierParutionInutilisable(Parution parution)
         {
             try
@@ -61,7 +77,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupération de tous les parutions dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les parutions dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Parution> getAllParution()
         {
             List<Parution> lesParutions = new List<Parution>();
@@ -85,7 +105,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupération de tous les revue dans la base de données
+
+        /// <summary>
+        /// Récupération de tous les revue dans la base de données
+        /// </summary>
+        /// <returns></returns>
         public static List<Revue> getAllRevue()
         {
             List<Revue> lesRevues = new List<Revue>();
@@ -110,7 +134,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Obtenir la liste de tous les titres de revues 
+
+        /// <summary>
+        /// Obtenir la liste de tous les titres de revues 
+        /// </summary>
+        /// <returns></returns>
         public static List<Revue> getAllTitre()
         {
             List<Revue> lesTitres = new List<Revue>();
@@ -131,7 +159,12 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupérer les parution d'une revue à partir de son titre
+
+        /// <summary>
+        /// Récupérer les parution d'une revue à partir de son titre
+        /// </summary>
+        /// <param name="pTitre"></param>
+        /// <returns></returns>
         public static List<Parution> getParutionByTitre(Revue pTitre)
         {
             List<Parution> lesParutions = new List<Parution>();
@@ -155,7 +188,11 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupèration de tous les Parutions signalé dans la bdd
+
+        /// <summary>
+        /// Récupèration de tous les Parutions signalé dans la bdd
+        /// </summary>
+        /// <returns></returns>
         public static List<SignalerParution> getAllSignalementParution()
         {
             List<SignalerParution> lesSignalementParutions = new List<SignalerParution>();
@@ -182,7 +219,12 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        //Récupérer les parutions signaler à partir de id de Revue
+
+        /// <summary>
+        /// Récupérer les parutions signaler à partir de id de Revue
+        /// </summary>
+        /// <param name="sIdRevue"></param>
+        /// <returns></returns>
         public static List<SignalerParution> getSignalerParutionByIdDoc(Revue sIdRevue)
         {
             List<SignalerParution> lesSignalementParutions = new List<SignalerParution>();
@@ -209,7 +251,15 @@ namespace Mediateq_AP_SIO2.modele
         }
 
 
-        // AJOUT dun signalement a la bdd
+
+        /// <summary>
+        /// AJOUT dun signalement a la bdd
+        /// </summary>
+        /// <param name="idRevue"></param>
+        /// <param name="numeroRevue"></param>
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        /// <param name="signaler"></param>
         public static void ajouterSignalement(string idRevue , string numeroRevue , string nom , string prenom , DateTime signaler)
         {
             try

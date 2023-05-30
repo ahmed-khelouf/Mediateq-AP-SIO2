@@ -740,6 +740,7 @@ namespace Mediateq_AP_SIO2
             this.tabDVD.TabIndex = 3;
             this.tabDVD.Text = "DVD";
             this.tabDVD.UseVisualStyleBackColor = true;
+            //this.tabDVD.Click += new System.EventHandler(this.tabDVD_Click);
             this.tabDVD.Enter += new System.EventHandler(this.tabDVD_Enter);
             // 
             // dataGridView1
